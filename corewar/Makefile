@@ -14,7 +14,8 @@ RMDIR = rm -fr
 MKDIR = mkdir
 BUILD_PATH = obj
 NAME = corewar
-SRC = src/main.c
+SRC = src/main.c \
+	src/parser.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 
