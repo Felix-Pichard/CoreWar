@@ -11,8 +11,8 @@
 #include <libzvbi.h>
 #include <malloc.h>
 #include "libmy.h"
-#include "../../sujet/op.h"
-#include "../includes/cycle.h"
+#include "op.h"
+#include "cycle.h"
 
 static t_cycle	*cycle_init()
 {
