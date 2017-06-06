@@ -10,9 +10,10 @@
 
 #include "libmy.h"
 #include "op.h"
+#include "parser.h"
 
-int main()
+int main(int argc, char **argv)
 {
-    my_putstr("Hello World!\n");
+    parser(argc, argv);
     return (0);
 }
