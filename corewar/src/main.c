@@ -8,10 +8,11 @@
 ** Last update Mon Jun  5 13:28:53 2017 MARZI Nicolas
 */
 
-#include "../../libmy/libmy.h"
+#include "libmy.h"
+#include "op.h"
 
 int main()
 {
-    my_putstr("Hello World !");
+    my_putstr("Hello World!\n");
     return (0);
 }
