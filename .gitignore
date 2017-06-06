@@ -5,3 +5,6 @@
 /corewar/obj
 /libmy/obj
 /libmy/libmy.a
+CMakeLists.txt
+.idea
+cmake-build-debug/
