@@ -16,10 +16,8 @@
 #include "op.h"
 #include "parser.h"
 
-void push(char **container, char *item)
+void push(char *item)
 {
-    container[array_len(container)] = item;
-
     if (is_comment(item))
     {
         my_putstr("comment    : ");my_putstr(item);my_putstr("\n");
@@ -29,7 +27,7 @@ void push(char **container, char *item)
     else if (is_label(item))
         set_label(item);
     else if (is_instruction(item))
-        my_putstr("instruction: ");
+        set_instruction(item);
     else if (is_null(item))
         my_putstr("null       \n");
     else
@@ -51,7 +49,6 @@ void print_file(char *filename)
     int file_handle;
     char data;
     char buffer[512];
-    char *buffer_lines[128];
     int cursor;
     cursor = 0;
 
@@ -63,17 +60,15 @@ void print_file(char *filename)
     {
         if (data == '\n')
         {
-            push(buffer_lines, get_string(buffer));
+            push(get_string(buffer));
             init_buffer(buffer, 512);
             cursor = 0;
         }
         else
-        {
-            buffer[cursor] = data;
-            cursor++;
-        }
+            buffer[cursor++] = data;
     }
-    push(buffer_lines, get_string(buffer));
+    push(get_string(buffer));
+    close(file_handle);
 }
 
 int main(int argv, char **args)
@@ -87,6 +82,11 @@ int main(int argv, char **args)
     // my_put_nbr(is_instruction("live zoidberg"));my_putstr("\n");
     // my_put_nbr(is_instruction("test zoidberg"));my_putstr("\n");
     // my_put_nbr(is_instruction("test zoidberg"));my_putstr("\n");
+
+    
+    // my_put_nbr(array_len(split_str("test", ',')));my_putstr("\n");
+    // my_put_nbr(array_len(split_str("test,tze", ',')));my_putstr("\n");
+    // my_put_nbr(array_len(split_str("zer,tes,zer", ',')));my_putstr("\n");
     // return (0);
 
     if (argv < 1)

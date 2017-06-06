@@ -14,7 +14,7 @@ RMDIR = rm -fr
 MKDIR = mkdir
 BUILD_PATH = obj
 NAME = asm
-SRC = ./src/op.c \
+SRC = src/op.c \
 	src/main.c \
 	src/file/xopen.c \
 	src/file/file_exists.c \

@@ -15,18 +15,18 @@
 
 typedef unsigned char byte;
 
-typedef struct param_value_s
+typedef struct param_s
 {
     char    *label;
     int     value;
-} param_value_t;
+    byte    type;
+} param_t;
 
 typedef struct instruction_s
 {
     byte opcode;
-    byte nb_arguments;
-    byte type_arguments;
-    param_value_t args[MAX_ARGS_NUMBER];
+    byte nb_args;
+    param_t args[MAX_ARGS_NUMBER];
     struct instruction_t *next;
 } instruction_t;
 
@@ -39,15 +39,16 @@ int is_null(char *line);
 int is_param_register(char *line);
 int is_param_dir(char *line);
 int is_param_indir(char *line);
+int is_param_valid(char *arg);
 
 char *get_string(char *buffer);
 void init_buffer(char *buffer, int size);
 void escape_str(char *string);
-
-void set_command(char *line);
-void set_label(char *line);
-
-
 int array_len(char **array);
+char **split_str(char *line, char delimiter);
+
+int set_command(char *line);
+int set_label(char *line);
+int set_instruction(char *line);
 
 #endif

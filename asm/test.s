@@ -11,5 +11,6 @@
 .name zoidberg
     .comment Whoop Whoop Whoop
 
-resr2: live %1
-live %1
+resr2: live r1
+live %:test
+add r1,%:test,r2,
