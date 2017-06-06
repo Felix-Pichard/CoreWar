@@ -62,3 +62,14 @@ des registres, on utilisera leur contenu comme un index
 r1      => Value of register
 %:name  => Address of function
 %1      => Static value
+
+
+## Struct Instruction
+
+opcode => unsigned char
+nbr_args => unsigned char
+args_type_t => type[MAX_ARGS_NUMBER]
+args => int
+
+23,45,%34 => 0xF8 0x00 0x17 0x00 0x2d 0x00 0x00 0x00 0x22
+

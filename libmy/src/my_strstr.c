@@ -22,17 +22,17 @@ char	*my_strstr(char *str, char *to_find)
   while (*str != '\0')
   {
     if (*str == to_find[0])
+    {
+      while (*(str + i) == to_find[i])
       {
-	while (*(str + i) == to_find[i])
-	{
-	  step++;
-	  if (step == length)
-	    return (str);
-	  i++;
-	}
-	i = 0;
+        step++;
+        if (step == length)
+          return (str);
+        i++;
       }
+	  i = 0;
+    }
     str++;
   }
-  return ("null");
+  return (0);
 }

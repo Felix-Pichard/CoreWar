@@ -14,10 +14,17 @@ RMDIR = rm -fr
 MKDIR = mkdir
 BUILD_PATH = obj
 NAME = asm
-SRC = src/main.c
+SRC = ./src/op.c \
+	src/main.c \
+	src/file/xopen.c \
+	src/file/file_exists.c \
+	src/parser.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
-CFLAGS = -W -Wextra -Werror -Wall -pedantic
+TEST_OBJS = $(TEST:%.c=$(BUILD_PATH)/%.o)
+
+INCLUDES = -I ./includes -I ../includes
+CFLAGS = -W -Wextra -Werror -Wall -pedantic $(INCLUDES) -g
 
 LIBMY_PATH = ../libmy/libmy.a
 
