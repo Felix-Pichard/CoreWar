@@ -18,7 +18,7 @@ SRC = src/main.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 
-INCLUDES = -I ./includes -I ../includes
+INCLUDES = -I ./includes -I ../includes 
 CFLAGS = -W -Wextra -Werror -Wall -pedantic $(INCLUDES)
 
 LIBMY_PATH = ../libmy/libmy.a
