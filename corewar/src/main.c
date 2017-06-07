@@ -17,13 +17,7 @@
 int main(int argc, char **argv)
 {
     t_byte *mem;
-
-    if (argc > 1 && argv != NULL)
-    {
-        mem = init_mem();
-        free(mem);
-    }
-    else
-        my_putstr("corewar: At least one argument required\n");
-    return (-1);
+    mem = init_mem();
+    free(mem);
+    return (0);
 }
