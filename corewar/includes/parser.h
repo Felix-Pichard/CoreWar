@@ -8,9 +8,34 @@
 ** Last update Mon Jun  5 13:28:53 2017 MARZI Nicolas
 */
 
-#ifndef PARSER
-#define PARSER
+#ifndef _PARSER__H_
+#define _PARSER__H_
 
-int parser(int, char**);
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include "../libmy/libmy.h"
+
+ 
+typedef struct          s_program
+{
+    char*               prog_name;
+    int                 number;
+    int                 address;
+    int                 cycle_of_instruction;
+    int                 cycle_spent;
+}                       t_program;
+
+typedef struct          s_meta
+{
+    int nbr_prg;
+    t_program* programs;
+}                       t_meta;
+
+void    print_tab(t_meta* test);
+void    fill_struct(int argc, char** argv, t_meta *test);
+void    init_meta(t_meta *meta);
+t_meta* parser(int argc, char** argv);
 
 #endif

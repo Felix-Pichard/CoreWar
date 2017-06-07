@@ -16,7 +16,8 @@ BUILD_PATH = obj
 NAME = corewar
 SRC = src/main.c \
 	src/parser.c \
-	src/memory.c
+	src/memory.c \
+	src/error.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 
