@@ -80,6 +80,8 @@ t_meta* parser(int argc, char** argv)
     int count;
 	int i;
 
+    if (argc <= 1)
+        my_error(6);
     if ((prog_args = malloc(sizeof(t_meta))) == NULL)
 		my_error(5);
     count = 0;
