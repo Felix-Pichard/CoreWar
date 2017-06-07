@@ -1,5 +1,6 @@
 #include <unistd.h>
 
+int    my_strlen(char *str);
 void    my_putchar(char str);
 
 void    my_putnbr_base(int nbr, char *base)
