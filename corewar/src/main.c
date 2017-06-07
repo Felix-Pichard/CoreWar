@@ -10,12 +10,14 @@
 
 #include <malloc.h>
 #include "libmy.h"
+#include "parser.h"
 #include "../../sujet/op.h"
 #include "../includes/memory.h"
 
 int main(int argc, char **argv)
 {
     t_byte *mem;
+    parser(argc, argv);
     mem = init_mem();
     free(mem);
     return (0);
