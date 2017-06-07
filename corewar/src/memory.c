@@ -8,7 +8,6 @@
 ** Last update Tue Jun  6 16:28:53 2017 VIALLON Louis
 */
 
-#include <libzvbi.h>
 #include <malloc.h>
 #include <stdlib.h>
 #include "libmy.h"

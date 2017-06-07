@@ -8,7 +8,6 @@
 ** Last update Mon Jun  5 13:28:53 2017 MARZI Nicolas
 */
 
-#include <libzvbi.h>
 #include <malloc.h>
 #include "libmy.h"
 #include "../../sujet/op.h"
