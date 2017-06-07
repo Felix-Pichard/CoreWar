@@ -11,6 +11,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include "libmy.h"
+#include "error.h"
 #include "../includes/memory.h"
 #include "../includes/op.h"
 
@@ -21,8 +22,7 @@ unsigned char *init_mem()
 
     if ((memory = (t_byte *)malloc(sizeof(t_byte) * MEM_SIZE)) == NULL)
     {
-        my_putstr("Tg Felix\n");
-        exit(-1);
+        my_error(5);
     }
     for (i = 0; i < MEM_SIZE; ++i)
         memory[i] = 0;
