@@ -8,7 +8,6 @@
 ** Last update Mon Jun  5 13:28:53 2017 MARZI Nicolas
 */
 
-#include <malloc.h>
 #include "libmy.h"
 #include "parser.h"
 #include "op.h"
@@ -17,9 +16,11 @@
 int main(int argc, char **argv)
 {
     t_byte *mem;
+    t_meta *meta;
 
-    parser(argc, argv);
+    meta = parser(argc, argv);
     mem = init_mem();
+    print_tab(meta);
     free(mem);
     return (0);
 }
