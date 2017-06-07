@@ -1,3 +1,4 @@
+#include "error.h"
 #include "libmy.h"
 
 void my_error(int i)
