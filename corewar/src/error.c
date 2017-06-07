@@ -3,7 +3,7 @@
 
 void my_error(int i)
 {
-    char* errors[6];
+    char* errors[7];
 
     errors[0] = "Tout va bien\n";
     errors[1] = "Wrong cycle format\n";
@@ -11,6 +11,7 @@ void my_error(int i)
     errors[3] = "Wrong address format\n";
     errors[4] = "Only 4 champions max allowed\n";
     errors[5] = "Cannot allocate enough memory\n";
+    errors[6] = "Wrong number of argument\n";
     my_putstr("Error: ");
     my_putstr(errors[i]);
     my_putstr("usage: corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address ] prog_name] ...\n");
