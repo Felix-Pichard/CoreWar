@@ -3,7 +3,7 @@
 
 void my_error(int i)
 {
-    char* errors[7];
+    char* errors[9];
 
     errors[0] = "Tout va bien\n";
     errors[1] = "Wrong cycle format\n";
@@ -12,6 +12,12 @@ void my_error(int i)
     errors[4] = "Only 4 champions max allowed\n";
     errors[5] = "Can’t perform malloc\n";
     errors[6] = "Wrong number of argument\n";
+    errors[7] = "Cannot open the file\n";
+    errors[8] = "Cannot read the file\n";
+    errors[9] = "Too much source code\n";
+    errors[10] = "File is not a corewar executable\n";
+    errors[11] = "File has not the correct magic const\n";
+    errors[12] = "File has a too long source code\n";
     my_putstr("Error: ");
     my_putstr(errors[i]);
     my_putstr("usage: corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address ] prog_name] ...\n");
