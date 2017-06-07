@@ -13,6 +13,8 @@
 
 int main(int argc, char** argv)
 {
-    parser(argc, argv);
+    t_meta* mabite;
+    mabite = parser(argc, argv);
+    print_tab(mabite);
     return (0);
 }

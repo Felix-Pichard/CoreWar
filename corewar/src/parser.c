@@ -35,7 +35,7 @@ void fill_struct(int argc, char** argv, t_meta *test)
         {
             test->programs[count].prog_name = argv[i];
             if (count >= 4)
-                my_error("Only 4 champions allowed\n");
+                my_error(4);
             ++count;
         }
     }
@@ -58,11 +58,12 @@ void init_meta(t_meta *meta)
     my_putstr(meta->programs[0].prog_name);
 }
 
-void parser(int argc, char** argv)
+t_meta* parser(int argc, char** argv)
 {
-    t_meta test;
+    t_meta* test;
     int count;
 
+    test = malloc(sizeof(t_meta));
     count = 0;
     for (int i = 1; i < argc ; ++i)
     {
@@ -71,12 +72,12 @@ void parser(int argc, char** argv)
         else
         {
             if (count >= 4)
-                my_error("Only 4 champions max allowed\n");
+                my_error(4);
             ++count;
         }
     }
-    test.nbr_prg = count;
-    init_meta(&test);
-    fill_struct(argc, argv, &test);
-    print_tab(&test);
+    test->nbr_prg = count;
+    init_meta(test);
+    fill_struct(argc, argv, test);
+    return test;
 }
