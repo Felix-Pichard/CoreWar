@@ -32,5 +32,6 @@ char    *my_strstr(char *str, char *to_find);
 char    **my_str_to_wordtab(char *str);
 void    my_swap(int *a, int *b);
 int     my_wordlen(char *str);
+void    my_putnbr_base(int nbr, char *base);
 
 #endif
