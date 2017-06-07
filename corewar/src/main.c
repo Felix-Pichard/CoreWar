@@ -11,8 +11,8 @@
 #include <malloc.h>
 #include "libmy.h"
 #include "parser.h"
-#include "../../sujet/op.h"
-#include "../includes/memory.h"
+#include "op.h"
+#include "memory.h"
 
 int main(int argc, char **argv)
 {
