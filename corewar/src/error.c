@@ -10,7 +10,7 @@ void my_error(int i)
     errors[2] = "Wrong number format\n";
     errors[3] = "Wrong address format\n";
     errors[4] = "Only 4 champions max allowed\n";
-    errors[5] = "Cannot allocate enough memory\n";
+    errors[5] = "Can’t perform malloc\n";
     errors[6] = "Wrong number of argument\n";
     my_putstr("Error: ");
     my_putstr(errors[i]);
