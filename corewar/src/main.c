@@ -17,11 +17,13 @@
 int main(int argc, char **argv)
 {
     t_byte *mem;
-    t_meta *programs;
+    t_meta *meta;
 
-    programs = parser(argc, argv);
+    meta = parser(argc, argv);
     mem = init_mem();
     try_put_programs(programs);
+    mem = init_mem();
+    print_tab(meta);
     free(mem);
     return (0);
 }
