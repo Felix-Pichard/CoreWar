@@ -23,6 +23,14 @@ typedef struct          s_program
     char*               prog_name;
     int                 number;
     int                 address;
-}                       s_program;
+    int                 cycle_of_instruction;
+    int                 cycle_spent;
+}                       t_program;
+
+typedef struct          s_meta
+{
+    int nbr_prg;
+    t_program* programs;
+}                       t_meta;
  
  #endif
