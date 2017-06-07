@@ -33,5 +33,6 @@ void    my_swap(int *a, int *b);
 int     my_wordlen(char *str);
 void    my_putnbr_base(int nbr, char *base);
 int     my_strspn (const char *s, const char *accept);
+int     my_bstrlen(char *str);
 
 #endif
