@@ -18,14 +18,3 @@ void    my_putnbr_base(int nbr, char *base)
   my_putchar(base[(nbr % baseNb)]);
   nbr = nbr / baseNb;
 }
-
-int    my_strlen(char *str)
-{
-  int    i;
-  i = 0;
-
-  while (str[i] != '\0')
-    i++;
-
-  return (i);
-}
