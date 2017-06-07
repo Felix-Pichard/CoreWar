@@ -8,14 +8,11 @@
 ** Last update Tue Jun  6 16:28:53 2017 VIALLON Louis
 */
 
-#ifndef _CYCLE__H_
-#define _CYCLE__H_
+#ifndef _MEMORY__H_
+#define _MEMORY__H_
 
-typedef struct	s_cycle
-{
-    int	nbr;
-    int	live_calls;
-    int	die;
-}		t_cycle;
+typedef unsigned char t_byte;
+
+unsigned char *init_mem();
 
 #endif

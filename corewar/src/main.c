@@ -12,32 +12,17 @@
 #include <malloc.h>
 #include "libmy.h"
 #include "../../sujet/op.h"
-#include "../includes/cycle.h"
-
-static t_cycle	*cycle_init()
-{
-    t_cycle	*cycle;
-
-    if ((cycle = (t_cycle*)malloc(sizeof(t_cycle))) != NULL)
-    {
-        cycle->nbr = 1;
-        cycle->live_calls = NBR_LIVE;
-        cycle->die = CYCLE_TO_DIE;
-    }
-    return (cycle);
-}
-
-int launch_corewar()
-{
-    if (cycle_init())
-        return (0);
-    return (-1);
-}
+#include "../includes/memory.h"
 
 int main(int argc, char **argv)
 {
+    t_byte *mem;
+
     if (argc > 1 && argv != NULL)
-        return (launch_corewar());
+    {
+        mem = init_mem();
+        free(mem);
+    }
     else
         my_putstr("corewar: At least one argument required\n");
     return (-1);
