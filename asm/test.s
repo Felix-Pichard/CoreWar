@@ -11,6 +11,8 @@
 .name zoidberg
     .comment Whoop Whoop Whoop
 
-resr2: live r1
-live %:test
-add r1,%:test,r2,
+#test: add r1,r2,r3
+sti r1,%:live,%1
+and r1,%0,r1
+live: live %1
+zjmp %:live

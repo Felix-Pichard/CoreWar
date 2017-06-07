@@ -15,23 +15,27 @@
 #include "file.h"
 #include "op.h"
 #include "parser.h"
+#include "label.h"
+#include "instruction.h"
+#include "command.h"
+#include "assemble.h"
 
-void push(char *item)
+int push(char *item, script_t *script)
 {
     if (is_comment(item))
     {
         my_putstr("comment    : ");my_putstr(item);my_putstr("\n");
+        return (1);
     }
     else if (is_command(item))
-        set_command(item);
+        return (set_command(item, script));
     else if (is_label(item))
-        set_label(item);
+        return (set_label(item, script));
     else if (is_instruction(item))
-        set_instruction(item);
+        return (set_instruction(item, script));
     else if (is_null(item))
-        my_putstr("null       \n");
-    else
-        my_putstr("error      : ");
+        return (1);
+    return (0);
 }
 
 void print_array(char **container)
@@ -50,24 +54,33 @@ void print_file(char *filename)
     char data;
     char buffer[512];
     int cursor;
-    cursor = 0;
+    int response;
 
+    script_t warrior = {NULL, NULL, {COREWAR_EXEC_MAGIC, "", 0, ""}};
+    cursor = 0;
+    response = 1;
     init_buffer(buffer, 512);
     file_handle = xopen_read(filename);
     if (file_handle == -1)
         return;
-    while (read(file_handle, &data, 1))
+    while (read(file_handle, &data, 1) && response == 1)
     {
         if (data == '\n')
         {
-            push(get_string(buffer));
+            response = push(get_string(buffer), &warrior);
             init_buffer(buffer, 512);
             cursor = 0;
         }
         else
             buffer[cursor++] = data;
     }
-    push(get_string(buffer));
+    push(get_string(buffer), &warrior);
+
+    warrior.header.prog_size = get_rec_size(warrior.instruction);
+    print_header(&warrior.header);
+    print_label(warrior.label);
+    print_instruction(warrior.instruction);
+    assemble(&warrior);
     close(file_handle);
 }
 
@@ -94,6 +107,7 @@ int main(int argv, char **args)
         my_putstr("asm file_name[.s] ...");
         return (-1);
     }
+
     for (int i = 1; i < argv; i++)
     {
         // TODO add filename without extension

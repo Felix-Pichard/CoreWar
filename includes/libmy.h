@@ -12,6 +12,7 @@
 #define __LIBMY_H__
 
 int	my_getnbr(char *str);
+void	put_hex(unsigned char nbr);
 int     my_is_alphanum(char c);
 int     my_isneg(int n);
 int     my_nb_len(int n);

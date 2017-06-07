@@ -12,6 +12,16 @@
 
 #include "libmy.h"
 
+int xopen_trunc(char *file_name)
+{
+  int file_handle;
+
+  file_handle = open(file_name, O_TRUNC | O_WRONLY | O_CREAT);
+  if (file_handle == -1)
+    my_putstr("File Error !\n");
+  return (file_handle);
+}
+
 int		  xopen_read(char *file_name)
 {
   int file_handle;

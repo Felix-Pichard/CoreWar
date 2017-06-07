@@ -16,20 +16,20 @@
 
 op_t    op_tab[] =
   {
-    {"live", 1, {T_DIR}, 1, 10, "alive"},
-    {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load"},
-    {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store"},
-    {"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition"},
-    {"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction"},
-    {"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
+    {"live", 1, {CODED_DIR}, 1, 10, "alive"},
+    {"ld", 2, {CODED_DIR | CODED_IND, CODED_REG}, 2, 5, "load"},
+    {"st", 2, {CODED_REG, CODED_IND | CODED_REG}, 3, 5, "store"},
+    {"add", 3, {CODED_REG, CODED_REG, CODED_REG}, 4, 10, "addition"},
+    {"sub", 3, {CODED_REG, CODED_REG, CODED_REG}, 5, 10, "soustraction"},
+    {"and", 3, {CODED_REG | CODED_DIR | CODED_IND, CODED_REG | CODED_IND | CODED_DIR, CODED_REG}, 6, 6,
      "et (and  r1, r2, r3   r1&r2 -> r3"},
-    {"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
+    {"or", 3, {CODED_REG | CODED_IND | CODED_DIR, CODED_REG | CODED_IND | CODED_DIR, CODED_REG}, 7, 6,
      "ou  (or   r1, r2, r3   r1 | r2 -> r3"},
-    {"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
+    {"xor", 3, {CODED_REG | CODED_IND | CODED_DIR, CODED_REG | CODED_IND | CODED_DIR, CODED_REG}, 8, 6,
      "ou (xor  r1, r2, r3   r1^r2 -> r3"},
-    {"zjmp", 1, {T_DIR}, 9, 20, "jump if zero"},
-    {"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
+    {"zjmp", 1, {CODED_DIR}, 9, 20, "jump if zero"},
+    {"ldi", 3, {CODED_REG | CODED_DIR | CODED_IND, CODED_DIR | CODED_REG, CODED_REG}, 10, 25,
      "load index"},
-    {"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
+    {"sti", 3, {CODED_REG, CODED_REG | CODED_DIR | CODED_IND, CODED_DIR | CODED_REG}, 11, 25,
      "store index"}
   };

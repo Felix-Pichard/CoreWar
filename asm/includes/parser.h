@@ -22,13 +22,31 @@ typedef struct param_s
     byte    type;
 } param_t;
 
-typedef struct instruction_s
+
+typedef struct instruction_s instruction_t;
+struct  instruction_s
 {
-    byte opcode;
-    byte nb_args;
-    param_t args[MAX_ARGS_NUMBER];
-    struct instruction_t *next;
-} instruction_t;
+    byte                    opcode;
+    byte                    nb_args;
+    param_t                 args[MAX_ARGS_NUMBER];
+    instruction_t    *next;
+};
+
+
+typedef struct label_s label_t;
+struct  label_s
+{
+    char     *name;
+    byte     position;
+    label_t  *next;
+};
+
+typedef struct  script_s
+{
+    label_t         *label;
+    instruction_t   *instruction;
+    header_t        header;
+}               script_t;
 
 int is_label(char *line);
 int is_command(char *line);
@@ -47,8 +65,8 @@ void escape_str(char *string);
 int array_len(char **array);
 char **split_str(char *line, char delimiter);
 
-int set_command(char *line);
-int set_label(char *line);
-int set_instruction(char *line);
+int set_command(char *line, script_t *script);
+int set_label(char *line, script_t *script);
+int set_instruction(char *line, script_t *script);
 
 #endif

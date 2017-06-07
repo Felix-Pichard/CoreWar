@@ -13,6 +13,8 @@
 #include "op.h"
 #include "parser.h"
 #include "libmy.h"
+#include "label.h"
+#include "instruction.h"
 
 int is_comment(char *line)
 {
@@ -153,23 +155,22 @@ void escape_str(char *string)
     }
 }
 
-int set_command(char *line)
+int set_command(char *line, script_t *script)
 {
     if (my_strncmp(line, NAME_CMD_STRING, my_strlen(NAME_CMD_STRING)) == 0)
     {
-        my_putstr("Command name: ");
         line = line + my_strlen(NAME_CMD_STRING);
         escape_str(line);
+        my_strcpy(script->header.prog_name, line);
         return (1);
     }
     else if (my_strncmp(line, COMMENT_CMD_STRING, my_strlen(COMMENT_CMD_STRING)) == 0)
     {
-        my_putstr("Command comment: ");
         line = line + my_strlen(COMMENT_CMD_STRING);
         escape_str(line);
+        my_strcpy(script->header.comment, line);
         return (1);
     }
-    my_putstr(line);my_putstr("\n");
     return (0);
 }
 
@@ -226,6 +227,37 @@ void init_container_buffer(char **buffer, int size)
         *(buffer + i) = 0;
 }
 
+char **split_n_str(char *line, char delimiter, int i)
+{
+    char **result;
+    char buffer[128];
+    int cursor;
+    char *str;
+
+    init_buffer(buffer, 128);
+    result = malloc(sizeof(char *) * (find_occurence(line, delimiter) + 2));
+    init_container_buffer(result, array_len(result));
+
+    for (cursor = 0; *line != '\0'; line++)
+    {
+        if (*line == delimiter && i != 0)
+        {
+            i--;
+            str = get_string(buffer);
+            if (my_strlen(str) > 0)
+                push_str(result, str);
+            init_buffer(buffer, 128);
+            cursor = 0;
+        }
+        else
+            buffer[cursor++] = *line;
+    }
+    str = get_string(buffer);
+    if (my_strlen(str) > 0)
+        push_str(result, str);
+    return (result);
+}
+
 char **split_str(char *line, char delimiter)
 {
     char **result;
@@ -271,11 +303,11 @@ op_t get_op(char *name)
 byte get_param_code(char *line)
 {
     if (is_param_register(line))
-        return (0x01);
+        return (CODED_REG);
     else if (is_param_dir(line))
-        return (0x02);
+        return (CODED_DIR);
     else if (is_param_indir(line))
-        return (0x03);
+        return (CODED_IND);
     return (0x00);
 }
 
@@ -291,15 +323,15 @@ int set_params(instruction_t *instruction, char **lines, int size)
         if (!is_param_valid(lines[i]))
             return (0);
         *param = (param_t) {NULL, 0, get_param_code(lines[i])};
-        if (param->type == 0x01)
+        if (param->type == CODED_REG)
         {
             param->value = my_getnbr(split_str(lines[i], 'r')[0]);
         }
-        else if (param->type == 0x03)
+        else if (param->type == CODED_IND)
         {
             param->value = my_getnbr(lines[i]);
         }
-        else
+        else if (param->type == CODED_DIR)
         {
             label = split_str(lines[i], '%')[0];
             if (label[0] == ':')
@@ -310,11 +342,13 @@ int set_params(instruction_t *instruction, char **lines, int size)
             else
                 param->value = my_getnbr(label);
         }
+        else
+            return (0);
     }
     return (1);
 }
 
-int set_instruction(char *line)
+int set_instruction(char *line, script_t *script)
 {
     char **instructions;
     char **params;
@@ -337,35 +371,48 @@ int set_instruction(char *line)
     if (!set_params(&instruction, params, op.nbr_args))
         return (0);
 
-    instruction.opcode = (byte) op.code;
-    instruction.nb_args = (byte) op.nbr_args;
+    instruction.opcode = op.code;
+    instruction.nb_args = op.nbr_args;
     instruction.next = NULL;
 
-    my_putstr("Instruction : ");my_putstr(instructions[0]);my_putstr("\n");
-    for (int i = 0; i < op.nbr_args; i++)
+    for (int i = 0; i < instruction.nb_args; i++)
     {
-        my_putstr("argument: ");my_put_nbr((int) instruction.args[i].type);
-        my_putstr(" ");
-        
-        if (instruction.args[i].label != NULL)
-            my_putstr(instruction.args[i].label);
-        else
-            my_put_nbr(instruction.args[i].value);
-        my_putstr("\n");
+        if (((byte) op.type[i] & instruction.args[i].type) == 0)
+        {
+            my_putstr("Wrong type for ");my_putstr(op.mnemonique);my_putstr(" at ");
+            my_put_nbr(i + 1);my_putstr(" parameter\n");
+            return (0);
+        }
     }
+    add_instruction(script, instruction);
     return (1);
 }
 
-int set_label(char *line)
+char *duplicate_str(char *string)
+{
+    char *result;
+    int i;
+    int size;
+    size = my_strlen(string);
+    result = malloc(sizeof(char) * (size + 1));
+    for (i = 0; i < size; i++)
+        result[i] = string[i];
+    result[i + 1] = '\0';
+    return (result);
+}
+
+int set_label(char *line, script_t *script)
 {
     char **labels;
+    label_t item;
 
-    labels = split_str(line, ':');
+    labels = split_n_str(line, ':', 1);
     if (array_len(labels) == 2)
     {
-        my_putstr("Label defined: "); my_putstr(labels[0]); my_putstr("\n");
+        item = (label_t) {duplicate_str(labels[0]), get_rec_size(script->instruction), NULL};
+        add_label(script, item);
         if (is_instruction(labels[1]))
-            return (set_instruction(labels[1]));
+            return (set_instruction(labels[1], script));
     }
     return (0);
 }

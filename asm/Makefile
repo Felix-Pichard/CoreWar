@@ -18,7 +18,12 @@ SRC = src/op.c \
 	src/main.c \
 	src/file/xopen.c \
 	src/file/file_exists.c \
-	src/parser.c
+	src/parser.c \
+	src/label.c \
+	src/instruction.c \
+	src/command.c \
+	src/assemble.c \
+	src/header.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 TEST_OBJS = $(TEST:%.c=$(BUILD_PATH)/%.o)
