@@ -18,7 +18,7 @@ int my_strspn (const char *s, const char *accept)
     count = 0;
     for (; *s != '\0'; ++s) {
          for (to_compare = accept; *to_compare != '\0'; ++to_compare) {
-            if (*p == *to_compare)
+            if (*s == *to_compare)
                   found = 1;
          }
           if (found == 0)
