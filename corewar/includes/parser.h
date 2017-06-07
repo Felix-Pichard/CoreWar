@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../libmy/libmy.h"
+#include "libmy.h"
 
  
 typedef struct          s_program
