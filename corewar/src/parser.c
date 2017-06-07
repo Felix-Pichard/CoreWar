@@ -12,7 +12,9 @@
 
 void print_tab(t_meta* test)
 {
-    for (int i = 0; i < test->nbr_prg; ++i)
+	int i;
+
+    for (i = 0; i < test->nbr_prg; ++i)
     {
         if (test->programs[i].prog_name != NULL)
         {
@@ -31,8 +33,9 @@ void fill_struct(int argc, char** argv, t_meta *test)
 {
     int count = 0;
     int cycle = -1;
+	int i;
 
-    for (int i = 1; i < argc ; ++i)
+    for (i = 1; i < argc ; ++i)
     {
         if (my_strcmp(argv[i], "-dump") == 0)
             check_dump(argv, &i, argc, &cycle);
@@ -54,9 +57,12 @@ void fill_struct(int argc, char** argv, t_meta *test)
 
 void init_meta(t_meta *meta)
 {
-    meta->programs = malloc(sizeof(t_program) * meta->nbr_prg);
+	int i;
 
-    for (int i = 0; i < meta->nbr_prg; ++i)
+    if ((meta->programs = malloc(sizeof(t_program) * meta->nbr_prg)) == NULL)
+		my_error(5);
+
+    for (i = 0; i < meta->nbr_prg; ++i)
     {
         meta->programs[i].prog_name = "";
         meta->programs[i].number = 0;
@@ -69,15 +75,17 @@ void init_meta(t_meta *meta)
 
 t_meta* parser(int argc, char** argv)
 {
-    t_meta* test;
+    t_meta* prog_args;
     int count;
+	int i;
 
-    test = malloc(sizeof(t_meta));
+    if ((prog_args = malloc(sizeof(t_meta))) == NULL)
+		my_error(5);
     count = 0;
-    for (int i = 1; i < argc ; ++i)
+    for (i = 1; i < argc ; ++i)
     {
         if (my_strcmp(argv[i], "-dump") == 0 || my_strcmp(argv[i], "-n") == 0 || my_strcmp(argv[i], "-a") == 0)
-            i = i + 1;
+            ++i;
         else
         {
             if (count >= 4)
@@ -85,8 +93,9 @@ t_meta* parser(int argc, char** argv)
             ++count;
         }
     }
-    test->nbr_prg = count;
-    init_meta(test);
-    fill_struct(argc, argv, test);
-    return test;
+    prog_args->nbr_prg = count;
+    init_meta(prog_args);
+    fill_struct(argc, argv, prog_args);
+    
+	return (prog_args);
 }
