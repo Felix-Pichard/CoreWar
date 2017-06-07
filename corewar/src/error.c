@@ -17,7 +17,7 @@ void my_error(int i)
 
 void check_dump(char** argv, int* i, int argc, int* cycle)
 {
-    if (*i + 1 < argc && *cycle == -1  && my_getnbr(argv[*i+1]) >= 0 && argv[*i+1][strspn(argv[*i+1], "0123456789")] == 0){
+    if (*i + 1 < argc && *cycle == -1  && my_getnbr(argv[*i+1]) >= 0 && argv[*i+1][my_strspn(argv[*i+1], "0123456789")] == 0){
         *i = *i + 1;
          *cycle = my_getnbr(argv[*i]);
     }
@@ -27,7 +27,7 @@ void check_dump(char** argv, int* i, int argc, int* cycle)
 
 int check_prog_n(char** argv, int* i, int argc)
 {
-    if (*i + 1 < argc && argv[*i+1][strspn(argv[*i+1], "0123456789")] == 0 && my_strcmp(argv[*i+1], "-a") != 0)
+    if (*i + 1 < argc && argv[*i+1][my_strspn(argv[*i+1], "0123456789")] == 0 && my_strcmp(argv[*i+1], "-a") != 0)
         *i = *i + 1;
     else
         my_error(2);
@@ -37,7 +37,7 @@ int check_prog_n(char** argv, int* i, int argc)
 
 int check_prog_addr(char** argv, int* i, int argc)
 {
-    if (*i + 1 < argc && argv[*i+1][strspn(argv[*i+1], "0123456789")] == 0 && my_strcmp(argv[*i+1], "-n") != 0)
+    if (*i + 1 < argc && argv[*i+1][my_strspn(argv[*i+1], "0123456789")] == 0 && my_strcmp(argv[*i+1], "-n") != 0)
         *i = *i + 1;
     else
         my_error(3);
