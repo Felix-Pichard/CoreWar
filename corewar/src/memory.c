@@ -29,3 +29,16 @@ unsigned char *init_mem()
         memory[i] = 0;
     return (memory);
 }
+
+int dump(t_byte *memory)
+{
+    int i;
+    
+    for (i = 0; i < MEM_SIZE; ++i)
+    {
+        if (i != 0 && (i % 32 == 0))
+            my_putstr("\n");
+        my_putnbr_base((int)memory[i], "0123456789ABCDEF");
+    }
+    return (0);
+}

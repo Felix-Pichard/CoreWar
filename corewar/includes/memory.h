@@ -14,5 +14,6 @@
 typedef unsigned char t_byte;
 
 unsigned char *init_mem();
+int dump(t_byte *memory);
 
 #endif
