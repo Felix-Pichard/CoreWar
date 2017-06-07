@@ -35,7 +35,8 @@ SRC = src/my_getnbr.c \
 		src/my_swap.c \
 		src/my_wordlen.c \
 		src/put_hex.c \
-		src/my_putnbr_base.c
+		src/my_putnbr_base.c \
+		src/my_strspn.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 CFLAGS = -W -Wextra -Werror -Wall -pedantic
