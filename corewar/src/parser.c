@@ -9,6 +9,7 @@
 */
 
 #include "parser.h"
+#include "error.h"
 
 void print_tab(t_meta* test)
 {
