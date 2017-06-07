@@ -1,4 +1,4 @@
-#include "../../libmy/libmy.h"
+#include "libmy.h"
 
 void my_error(int i)
 {
