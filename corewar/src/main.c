@@ -21,8 +21,8 @@ int main(int argc, char **argv)
 
     programs = parser(argc, argv);
     mem = init_mem();
-    mem = init_mem();
     print_tab(meta);
+    try_put_programs(programs);
     free(mem);
     return (0);
 }
