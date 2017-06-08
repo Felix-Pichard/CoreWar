@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 13:50:39 2017 MARZI Nicolas
-** Last update Wed Jun  7 13:50:39 2017 MARZI Nicolas
+** Last update Thu Jun  8 07:35:55 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -40,32 +40,23 @@ int assemble(script_t *script)
 {
     int i;
     int offset;
+    int file_handle;
     byte content[script->header.prog_size];
     instruction_t *tmp;
 
     offset = 0;
     init_byte_buffer(content, script->header.prog_size);
     tmp = script->instruction;
-
     while (tmp != NULL)
     {
-        my_putstr("Instruction: ");my_put_nbr(tmp->opcode);my_putstr("\n");
         for (i = 0; i < tmp->nb_args; i++)
             replace_label(script->label, &tmp->args[i], offset);
         offset += write_instruction(content, offset, tmp);
         tmp = tmp->next;
-        my_putstr("\n");
     }
-    for (int j = 0; j < offset; j++)
-    {
-        put_hex(content[j]);
-    }
-    int file_handle = xopen_trunc("test.cor");
+    file_handle = xopen_trunc(script->file_name);
     write_header(file_handle, script->header);
-    for (i = 0; i < offset; i++)
-    {
-        write(file_handle, &content[i], 1);
-    }
+    write(file_handle, content, script->header.prog_size);
     close(file_handle);
     return (1);
 }

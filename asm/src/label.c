@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 08:51:04 2017 MARZI Nicolas
-** Last update Wed Jun  7 08:51:04 2017 MARZI Nicolas
+** Last update Thu Jun  8 08:37:57 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -14,13 +14,11 @@
 #include "label.h"
 #include "libmy.h"
 
-
 label_t *get_label(label_t *container, char *name)
 {
     label_t *tmp;
 
     tmp = container;
-
     while (tmp != NULL)
     {
         if (my_strcmp(name, container->name) == 0)
@@ -32,8 +30,6 @@ label_t *get_label(label_t *container, char *name)
 
 int get_value_label(label_t *label, int cursor)
 {
-    my_putstr("Offset: ");my_put_nbr(cursor);my_putstr("\n");
-    my_putstr("Positi: ");my_put_nbr(label->position);my_putstr("\n");
     if (label->position > cursor)
         return (label->position);
     return (0x0000 - (cursor - label->position));
@@ -50,9 +46,6 @@ int replace_label(label_t *labels, param_t *param, int offset)
     if (label == NULL)
         return (0);
     param->value = get_value_label(label, offset);
-    my_putstr(param->label);
-    my_put_nbr(get_value_label(label, offset));
-    my_putstr("\n");
     return (1);
 }
 
@@ -74,15 +67,28 @@ void add_label(script_t *script, label_t item)
     *tmp->next = item;
 }
 
-void print_label(label_t *container)
+int is_char_label(char c)
 {
-    if (container == NULL)
-        return;
+    int i;
 
-    my_putstr("Label : \n");
-    my_putstr("\tname     : ");my_putstr(container->name);my_putstr("\n");
-    my_putstr("\tposition : ");my_put_nbr(container->position);my_putstr("\n");
+    for (i = 0; i < my_strlen(LABEL_CHARS); i++)
+    {
+        if (c == LABEL_CHARS[i])
+            return (1);
+    }
+    return (0);
+}
 
-    if (container->next != NULL)
-        print_label(container->next);
+int is_label(char *line)
+{
+    int cursor;
+
+    for (cursor = 0; *(line + cursor) != '\0'; cursor++)
+    {
+        if (line[cursor] == LABEL_CHAR && cursor > 0)
+            return (1);
+        else if (is_char_label(line[cursor]) == 0)
+            return (0);
+    }
+    return (0);
 }

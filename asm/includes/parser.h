@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 08:47:49 2017 MARZI Nicolas
-** Last update Tue Jun  6 08:47:49 2017 MARZI Nicolas
+** Last update Thu Jun  8 08:37:16 2017 MARZI Nicolas
 */
 
 #include "op.h"
@@ -46,24 +46,21 @@ typedef struct  script_s
     label_t         *label;
     instruction_t   *instruction;
     header_t        header;
+    char            *file_name;
 }               script_t;
 
-int is_label(char *line);
 int is_command(char *line);
 int is_comment(char *line);
 int is_instruction(char *line);
 int is_null(char *line);
-
-int is_param_register(char *line);
-int is_param_dir(char *line);
-int is_param_indir(char *line);
-int is_param_valid(char *arg);
 
 char *get_string(char *buffer);
 void init_buffer(char *buffer, int size);
 void escape_str(char *string);
 int array_len(char **array);
 char **split_str(char *line, char delimiter);
+
+int is_nbr(char *line);
 
 int set_command(char *line, script_t *script);
 int set_label(char *line, script_t *script);

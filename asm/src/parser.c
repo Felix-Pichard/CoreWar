@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 20:02:00 2017 MARZI Nicolas
-** Last update Mon Jun  5 20:02:00 2017 MARZI Nicolas
+** Last update Thu Jun  8 08:43:19 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -15,6 +15,9 @@
 #include "libmy.h"
 #include "label.h"
 #include "instruction.h"
+#include "free.h"
+#include "param.h"
+#include "debug.h"
 
 int is_comment(char *line)
 {
@@ -35,33 +38,6 @@ int array_len(char **array)
     {}
     return (size);
 }
-
-int is_char_label(char c)
-{
-    int i;
-
-    for (i = 0; i < my_strlen(LABEL_CHARS); i++)
-    {
-        if (c == LABEL_CHARS[i])
-            return (1);
-    }
-    return (0);
-}
-
-int is_label(char *line)
-{
-    int cursor;
-
-    for (cursor = 0; *(line + cursor) != '\0'; cursor++)
-    {
-        if (line[cursor] == LABEL_CHAR && cursor > 0)
-            return (1);
-        else if (is_char_label(line[cursor]) == 0)
-            return (0);
-    }
-    return (0);
-}
-
 
 int is_instruction(char *line)
 {
@@ -93,48 +69,6 @@ int is_nbr(char *line)
             return (0);
     }
     return (1);    
-}
-
-int is_param_label(char *line)
-{
-    char c;
-
-    for (; *line != '\0'; line++)
-    {
-        c = *line;
-        if (!is_char_label(c))
-            return (0);
-    }
-    return (1);
-}
-
-int is_param_register(char *line)
-{
-    if (line[0] != 'r')
-        return (0);
-    line++;
-    return (is_nbr(line));
-}
-
-int is_param_indir(char *line)
-{
-    return (is_nbr(line));
-}
-
-int is_param_dir(char *line)
-{
-    if (line[0] != DIRECT_CHAR)
-        return (0);
-    line++;
-    if (line[0] == LABEL_CHAR)
-    {
-        line++;
-        if (is_param_label(line))
-            return (1);
-    }
-    else if (is_nbr(line))
-        return (1);
-    return (0);    
 }
 
 int is_invisible_char(char c)
@@ -212,11 +146,6 @@ void push_str(char **container, char *item)
 {
     if (my_strlen(item) > 0)
         container[array_len(container)] = item;
-}
-
-int is_param_valid(char *arg)
-{
-    return (is_param_register(arg) || is_param_dir(arg) || is_param_indir(arg));
 }
 
 void init_container_buffer(char **buffer, int size)
@@ -366,7 +295,11 @@ int set_instruction(char *line, script_t *script)
     params = split_str(instructions[1], SEPARATOR_CHAR);
 
     if (array_len(params) != op.nbr_args)
+    {
+        my_put_nbr(array_len(params));my_putstr(" parameters given, ");
+        my_put_nbr(op.nbr_args);my_putstr(" expected");
         return (0);
+    }
 
     if (!set_params(&instruction, params, op.nbr_args))
         return (0);
@@ -379,8 +312,11 @@ int set_instruction(char *line, script_t *script)
     {
         if (((byte) op.type[i] & instruction.args[i].type) == 0)
         {
-            my_putstr("Wrong type for ");my_putstr(op.mnemonique);my_putstr(" at ");
-            my_put_nbr(i + 1);my_putstr(" parameter\n");
+            my_putstr("Wrong type for ");my_putstr(op.mnemonique);my_putstr(" instruction for parameter at position ");
+            my_put_nbr(i + 1);my_putstr("\n");
+            my_putstr(get_type_param(instruction.args[i].type));
+            my_putstr(" given, expected: ");
+            print_param_possibilities(op.type[i]);
             return (0);
         }
     }
@@ -414,5 +350,6 @@ int set_label(char *line, script_t *script)
         if (is_instruction(labels[1]))
             return (set_instruction(labels[1], script));
     }
+    free_array(labels);
     return (0);
 }

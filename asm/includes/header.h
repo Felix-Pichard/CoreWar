@@ -14,5 +14,6 @@
 #include "op.h"
 
 void write_header(int file_handle, header_t header);
+char *get_filename(char *file);
 
 #endif
