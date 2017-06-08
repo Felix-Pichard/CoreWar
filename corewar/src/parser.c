@@ -46,6 +46,7 @@ void fill_struct(int argc, char** argv, t_meta *meta)
     int count = 0;
     int cycle = -1;
     int i;
+    byte *source_code;
     header_t *header;
 
     header = new_header();
@@ -60,29 +61,15 @@ void fill_struct(int argc, char** argv, t_meta *meta)
         else
         {
             meta->programs[count].file_name = argv[i];
-            get_file_content(argv[i], header, 1);
+            source_code = get_file_content(argv[i], header, 1);
             if (count >= 4)
                 my_error(4);
             ++count;
         }
         meta->programs[count].header = *header;
+        meta->programs[count].binaries = source_code;
     }
 }
-
-//void fill_file(char **argv, t_meta *meta)
-//{
-//    int count = 0;
-//    int i;
-//
-//    for (i = 1; i <= meta->nbr_prg ; ++i)
-//    {
-//        meta->programs[count].header = *get_header(get_file_content(argv[i], meta->nbr_prg), meta->nbr_prg);
-//        my_put_nbr(meta->programs[count].header.prog_size);
-//      my_putstr(" : lol \n");
-//        ++count;
-//    }
-//
-//}
 
 void init_meta(t_meta *meta)
 {
