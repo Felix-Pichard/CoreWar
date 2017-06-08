@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include "libmy.h"
 #include "error.h"
-#include "../includes/memory.h"
-#include "../includes/op.h"
+#include "memory.h"
+#include "op.h"
 
 unsigned char *init_mem()
 {
