@@ -13,5 +13,6 @@
 
 int         file_exists(char *file);
 int		    xopen_read(char *file_name);
+int         xopen_trunc(char *file_name);
 
 #endif
