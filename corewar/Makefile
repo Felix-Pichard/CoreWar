@@ -5,7 +5,7 @@
 ## Login   <marzi_n@etna-alternance.net>
 ##
 ## Started on  Mon Jun  5 13:26:04 2017 MARZI Nicolas
-## Last update Mon Jun  5 13:27:36 2017 MARZI Nicolas
+## Last update Thu Jun  8 15:54:40 2017 MARZI Nicolas
 ##
 
 CC = gcc
@@ -19,7 +19,9 @@ SRC = src/main.c \
 	src/memory.c \
 	src/error.c \
 	src/header_parser.c \
-	src/manager.c
+	src/manager.c \
+	src/game.c \
+	src/game_utils.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 

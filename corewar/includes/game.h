@@ -1,7 +1,18 @@
+/*
+** game.h for COREWAR in /media/maniarr/Workspace1/etna/CoreWar/corewar/includes
+**
+** Made by MARZI Nicolas
+** Login   <marzi_n@etna-alternance.net>
+**
+** Started on  Thu Jun  8 15:32:49 2017 MARZI Nicolas
+** Last update Thu Jun  8 16:09:00 2017 MARZI Nicolas
+*/
+
 #ifndef _GAME__H_
 #define _GAME__H_
 
 #include "op.h"
+#include "memory.h"
 
 typedef struct cursor_s
 {
@@ -35,5 +46,9 @@ typedef struct instruction_s
     byte        cost;
     void        (*foo)(program_t *programs[], byte *memory[], cursor_t *cursor);
 } instruction_t;
+
+int nb_program_alive(program_t **programs);
+void launch_game(game_t *game);
+void free_game(game_t *game);
 
 #endif
