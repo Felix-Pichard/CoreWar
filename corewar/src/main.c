@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 19:07:08 2017 MARZI Nicolas
+** Last update Thu Jun  8 19:43:17 2017 MARZI Nicolas
 */
 
 #include "libmy.h"
@@ -50,11 +50,12 @@ int main(int argc, char **argv)
     
     game.nb_player = program->nbr_prg;
     
-    game.programs = malloc(sizeof(program_t) * game.nb_player);
+    game.programs = malloc(sizeof(program_t) * game.nb_player + 1);
     game.cursors = malloc(sizeof(cursor_t) * game.nb_player);
     for (int i = 0; i < program->nbr_prg; i++)
     {
-        insert_prog(program->programs[i], &game.memory, program->programs[i].address);
+        // todo verif size of memory
+        insert_prog(program->programs[i], &game.memory, (MEM_SIZE / program->nbr_prg) * i);
         game.programs[i].id = i + 1;
         game.programs[i].alive = 1;
         game.programs[i].name = program->programs[i].header.prog_name;

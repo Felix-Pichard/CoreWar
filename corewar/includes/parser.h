@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 18:44:24 2017 MARZI Nicolas
+** Last update Thu Jun  8 19:42:22 2017 MARZI Nicolas
 */
 
 #ifndef _PARSER__H_
@@ -18,17 +18,6 @@
 #include "op.h"
 #include "libmy.h"
 #include "memory.h"
-
-typedef unsigned char byte;
- 
-typedef struct          s_program
-{
-    char*               file_name;
-    int                 number;
-    int                 address;
-    byte*               binaries;
-    header_t            header;
-}                       t_program;
 
 typedef struct          s_meta
 {
