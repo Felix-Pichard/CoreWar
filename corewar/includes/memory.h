@@ -5,7 +5,7 @@
 ** Login   <viallo_l@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 16:27:50 2017 VIALLON Louis
-** Last update Tue Jun  6 16:28:53 2017 VIALLON Louis
+** Last update Thu Jun  8 18:14:12 2017 MARZI Nicolas
 */
 
 #ifndef _MEMORY__H_
@@ -13,7 +13,8 @@
 
 typedef unsigned char byte;
 
-unsigned char *init_mem();
-int dump(byte *memory);
+void init_mem(byte **memory);
+int dump_n(byte memory[], int n);
+int dump(byte memory[]);
 
 #endif

@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:18:31 2017 MARZI Nicolas
-** Last update Thu Jun  8 17:35:21 2017 MARZI Nicolas
+** Last update Thu Jun  8 18:15:28 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -14,11 +14,11 @@
 #include "game.h"
 #include "op.h"
 
-int nb_program(program_t **program)
+int nb_program(program_t *program)
 {
     int size;
 
-    for (size = 0; *program != NULL; program++)
+    for (size = 0; program != NULL; program++)
         size++;
     return (size);
 }
@@ -61,9 +61,9 @@ void free_game(game_t *game)
 {
     program_t *clean;
 
-    for (; *game->programs != NULL;)
+    for (; game->programs != NULL;)
     {
-        clean = (*game->programs);
+        clean = game->programs;
         // free(clean->name);
         free(clean);
         game->programs++;

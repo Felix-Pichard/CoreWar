@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:32:49 2017 MARZI Nicolas
-** Last update Thu Jun  8 17:11:14 2017 MARZI Nicolas
+** Last update Thu Jun  8 18:14:57 2017 MARZI Nicolas
 */
 
 #ifndef _GAME__H_
@@ -35,9 +35,9 @@ typedef struct game_s
     int         max_cycles;
     int         left_cycles;
     int         dump_cycles;
-    byte        *memory[MEM_SIZE];
-    program_t   **programs;
-    cursor_t    **cursors;
+    byte        *memory;
+    program_t   *programs;
+    cursor_t    *cursors;
 } game_t;
 
 typedef struct instruction_s
@@ -48,7 +48,7 @@ typedef struct instruction_s
     void        (*foo)(program_t *programs[], byte *memory[], cursor_t *cursor);
 } instruction_t;
 
-int nb_program_alive(program_t **programs);
+int nb_program_alive(program_t *programs);
 void init_game(game_t *game);
 void launch_game(game_t *game);
 void free_game(game_t *game);

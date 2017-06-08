@@ -5,7 +5,7 @@
 ** Login   <viallo_l@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 16:27:50 2017 VIALLON Louis
-** Last update Thu Jun  8 17:37:04 2017 MARZI Nicolas
+** Last update Thu Jun  8 18:14:15 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -14,27 +14,37 @@
 #include "memory.h"
 #include "op.h"
 
-byte *init_mem()
+void init_mem(byte **memory)
 {
-    byte  *memory;
     int     i;
 
-    if ((memory = (byte *)malloc(sizeof(byte) * MEM_SIZE)) == NULL)
-        my_error(5);
     for (i = 0; i < MEM_SIZE; i++)
         memory[i] = 0;
-    return (memory);
 }
 
-int dump(byte *memory)
+int dump(byte memory[])
 {
     int i;
     
-    for (i = 0; i < MEM_SIZE; ++i)
+    for (i = 0; i < MEM_SIZE; i++)
     {
         if (i != 0 && (i % 32 == 0))
             my_putstr("\n");
-        my_putnbr_base((int)memory[i], "0123456789ABCDEF");
+        put_hex(memory[i]);
+    }
+    return (0);
+}
+
+
+int dump_n(byte memory[], int n)
+{
+    int i;
+    
+    for (i = 0; i < n; i++)
+    {
+        if (i != 0 && (i % 32 == 0))
+            my_putstr("\n");
+        put_hex(memory[i]);
     }
     return (0);
 }
