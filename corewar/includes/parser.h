@@ -17,6 +17,7 @@
 #include <string.h>
 #include "op.h"
 #include "libmy.h"
+#include "memory.h"
 
  
 typedef struct          s_program
@@ -24,8 +25,7 @@ typedef struct          s_program
     char*               file_name;
     int                 number;
     int                 address;
-    int                 cycle_of_instruction;
-    int                 cycle_spent;
+    byte*               binaries;
     header_t            header;
 }                       t_program;
 

@@ -16,7 +16,7 @@
 
 int main(int argc, char **argv)
 {
-    t_byte *mem;
+    byte *mem;
     t_meta *programs;
 
     programs = parser(argc, argv);

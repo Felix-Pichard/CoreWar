@@ -80,8 +80,6 @@ void init_meta(t_meta *meta)
         meta->programs[i].file_name = "";
         meta->programs[i].number = 0;
         meta->programs[i].address = 0;
-        meta->programs[i].cycle_of_instruction = 0;
-        meta->programs[i].cycle_spent = 0;
     }
     //my_putstr(meta->programs[0].file_name);
 }

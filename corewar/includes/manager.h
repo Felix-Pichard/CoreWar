@@ -13,5 +13,6 @@
 
 int calc_address(int initial_address);
 int try_put_programs(t_meta *meta);
+int put_program(t_program *program, int start_addr);
 
 #endif

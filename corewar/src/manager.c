@@ -10,6 +10,7 @@
 
 #include "parser.h"
 #include "op.h"
+#include "manager.h"
 
 int calc_address(int initial_address)
 {
@@ -34,8 +35,8 @@ int try_put_programs(t_meta *meta)
             start_address = calc_address(i * (MEM_SIZE / meta->nbr_prg));
         else
             start_address = calc_address(tmp_prog.address);
-        //if (!put_program(start_address, tmp_prog))
-        //    return (0);
+        if (!put_program(&tmp_prog, start_address))
+            return (1);
         my_put_nbr(tmp_prog.header.prog_size);
         my_putchar('\n');
         my_putstr(tmp_prog.file_name);
@@ -44,5 +45,11 @@ int try_put_programs(t_meta *meta)
         my_putchar('\n');
         my_putchar('\n');
     }
+    return (0);
+}
+
+int put_program(t_program *program, int start_address)
+{
+    program->address = start_address;
     return (0);
 }

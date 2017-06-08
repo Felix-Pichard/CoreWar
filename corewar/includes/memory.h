@@ -1,5 +1,5 @@
 /*
-** cycle.h for CoreWar in /home/louis/CoreWar/corewar/includes
+** memory.h for CoreWar in /home/louis/CoreWar/corewar/includes
 **
 ** Made by VIALLON Louis
 ** Login   <viallo_l@etna-alternance.net>
@@ -11,9 +11,9 @@
 #ifndef _MEMORY__H_
 #define _MEMORY__H_
 
-typedef unsigned char t_byte;
+typedef unsigned char byte;
 
 unsigned char *init_mem();
-int dump(t_byte *memory);
+int dump(byte *memory);
 
 #endif
