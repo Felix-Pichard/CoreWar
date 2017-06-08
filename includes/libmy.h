@@ -34,5 +34,6 @@ int     my_wordlen(char *str);
 void    my_putnbr_base(int nbr, char *base);
 int     my_strspn (const char *s, const char *accept);
 int     my_bstrlen(char *str);
+char    *my_strnncpy(char *src, int i, int size);
 
 #endif
