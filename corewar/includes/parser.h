@@ -21,7 +21,7 @@
  
 typedef struct          s_program
 {
-    char*               prog_name;
+    char*               file_name;
     int                 number;
     int                 address;
     int                 cycle_of_instruction;

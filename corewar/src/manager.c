@@ -36,8 +36,12 @@ int try_put_programs(t_meta *meta)
             start_address = calc_address(tmp_prog.address);
         //if (!put_program(start_address, tmp_prog))
         //    return (0);
+        my_put_nbr(tmp_prog.header.prog_size);
+        my_putchar('\n');
+        my_putstr(tmp_prog.file_name);
+        my_putchar('\n');
         my_put_nbr(start_address);
-        my_putstr(tmp_prog.prog_name);
+        my_putchar('\n');
         my_putchar('\n');
     }
     return (0);

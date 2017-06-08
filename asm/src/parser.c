@@ -34,7 +34,7 @@ int array_len(char **array)
 {
     int size;
 
-    for(size = 0; array[size] != '\0'; size++) 
+    for(size = 0; array[size] != NULL; size++)
     {}
     return (size);
 }

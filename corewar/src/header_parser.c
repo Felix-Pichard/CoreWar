@@ -16,14 +16,16 @@
 #include "libmy.h"
 #include "op.h"
 
-char *get_file_content(char *filename, int max_size)
+char *get_file_content(char *filename, int opponent_number)
 {
     int fd;
     char *file_content;
     int i;
     int check;
+    int max_size;
 
     check = 0;
+    max_size = MEM_SIZE / opponent_number;
     file_content = malloc(max_size);
     fd = open(filename, O_RDONLY);
     if (fd == -1)

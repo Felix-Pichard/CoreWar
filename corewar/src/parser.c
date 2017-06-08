@@ -10,6 +10,7 @@
 
 #include "parser.h"
 #include "error.h"
+#include "header_parser.h"
 
 void print_tab(t_meta* test)
 {
@@ -17,9 +18,9 @@ void print_tab(t_meta* test)
 
     for (i = 0; i < test->nbr_prg; ++i)
     {
-        if (test->programs[i].prog_name != NULL)
+        if (test->programs[i].file_name != NULL)
         {
-            my_putstr(test->programs[i].prog_name);
+            my_putstr(test->programs[i].file_name);
             my_putchar('\n');
             my_put_nbr(test->programs[i].address);
             my_putchar('\n');
@@ -30,31 +31,42 @@ void print_tab(t_meta* test)
     }
 }
 
-void fill_struct(int argc, char** argv, t_meta *test)
+void fill_struct(int argc, char** argv, t_meta *meta)
 {
     int count = 0;
     int cycle = -1;
-	int i;
+    int i;
 
     for (i = 1; i < argc ; ++i)
     {
         if (my_strcmp(argv[i], "-dump") == 0)
             check_dump(argv, &i, argc, &cycle);
         else if (my_strcmp(argv[i], "-n") == 0)
-            test->programs[count].number = check_prog_n(argv, &i, argc);
+            meta->programs[count].number = check_prog_n(argv, &i, argc);
         else if (my_strcmp(argv[i], "-a") == 0)
-            test->programs[count].address = check_prog_addr(argv, &i, argc);
+            meta->programs[count].address = check_prog_addr(argv, &i, argc);
         else
         {
-            test->programs[count].prog_name = argv[i];
+            meta->programs[count].file_name = argv[i];
             if (count >= 4)
                 my_error(4);
             ++count;
         }
     }
-
 }
 
+void fill_file(char **argv, t_meta *meta)
+{
+    int count = 0;
+    int i;
+
+    for (i = 1; i < meta->nbr_prg ; ++i)
+    {
+        meta->programs[count].header = *get_header(get_file_content(argv[i], meta->nbr_prg), meta->nbr_prg);
+        ++count;
+    }
+
+}
 
 void init_meta(t_meta *meta)
 {
@@ -65,13 +77,13 @@ void init_meta(t_meta *meta)
 
     for (i = 0; i < meta->nbr_prg; ++i)
     {
-        meta->programs[i].prog_name = "";
+        meta->programs[i].file_name = "";
         meta->programs[i].number = 0;
         meta->programs[i].address = 0;
         meta->programs[i].cycle_of_instruction = 0;
         meta->programs[i].cycle_spent = 0;
     }
-    my_putstr(meta->programs[0].prog_name);
+    //my_putstr(meta->programs[0].file_name);
 }
 
 t_meta* parser(int argc, char** argv)
@@ -99,6 +111,7 @@ t_meta* parser(int argc, char** argv)
     prog_args->nbr_prg = count;
     init_meta(prog_args);
     fill_struct(argc, argv, prog_args);
+    fill_file(argv, prog_args);
     
 	return (prog_args);
 }
