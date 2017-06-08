@@ -38,16 +38,16 @@ char *get_file_content(char *filename, int max_size)
 
 header_t *get_header(char *file_content, int opponent_number)
 {
-    header_t header;
+    header_t *header;
     int header_size = COMMENT_LENGTH + PROG_NAME_LENGTH + sizeof(int) * 2;
     if (my_bstrlen(file_content) < header_size)
         my_error(10);
-    header.magic = my_strnncpy(file_content, 0, sizeof(int));
-    header.prog_name = my_strnncpy(file_content, sizeof(int), PROG_NAME_LENGTH);
-    header.prog_size = my_strnncpy(file_content, sizeof(int) + PROG_NAME_LENGTH + 1, sizeof(int));
-    if (my_getnbr(header.magic) != COREWAR_EXEC_MAGIC)
+    header->magic = my_strnncpy(file_content, 0, sizeof(int));
+    header->prog_name = my_strnncpy(file_content, sizeof(int), PROG_NAME_LENGTH);
+    header->prog_size = my_strnncpy(file_content, sizeof(int) + PROG_NAME_LENGTH + 1, sizeof(int));
+    if (my_getnbr(header->magic) != COREWAR_EXEC_MAGIC)
         my_error(11);
-    if (header.prog_size > MEM_SIZE * opponent_number)
+    if (header->prog_size > MEM_SIZE * opponent_number)
         my_error(12);
-    return (&header);
+    return (header);
 }
