@@ -5,7 +5,7 @@
 ** Login   <viallo_l@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 16:27:50 2017 VIALLON Louis
-** Last update Tue Jun  6 16:28:53 2017 VIALLON Louis
+** Last update Thu Jun  8 17:37:04 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -14,14 +14,14 @@
 #include "memory.h"
 #include "op.h"
 
-unsigned char *init_mem()
+byte *init_mem()
 {
     byte  *memory;
     int     i;
 
     if ((memory = (byte *)malloc(sizeof(byte) * MEM_SIZE)) == NULL)
         my_error(5);
-    for (i = 0; i < MEM_SIZE; ++i)
+    for (i = 0; i < MEM_SIZE; i++)
         memory[i] = 0;
     return (memory);
 }

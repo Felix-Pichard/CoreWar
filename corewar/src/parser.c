@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 17:12:39 2017 MARZI Nicolas
+** Last update Thu Jun  8 17:47:36 2017 MARZI Nicolas
 */
 
 #include "parser.h"
@@ -16,10 +16,8 @@ void print_tab(t_meta* test)
 {
 	int i;
 
-    for (i = 0; i < test->nbr_prg; ++i)
+    for (i = 0; i < test->nbr_prg; i++)
     {
-        if (test->programs[i].file_name != NULL)
-        {
             my_putstr(test->programs[i].file_name);
             my_putchar('\n');
             my_put_nbr(test->programs[i].address);
@@ -27,7 +25,7 @@ void print_tab(t_meta* test)
             my_put_nbr(test->programs[i].number);
             my_putchar('\n');
             my_putchar('\n');
-        }
+        
     }
 }
 

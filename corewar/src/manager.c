@@ -5,7 +5,7 @@
 ** Login   <viallo_l@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 16:27:50 2017 VIALLON Louis
-** Last update Tue Jun  6 16:28:53 2017 VIALLON Louis
+** Last update Thu Jun  8 17:47:49 2017 MARZI Nicolas
 */
 
 #include "parser.h"
@@ -37,13 +37,13 @@ int try_put_programs(t_meta *meta)
             start_address = calc_address(tmp_prog.address);
         if (!put_program(&tmp_prog, start_address))
             return (1);
-        /*my_put_nbr(tmp_prog.header.prog_size);
+        my_put_nbr(tmp_prog.header.prog_size);
         my_putchar('\n');
         my_putstr(tmp_prog.file_name);
         my_putchar('\n');
         my_put_nbr(start_address);
         my_putchar('\n');
-        my_putchar('\n');*/
+        my_putchar('\n');
     }
     return (0);
 }
