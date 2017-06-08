@@ -8,37 +8,20 @@
 ** Last update Mon Jun  5 13:28:53 2017 MARZI Nicolas
 */
 
-#include <libzvbi.h>
-#include <malloc.h>
 #include "libmy.h"
+#include "parser.h"
 #include "op.h"
-#include "cycle.h"
-
-static t_cycle	*cycle_init()
-{
-    t_cycle	*cycle;
-
-    if ((cycle = (t_cycle*)malloc(sizeof(t_cycle))) != NULL)
-    {
-        cycle->nbr = 1;
-        cycle->live_calls = NBR_LIVE;
-        cycle->die = CYCLE_TO_DIE;
-    }
-    return (cycle);
-}
-
-int launch_corewar()
-{
-    if (cycle_init())
-        return (0);
-    return (-1);
-}
+#include "manager.h"
+#include "memory.h"
 
 int main(int argc, char **argv)
 {
-    if (argc > 1 && argv != NULL)
-        return (launch_corewar());
-    else
-        my_putstr("corewar: At least one argument required\n");
-    return (-1);
+    t_byte *mem;
+    t_meta *programs;
+
+    programs = parser(argc, argv);
+    mem = init_mem();
+    try_put_programs(programs);
+    free(mem);
+    return (0);
 }
