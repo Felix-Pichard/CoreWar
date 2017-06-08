@@ -8,7 +8,7 @@
 ** Last update Tue Oct  6 10:01:30 2015 MARZI Nicolas
 */
 
-#include "op.h"
+#include <stdio.h>
 
 int my_bstrlen(char *str)
 {
