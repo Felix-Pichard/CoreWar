@@ -8,20 +8,23 @@
 ** Last update Tue Oct  6 10:01:30 2015 MARZI Nicolas
 */
 
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include "header_parser.h"
 #include "error.h"
 #include "libmy.h"
 
 char *get_file_content(char *filename, int max_size)
 {
-    File fd;
+    int fd;
     char *file_content;
     int i;
     int check;
 
     check = 0;
     file_content = malloc(max_size);
-    fd = open(filename);
+    fd = open(filename, O_RDONLY);
     if (fd == -1)
         my_error(7);
     if (read(fd, file_content, max_size) == -1)

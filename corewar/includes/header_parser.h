@@ -13,7 +13,7 @@
 
 #include "op.h"
 
-char *get_file_content(char *filename);
-header_t *get_header(char *file_content);
+char *get_file_content(char *filename, int max_size);
+header_t *get_header(char *file_content, int opponent_number);
 
 #endif
