@@ -13,7 +13,7 @@
 
 void my_error(int i)
 {
-    char* errors[9];
+    char* errors[13];
 
     errors[0] = "Tout va bien\n";
     errors[1] = "Wrong cycle format\n";

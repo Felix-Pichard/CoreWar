@@ -34,6 +34,7 @@ SRC = src/my_getnbr.c \
 		src/my_str_to_wordtab.c \
 		src/my_swap.c \
 		src/my_wordlen.c \
+		src/put_hex.c \
 		src/my_putnbr_base.c \
 		src/my_strspn.c \
 		src/my_bstrlen.c \

@@ -5,6 +5,7 @@
 ** Tue Jul 13 18:53:48 1993
 */
 
+
 #ifndef _OP_H_
 # define _OP_H_
 
@@ -63,6 +64,7 @@ typedef struct op_s     op_t;
  */
 
 #define IND_SIZE        2               /* en octet */
+
 #define REG_SIZE        4               /* en octet */
 #define DIR_SIZE        REG_SIZE        /* en octet */
 

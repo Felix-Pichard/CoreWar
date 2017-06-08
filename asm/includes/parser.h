@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 08:47:49 2017 MARZI Nicolas
-** Last update Tue Jun  6 08:47:49 2017 MARZI Nicolas
+** Last update Thu Jun  8 08:37:16 2017 MARZI Nicolas
 */
 
 #include "op.h"
@@ -15,39 +15,55 @@
 
 typedef unsigned char byte;
 
-typedef struct param_value_s
+typedef struct param_s
 {
     char    *label;
     int     value;
-} param_value_t;
+    byte    type;
+} param_t;
 
-typedef struct instruction_s
+
+typedef struct instruction_s instruction_t;
+struct  instruction_s
 {
-    byte opcode;
-    byte nb_arguments;
-    byte type_arguments;
-    param_value_t args[MAX_ARGS_NUMBER];
-    struct instruction_t *next;
-} instruction_t;
+    byte                    opcode;
+    byte                    nb_args;
+    param_t                 args[MAX_ARGS_NUMBER];
+    instruction_t    *next;
+};
 
-int is_label(char *line);
+
+typedef struct label_s label_t;
+struct  label_s
+{
+    char     *name;
+    byte     position;
+    label_t  *next;
+};
+
+typedef struct  script_s
+{
+    label_t         *label;
+    instruction_t   *instruction;
+    header_t        header;
+    char            *file_name;
+}               script_t;
+
 int is_command(char *line);
 int is_comment(char *line);
 int is_instruction(char *line);
 int is_null(char *line);
 
-int is_param_register(char *line);
-int is_param_dir(char *line);
-int is_param_indir(char *line);
-
 char *get_string(char *buffer);
 void init_buffer(char *buffer, int size);
 void escape_str(char *string);
-
-void set_command(char *line);
-void set_label(char *line);
-
-
 int array_len(char **array);
+char **split_str(char *line, char delimiter);
+
+int is_nbr(char *line);
+
+int set_command(char *line, script_t *script);
+int set_label(char *line, script_t *script);
+int set_instruction(char *line, script_t *script);
 
 #endif

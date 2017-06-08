@@ -1,3 +1,13 @@
+/*
+** my_putnbr_base.c for COREWAR in /media/maniarr/Workspace/etna/CoreWar/libmy/src
+**
+** Made by MARZI Nicolas
+** Login   <marzi_n@etna-alternance.net>
+**
+** Started on  Thu Jun  8 10:02:47 2017 MARZI Nicolas
+** Last update Thu Jun  8 10:02:47 2017 MARZI Nicolas
+*/
+
 #include <unistd.h>
 
 int    my_strlen(char *str);
