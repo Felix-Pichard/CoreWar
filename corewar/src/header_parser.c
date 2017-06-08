@@ -46,7 +46,7 @@ header_t *get_header(char *file_content, int opponent_number)
     if (my_bstrlen(file_content) < header_size)
         my_error(10);
     header->magic = my_getnbr(my_strnncpy(file_content, 0, sizeof(int)));
-    header->prog_name = my_strnncpy(file_content, sizeof(int), PROG_NAME_LENGTH);
+    my_strcpy(header->prog_name,my_strnncpy(file_content, sizeof(int), PROG_NAME_LENGTH));
     header->prog_size = my_getnbr(my_strnncpy(file_content, sizeof(int) + PROG_NAME_LENGTH + 1, sizeof(int)));
     if (header->magic != COREWAR_EXEC_MAGIC)
         my_error(11);
