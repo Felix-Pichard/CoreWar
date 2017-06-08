@@ -11,6 +11,8 @@
 #ifndef _INSTRUCTIONS__H_
 #define _INSTRUCTIONS__H_
 
+void instruction(program_t *programs[], byte *memory[], cursor_t *cursor);
+
 void live(program_t *programs[], byte *memory[], cursor_t *cursor);
 void ld(program_t *programs[], byte *memory[], cursor_t *cursor);
 void st(program_t *programs[], byte *memory[], cursor_t *cursor);

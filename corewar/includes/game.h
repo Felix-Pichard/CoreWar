@@ -1,11 +1,11 @@
 /*
-** my_strlen.c for MYLIB in /home/marzi_n/Piscine/C/Libmy/marzi_n
-** 
+** game.h for COREWAR in /media/maniarr/Workspace1/etna/CoreWar/corewar/includes
+**
 ** Made by MARZI Nicolas
 ** Login   <marzi_n@etna-alternance.net>
-** 
-** Started on  Thu Oct  1 19:16:07 2015 MARZI Nicolas
-** Last update Tue Oct  6 10:01:30 2015 MARZI Nicolas
+**
+** Started on  Thu Jun  8 15:32:49 2017 MARZI Nicolas
+** Last update Thu Jun  8 16:27:31 2017 MARZI Nicolas
 */
 
 #ifndef _GAME__H_
@@ -13,6 +13,7 @@
 
 #include "op.h"
 #include "memory.h"
+#include "libmy.h"
 
 typedef struct cursor_s
 {
@@ -46,5 +47,9 @@ typedef struct instruction_s
     byte        cost;
     void        (*foo)(program_t *programs[], byte *memory[], cursor_t *cursor);
 } instruction_t;
+
+int nb_program_alive(program_t **programs);
+void launch_game(game_t *game);
+void free_game(game_t *game);
 
 #endif

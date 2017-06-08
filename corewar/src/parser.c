@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Mon Jun  5 13:28:53 2017 MARZI Nicolas
+** Last update Thu Jun  8 13:07:20 2017 MARZI Nicolas
 */
 
 #include "parser.h"
@@ -111,6 +111,6 @@ t_meta* parser(int argc, char** argv)
     prog_args->nbr_prg = count;
     init_meta(prog_args);
     fill_struct(argc, argv, prog_args);
-    
+    fill_file(argv, prog_args);
 	return (prog_args);
 }
