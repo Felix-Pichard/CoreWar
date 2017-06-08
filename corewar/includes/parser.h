@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 18:12:18 2017 MARZI Nicolas
+** Last update Thu Jun  8 18:44:24 2017 MARZI Nicolas
 */
 
 #ifndef _PARSER__H_
@@ -19,6 +19,7 @@
 #include "libmy.h"
 #include "memory.h"
 
+typedef unsigned char byte;
  
 typedef struct          s_program
 {
@@ -32,7 +33,7 @@ typedef struct          s_program
 typedef struct          s_meta
 {
     int nbr_prg;
-    t_program* programs;
+    t_program *programs;
 }                       t_meta;
 
 void    print_tab(t_meta* test);

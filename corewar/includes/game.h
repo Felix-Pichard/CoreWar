@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:32:49 2017 MARZI Nicolas
-** Last update Thu Jun  8 18:14:57 2017 MARZI Nicolas
+** Last update Thu Jun  8 18:57:58 2017 MARZI Nicolas
 */
 
 #ifndef _GAME__H_

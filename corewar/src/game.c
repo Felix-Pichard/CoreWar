@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:18:31 2017 MARZI Nicolas
-** Last update Thu Jun  8 18:15:28 2017 MARZI Nicolas
+** Last update Thu Jun  8 19:07:01 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -26,7 +26,7 @@ int nb_program(program_t *program)
 void init_game(game_t *game)
 {
     game->max_cycles = CYCLE_TO_DIE;
-    game->left_cycles = game->max_cycles;
+    game->left_cycles = 10;
     game->nb_player = nb_program(game->programs);
     game->dump_cycles = -1;
 }
@@ -35,6 +35,7 @@ void launch_game(game_t *game)
 {
     int i;
     // cursor_t *current_cursor;
+        my_put_nbr(game->max_cycles);my_putstr(" - ");my_put_nbr(game->left_cycles);my_putstr("\n");
 
     while (game->nb_player > 1 && game->max_cycles > 0 && game->dump_cycles != 0)
     {
@@ -52,7 +53,7 @@ void launch_game(game_t *game)
             game->max_cycles -= CYCLE_DELTA;
             game->left_cycles = game->max_cycles;
         }
-        // my_put_nbr(game->max_cycles);my_putstr(" - ");my_put_nbr(game->left_cycles);my_putstr("\n");
+        my_put_nbr(game->max_cycles);my_putstr(" - ");my_put_nbr(game->left_cycles);my_putstr("\n");
         game->left_cycles--;
     }
 }

@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 17:50:15 2017 MARZI Nicolas
+** Last update Thu Jun  8 18:50:14 2017 MARZI Nicolas
 */
 
 #include "parser.h"
@@ -62,10 +62,10 @@ void fill_struct(int argc, char** argv, t_meta *meta)
             source_code = get_file_content(argv[i], header, 1);
             if (count >= 4)
                 my_error(4);
-            ++count;
         }
         meta->programs[count].header = *header;
         meta->programs[count].binaries = source_code;
+        count++;
     }
 }
 

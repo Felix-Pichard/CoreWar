@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 17:47:11 2017 MARZI Nicolas
+** Last update Thu Jun  8 19:07:08 2017 MARZI Nicolas
 */
 
 #include "libmy.h"
@@ -39,15 +39,37 @@ int main(int argc, char **argv)
     // my_put_nbr(nb_program_alive(programs));
 
     // return (0);
-    
-    byte *mem;
+
     t_meta *program;
+    game_t game;
 
     program = parser(argc, argv);
-    mem = init_mem();
-    try_put_programs(program);
-    program->nbr_prg = 2;
-    print_tab(program);
-    free(mem);
+    game.memory = malloc(sizeof(byte) * MEM_SIZE);
+
+    init_mem(&game.memory);
+    
+    game.nb_player = program->nbr_prg;
+    
+    game.programs = malloc(sizeof(program_t) * game.nb_player);
+    game.cursors = malloc(sizeof(cursor_t) * game.nb_player);
+    for (int i = 0; i < program->nbr_prg; i++)
+    {
+        insert_prog(program->programs[i], &game.memory, program->programs[i].address);
+        game.programs[i].id = i + 1;
+        game.programs[i].alive = 1;
+        game.programs[i].name = program->programs[i].header.prog_name;
+        game.cursors[i].registers[0] = i + 1;
+        for (int j = 1; j <= REG_NUMBER; j++)
+            game.cursors[i].registers[i] = 0;
+        game.cursors[i].position = program->programs[i].address;
+        game.cursors[i].cycles_left = 0;
+
+    }
+    dump(game.memory);
+
+    // init_game(&game);
+    // launch_game(&game);
+    // free_game(&game);
+
     return (0);
 }
