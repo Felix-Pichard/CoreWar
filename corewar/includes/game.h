@@ -13,6 +13,7 @@
 
 #include "op.h"
 #include "memory.h"
+#include "libmy.h"
 
 typedef struct cursor_s
 {

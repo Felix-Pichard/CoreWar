@@ -20,6 +20,7 @@ SRC = src/main.c \
 	src/error.c \
 	src/header_parser.c \
 	src/manager.c \
+	src/instructions.c \
 	instructions/live.c \
 	instructions/ld.c \
 	instructions/st.c \

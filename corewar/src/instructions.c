@@ -27,3 +27,11 @@ instruction_t instructions[] =
         {11, 3, 25, &sti},
         {12, 0, 1, &nop}
     };
+
+void instruction(program_t *programs[], byte *memory[], cursor_t *cursor)
+{
+    if (*memory[cursor->position] > 11)
+        instructions[11].foo(programs, memory, cursor);
+    else
+        instructions[*memory[cursor->position]].foo(programs, memory, cursor);
+}
