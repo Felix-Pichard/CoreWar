@@ -9,7 +9,7 @@
 */
 
 #include <stdlib.h>
-#include "libmy.h"
+#include "../../includes/libmy.h"
 
 char *my_strnncpy(char *src, int i, int size)
  {
