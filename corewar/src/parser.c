@@ -31,12 +31,24 @@ void print_tab(t_meta* test)
     }
 }
 
+header_t *new_header()
+{
+    header_t *header;
+
+    header = malloc(sizeof(header_t));
+    header->magic = 0;
+    header->prog_size = 0;
+    return (header);
+}
+
 void fill_struct(int argc, char** argv, t_meta *meta)
 {
     int count = 0;
     int cycle = -1;
     int i;
+    header_t *header;
 
+    header = new_header();
     for (i = 1; i < argc ; ++i)
     {
         if (my_strcmp(argv[i], "-dump") == 0)
@@ -48,25 +60,29 @@ void fill_struct(int argc, char** argv, t_meta *meta)
         else
         {
             meta->programs[count].file_name = argv[i];
+            get_file_content(argv[i], header, 1);
             if (count >= 4)
                 my_error(4);
             ++count;
         }
+        meta->programs[count].header = *header;
     }
 }
 
-void fill_file(char **argv, t_meta *meta)
-{
-    int count = 0;
-    int i;
-
-    for (i = 1; i < meta->nbr_prg ; ++i)
-    {
-        meta->programs[count].header = *get_header(get_file_content(argv[i], meta->nbr_prg), meta->nbr_prg);
-        ++count;
-    }
-
-}
+//void fill_file(char **argv, t_meta *meta)
+//{
+//    int count = 0;
+//    int i;
+//
+//    for (i = 1; i <= meta->nbr_prg ; ++i)
+//    {
+//        meta->programs[count].header = *get_header(get_file_content(argv[i], meta->nbr_prg), meta->nbr_prg);
+//        my_put_nbr(meta->programs[count].header.prog_size);
+//      my_putstr(" : lol \n");
+//        ++count;
+//    }
+//
+//}
 
 void init_meta(t_meta *meta)
 {
@@ -81,7 +97,6 @@ void init_meta(t_meta *meta)
         meta->programs[i].number = 0;
         meta->programs[i].address = 0;
     }
-    //my_putstr(meta->programs[0].file_name);
 }
 
 t_meta* parser(int argc, char** argv)
@@ -109,7 +124,6 @@ t_meta* parser(int argc, char** argv)
     prog_args->nbr_prg = count;
     init_meta(prog_args);
     fill_struct(argc, argv, prog_args);
-    fill_file(argv, prog_args);
     
 	return (prog_args);
 }

@@ -11,10 +11,7 @@
 #include <unistd.h>
 
 
-void	my_putchar(char c)
-{
-  write(1, &c, 1);
-}
+void	my_putchar(char c);
 
 void	put_hex_core(unsigned char nbr)
 {

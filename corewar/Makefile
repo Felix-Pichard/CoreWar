@@ -19,19 +19,7 @@ SRC = src/main.c \
 	src/memory.c \
 	src/error.c \
 	src/header_parser.c \
-	src/manager.c \
-	instructions/live.c \
-	instructions/ld.c \
-	instructions/st.c \
-	instructions/add.c \
-	instructions/sub.c \
-	instructions/and.c \
-	instructions/or.c \
-	instructions/xor.c \
-	instructions/zjmp.c \
-	instructions/ldi.c \
-	instructions/sti.c \
-	instructions/nop.c
+	src/manager.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 
