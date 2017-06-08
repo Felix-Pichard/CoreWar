@@ -9,6 +9,7 @@
 */
 
 #include <stdlib.h>
+#include "error.h"
 
 char *my_strnncpy(char *src, int i, int size)
  {
