@@ -5,47 +5,46 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:18:31 2017 MARZI Nicolas
-** Last update Thu Jun  8 16:25:21 2017 MARZI Nicolas
+** Last update Thu Jun  8 16:44:59 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
 
 #include "libmy.h"
 #include "game.h"
+#include "op.h"
 
-void escape_program(game_t *game)
+// void escape_program(game_t *game)
+// {
+//     program_t **container;
+//     int i;
+
+//     container = game->programs;
+//     for (i = 0; i < game->nb_player; i++)
+//     {
+//         if (!game->programs[i]->alive && game->programs[i + 1] != NULL )
+//         {
+            
+//         }
+//     }
+// }
+
+int nb_program(program_t **program)
 {
-    program_t **container;
-    program_t **old;
-    program_t *tmp;
-    int i;
+    int size;
 
-    old = game->programs;
-    game->nb_player = nb_program_alive(game->programs);
-    container = malloc(sizeof(program_t) * game->nb_player);
-    for (i = 0; *old != NULL;)
-    {
-        if (!(*old)->alive)
-        {
-            tmp = (*old);
-            old++;
-            free(tmp->name);
-            free(tmp);
-            continue;
-        }
-        container[i] = malloc(sizeof(program_t));
-        container[i] = *old;
-        i++;
-        old++;
-    }
-    free(game->programs);
-    game->programs = container;
+    for (size = 0; *program != NULL; program++)
+        size++;
+    return (size);
 }
 
 void init_game(game_t *game)
 {
-    escape_program(game);
+    // escape_program(game);
+    game->max_cycles = CYCLE_TO_DIE;
     game->left_cycles = game->max_cycles;
+    game->nb_player = nb_program(game->programs);
+    game->dump_cycles = -1;
 }
 
 void launch_game(game_t *game)
@@ -53,7 +52,7 @@ void launch_game(game_t *game)
     int i;
     // cursor_t *current_cursor;
 
-    while (nb_program_alive(game->programs) > 0 && game->max_cycles > 0 && game->dump_cycles != 0)
+    while (game->nb_player > 1 && game->max_cycles > 0 && game->dump_cycles != 0)
     {
         for (i = 0; i < game->nb_player; i++)
         {
@@ -66,9 +65,11 @@ void launch_game(game_t *game)
             game->dump_cycles--;
         if (game->left_cycles == 0)
         {
-            game->max_cycles -= 5;
+            // escape_program(game);
+            game->max_cycles -= CYCLE_DELTA;
             game->left_cycles = game->max_cycles;
         }
+        my_put_nbr(game->max_cycles);my_putstr(" - ");my_put_nbr(game->left_cycles);my_putstr("\n");
         game->left_cycles--;
     }
 }
