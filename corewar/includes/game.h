@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:32:49 2017 MARZI Nicolas
-** Last update Thu Jun  8 16:27:31 2017 MARZI Nicolas
+** Last update Thu Jun  8 17:11:14 2017 MARZI Nicolas
 */
 
 #ifndef _GAME__H_
@@ -49,6 +49,7 @@ typedef struct instruction_s
 } instruction_t;
 
 int nb_program_alive(program_t **programs);
+void init_game(game_t *game);
 void launch_game(game_t *game);
 void free_game(game_t *game);
 

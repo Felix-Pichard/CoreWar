@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:18:31 2017 MARZI Nicolas
-** Last update Thu Jun  8 16:44:59 2017 MARZI Nicolas
+** Last update Thu Jun  8 17:09:50 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -14,20 +14,26 @@
 #include "game.h"
 #include "op.h"
 
-// void escape_program(game_t *game)
-// {
-//     program_t **container;
-//     int i;
+void escape_program(game_t *game)
+{
+    program_t **container;
+    // program_t *tmp;
+    int i;
 
-//     container = game->programs;
-//     for (i = 0; i < game->nb_player; i++)
-//     {
-//         if (!game->programs[i]->alive && game->programs[i + 1] != NULL )
-//         {
-            
-//         }
-//     }
-// }
+    container = game->programs;
+    for (i = 0; i < game->nb_player; i++)
+    {
+        my_put_nbr(container[i]->alive);my_putstr(" -> ");my_put_nbr(container[i]->id);
+        my_putstr("\n");
+        // if (!game->programs[i]->alive && game->programs[i + 1] != NULL)
+        // {
+        //     tmp = game->programs[i];
+        //     game->programs[i] = game->programs[i + 1];
+        //     game->programs[i + 1] = tmp;
+        //     i--;
+        // }
+    }
+}
 
 int nb_program(program_t **program)
 {
@@ -40,7 +46,7 @@ int nb_program(program_t **program)
 
 void init_game(game_t *game)
 {
-    // escape_program(game);
+    escape_program(game);
     game->max_cycles = CYCLE_TO_DIE;
     game->left_cycles = game->max_cycles;
     game->nb_player = nb_program(game->programs);
@@ -60,12 +66,13 @@ void launch_game(game_t *game)
             // if (current_cursor->left_cycles == 0)
                 my_putstr("exec instruction \n");
             // current_cursor->left_cycles--;
+            game->programs[i]->alive = 0;
         }
         if (game->dump_cycles != -1)
             game->dump_cycles--;
         if (game->left_cycles == 0)
         {
-            // escape_program(game);
+            escape_program(game);
             game->max_cycles -= CYCLE_DELTA;
             game->left_cycles = game->max_cycles;
         }
