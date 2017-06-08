@@ -8,6 +8,9 @@
 ** Last update Tue Jun  6 16:28:53 2017 VIALLON Louis
 */
 
+#include "parser.h"
+#include "op.h"
+
 int calc_address(int initial_address)
 {
     if (initial_address < 0)

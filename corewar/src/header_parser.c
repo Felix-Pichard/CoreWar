@@ -14,6 +14,7 @@
 #include "header_parser.h"
 #include "error.h"
 #include "libmy.h"
+#include "op.h"
 
 char *get_file_content(char *filename, int max_size)
 {
@@ -42,6 +43,8 @@ char *get_file_content(char *filename, int max_size)
 header_t *get_header(char *file_content, int opponent_number)
 {
     header_t *header;
+    if ((header = malloc(sizeof(*header))) == NULL)
+        my_error(5);
     int header_size = COMMENT_LENGTH + PROG_NAME_LENGTH + sizeof(int) * 2;
     if (my_bstrlen(file_content) < header_size)
         my_error(10);
