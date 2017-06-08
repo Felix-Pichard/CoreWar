@@ -18,7 +18,8 @@ SRC = src/main.c \
 	src/parser.c \
 	src/memory.c \
 	src/error.c \
-	src/header_parser.c
+	src/header_parser.c \
+	src/manager.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 

@@ -26,6 +26,7 @@ typedef struct          s_program
     int                 address;
     int                 cycle_of_instruction;
     int                 cycle_spent;
+    header_t            header;
 }                       t_program;
 
 typedef struct          s_meta
