@@ -13,7 +13,6 @@
 
 void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
-    int i;
     byte type_param;
     byte nb_register;
 
@@ -46,4 +45,5 @@ void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs
         cursor->registers[0] = 1;
     else 
         cursor->registers[0] = 0;
+    bypass_programs(programs, nb_programs);
 }
