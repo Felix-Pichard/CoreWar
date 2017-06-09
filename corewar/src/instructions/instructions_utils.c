@@ -38,7 +38,7 @@ int get_nb_param(byte type_param)
     size = 0;
     for (i = 0; i < 4;i ++)
     {
-        if ((type_param & (0x03 << (i * 3))) != 0)
+        if ((type_param & (0x03 << (i * 2))) != 0)
             size++;
     }
     return (size);
@@ -52,8 +52,10 @@ int is_type_param_valid(byte opcode, byte type_params)
     op = get_op(opcode);
     if (op.code != opcode)
         return (0);
+
     if (get_nb_param(type_params) != op.nbr_args)
         return (0);
+    
     for (i = 0; i < op.nbr_args; i++)
     {
         if (((byte) op.type[i]) == 0)
