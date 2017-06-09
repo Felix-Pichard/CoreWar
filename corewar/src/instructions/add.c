@@ -9,6 +9,7 @@
 */
 
 #include "game.h"
+#include "instructions.h"
 
 void add(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
@@ -32,4 +33,5 @@ void add(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
             cursor->registers[0] = 0;
         cursor->position += REG_NUMBER * 3 + 1;
     }
+    bypass_programs(programs, nb_programs);
 }

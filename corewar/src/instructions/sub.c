@@ -9,6 +9,7 @@
 */
 
 #include "game.h"
+#include "instructions.h"
 
 void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
@@ -31,4 +32,5 @@ void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
         else
             cursor->registers[0] = 0;
     }
+    bypass_programs(programs, nb_programs);
 }
