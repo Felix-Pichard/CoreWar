@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:32:49 2017 MARZI Nicolas
-** Last update Thu Jun  8 19:42:32 2017 MARZI Nicolas
+** Last update Fri Jun  9 09:25:24 2017 MARZI Nicolas
 */
 
 #ifndef _GAME__H_
@@ -14,7 +14,6 @@
 #include "op.h"
 #include "memory.h"
 #include "libmy.h"
-
 
 typedef struct cursor_s
 {
@@ -50,6 +49,7 @@ typedef struct instruction_s
 } instruction_t;
 
 int nb_program_alive(program_t *programs);
+// int nb_program(program_t *program);
 void init_game(game_t *game);
 void launch_game(game_t *game);
 void free_game(game_t *game);
