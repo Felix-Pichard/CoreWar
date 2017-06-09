@@ -32,7 +32,7 @@ void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb
 {
     byte opcode;
 
-    opcode = *memory[cursor->position];
+    opcode = (*memory)[cursor->position];
     if (cursor->flag == 1 && cursor->cycles_left == 0)
     {
         if (opcode > 11)

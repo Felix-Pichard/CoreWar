@@ -11,27 +11,50 @@
 #include "game.h"
 #include "instructions.h"
 
+int read_byte_to_int(byte *memory[], int position, int size)
+{
+    int i;
+    int result;
+
+    result = 0;
+    for (i = 0; i < size; i++)
+        result += (*memory)[position + i] << ((size - i - 1) * 8);
+    return (result);
+}
+
 void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     int i;
     byte type_param;
     byte nb_register;
 
-    if (!is_type_param_valid(0x02, (*memory)[cursor->position + 1]))
-        return;
-    if (type_param >> 6 == CODED_DIR)
-        nb_register = *memory[cursor->position + 1 + DIR_SIZE];
-    else
-        nb_register = *memory[cursor->position + 1 + IND_SIZE];
+    type_param = (*memory)[cursor->position + 1];
 
+    if (!is_type_param_valid(0x02, type_param))
+        return;
+
+    if (type_param >> 6 == CODED_DIR)
+        nb_register = (*memory)[cursor->position + 1 + DIR_SIZE + 1];
+    else
+        nb_register = (*memory)[cursor->position + 1 + IND_SIZE + 1];
+        
     if (nb_register > REG_NUMBER || nb_register < 1)
         return;
-    
     if (type_param >> 6 == CODED_DIR)
     {
-        for (i = 1; i <= DIR_SIZE; i++)
-        {
-            cursor->registers[nb_register] = *memory[cursor->position + 1 + i] << (DIR_SIZE - i) * 8;
-        }
+        cursor->registers[nb_register] = read_byte_to_int(memory, cursor->position + 2, DIR_SIZE);
+        cursor->position += DIR_SIZE + 2;
     }
+    else 
+    {
+        cursor->registers[nb_register] = read_byte_to_int(memory, 
+        ((read_byte_to_int(memory, cursor->position + 2, IND_SIZE) % IDX_MOD) + cursor->position) % MEM_SIZE, 
+        REG_SIZE);
+        cursor->position += IND_SIZE + 2;
+    }
+    
+    if ( cursor->registers[nb_register] == 0)
+        cursor->registers[0] = 1;
+    else 
+        cursor->registers[0] = 0;
 }
