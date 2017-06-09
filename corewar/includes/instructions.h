@@ -29,5 +29,6 @@ void sti(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
 
 int is_type_param_valid(byte opcode, byte type_params);
 void bypass_programs(program_t *program[], int nb_programs);
+int read_byte_to_int(byte *memory[], int position, int size);
 
 #endif

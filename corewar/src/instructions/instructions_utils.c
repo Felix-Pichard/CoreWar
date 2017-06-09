@@ -63,3 +63,14 @@ int is_type_param_valid(byte opcode, byte type_params)
     }
     return (1);
 }
+
+int read_byte_to_int(byte *memory[], int position, int size)
+{
+    int i;
+    int result;
+
+    result = 0;
+    for (i = 0; i < size; i++)
+        result += (*memory)[position + i] << ((size - i - 1) * 8);
+    return (result);
+}

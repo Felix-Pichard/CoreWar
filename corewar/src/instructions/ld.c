@@ -11,17 +11,6 @@
 #include "game.h"
 #include "instructions.h"
 
-int read_byte_to_int(byte *memory[], int position, int size)
-{
-    int i;
-    int result;
-
-    result = 0;
-    for (i = 0; i < size; i++)
-        result += (*memory)[position + i] << ((size - i - 1) * 8);
-    return (result);
-}
-
 void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     int i;

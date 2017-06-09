@@ -9,12 +9,14 @@
 */
 
 #include "game.h"
+#include "instructions.h"
 
 void live(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     int warrior_id;
 
-    warrior_id = (int)my_bstrnncpy(memory, cursor->position + 1, DIR_SIZE);
+    warrior_id = read_byte_to_int(memory, cursor->position + 1, DIR_SIZE);
     if (warrior_id < nb_programs && programs[warrior_id]->alive != -1)
         programs[warrior_id]->alive = 1;
+    //  cursor->position += 1 + DIR_SIZE;
 }
