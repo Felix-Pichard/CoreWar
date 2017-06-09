@@ -20,9 +20,9 @@ void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
 
     if (!is_type_param_valid(5, *memory[cursor->position + 1]))
         return;
-    op_1 = *memory[cursor->position + 2];
-    op_2 = *memory[cursor->position + 3];
-    res_reg = *memory[cursor->position + 4];
+    op_1 = (*memory)[cursor->position + 2];
+    op_2 = (*memory)[cursor->position + 3];
+    res_reg = (*memory)[cursor->position + 4];
     if (op_1 <= REG_NUMBER && op_2 <= REG_NUMBER && res_reg <= REG_NUMBER)
     {
         res = cursor->registers[op_1] - cursor->registers[op_2];
@@ -31,6 +31,7 @@ void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
             cursor->registers[0] = 1;
         else
             cursor->registers[0] = 0;
+        cursor->position += T_REG * 3 + 1;
     }
     bypass_programs(programs, nb_programs);
 }
