@@ -26,7 +26,6 @@ void i_xor(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progr
 void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 void ldi(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 void sti(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
-void nop(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 
 int is_type_param_valid(byte opcode, byte type_params);
 void bypass_programs(program_t *program[], int nb_programs);
