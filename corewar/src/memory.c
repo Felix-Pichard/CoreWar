@@ -5,7 +5,7 @@
 ** Login   <viallo_l@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 16:27:50 2017 VIALLON Louis
-** Last update Thu Jun  8 18:50:50 2017 MARZI Nicolas
+** Last update Fri Jun  9 08:23:59 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -55,7 +55,7 @@ void insert_prog(t_program program, byte *memory[], int offset)
     int i;
     
     if (program.header.prog_size + offset > MEM_SIZE)
-        return;
+        exit(9);
     for (i = 0; i < program.header.prog_size; i++)
         (*memory)[offset + i] = program.binaries[i];
 }

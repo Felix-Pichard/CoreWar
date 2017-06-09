@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 19:10:45 2017 MARZI Nicolas
+** Last update Fri Jun  9 08:22:26 2017 MARZI Nicolas
 */
 
 #include "parser.h"
@@ -45,9 +45,7 @@ void fill_struct(int argc, char** argv, t_meta *meta)
     int cycle = -1;
     int i;
     byte *source_code;
-    header_t *header;
 
-    header = new_header();
     for (i = 1; i < argc ; ++i)
     {
         if (my_strcmp(argv[i], "-dump") == 0)
@@ -59,12 +57,11 @@ void fill_struct(int argc, char** argv, t_meta *meta)
         else
         {
             meta->programs[count].file_name = argv[i];
-            source_code = get_file_content(argv[i], header, 1);
+            source_code = get_file_content(argv[i], &meta->programs[count].header, 1);
             if (count >= 4)
                 my_error(4);
            
         }
-        meta->programs[count].header = *header;
         meta->programs[count].binaries = source_code;
         count++;
     }
