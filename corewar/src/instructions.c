@@ -24,8 +24,7 @@ instruction_t instructions[] =
         {8, 3, 6, &i_xor},
         {9, 1, 20, &zjmp},
         {10, 3, 25, &ldi},
-        {11, 3, 25, &sti},
-        {12, 0, 1, &nop}
+        {11, 3, 25, &sti}
     };
 
 void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
@@ -36,7 +35,7 @@ void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb
     if (cursor->flag == 1 && cursor->cycles_left == 0)
     {
         if (opcode > 11)
-            instructions[11].foo(programs, memory, cursor, nb_programs);
+            ++(cursor->position);
         else
             instructions[opcode - 1].foo(programs, memory, cursor, nb_programs);
         cursor->flag = 0;

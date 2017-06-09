@@ -34,7 +34,6 @@ SRC = src/main.c \
 	src/instructions/zjmp.c \
 	src/instructions/ldi.c \
 	src/instructions/sti.c \
-	src/instructions/nop.c \
 	src/instructions/instructions_utils.c \
 	src/op.c
 
