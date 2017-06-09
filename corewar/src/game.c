@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:18:31 2017 MARZI Nicolas
-** Last update Fri Jun  9 09:25:12 2017 MARZI Nicolas
+** Last update Fri Jun  9 09:52:35 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ void launch_game(game_t *game)
     cursor_t *current_cursor;
     
     // nb_player_alive
-    while (nb_program_alive(game->programs) /* tmp */ && game->max_cycles > 0 && game->dump_cycles != 0)
+    while (nb_program_alive(game->programs, game->nb_player) > 0/* tmp */ && game->max_cycles > 0 && game->dump_cycles != 0)
     {
         for (i = 0; i < game->nb_player; i++)
         {
@@ -59,12 +59,12 @@ void free_game(game_t *game)
 {
     program_t *clean;
 
-    for (; game->programs != NULL;)
-    {
-        clean = game->programs;
-        // free(clean->name);
-        free(clean);
-        game->programs++;
-    }
+    // for (; game->programs != NULL;)
+    // {
+    //     clean = game->programs;
+    //     // free(clean->name);
+    //     free(clean);
+    //     game->programs++;
+    // }
     // free(game->programs);
 }

@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Fri Jun  9 09:23:00 2017 MARZI Nicolas
+** Last update Fri Jun  9 09:52:17 2017 MARZI Nicolas
 */
 
 #include "libmy.h"
@@ -67,8 +67,8 @@ int main(int argc, char **argv)
     dump(game.memory);
 
     init_game(&game);
-    //launch_game(&game);
-    //free_game(&game);
+    launch_game(&game);
+    // free_game(&game);
 
     return (0);
 }
