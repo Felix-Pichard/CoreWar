@@ -23,6 +23,18 @@ void init_game(game_t *game)
     game->dump_cycles = -1;
 }
 
+void print_register(int *tab)
+{
+    int i;
+
+    for (i = 0; i <= REG_NUMBER; i++)
+    {
+        my_putstr("Reg ");my_put_nbr(i);
+        my_putstr(": ");my_put_nbr(tab[i]);
+        my_putstr("\n");
+    }
+}
+
 void launch_game(game_t *game)
 {
     int i;
@@ -50,9 +62,10 @@ void launch_game(game_t *game)
             game->max_cycles -= CYCLE_DELTA;
             game->left_cycles = game->max_cycles;
         }
-        my_put_nbr(game->max_cycles);my_putstr(" - ");my_put_nbr(game->left_cycles);my_putstr("\n");
+        // my_put_nbr(game->max_cycles);my_putstr(" - ");my_put_nbr(game->left_cycles);my_putstr("\n");
         game->left_cycles--;
     }
+    print_register(game->cursors[0].registers);
 }
 
 void free_game(game_t *game)

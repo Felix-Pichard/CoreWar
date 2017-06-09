@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Fri Jun  9 10:02:12 2017 MARZI Nicolas
-** Last update Fri Jun  9 10:23:44 2017 MARZI Nicolas
+** Last update Fri Jun  9 10:23:27 2017 MARZI Nicolas
 */
 
 #include "memory.h"
@@ -31,11 +31,14 @@ int get_nb_param(byte type_param)
     int size;
 
     size = 0;
-    for (i = MAX_ARGS_NUMBER - 1; i >= 0; i--)
-    {
-        if ((type_param >> (i * 2)) != 0)
-            size++;
-    }
+    if ((type_param & 0b11000000) != 0)
+        size++;
+    if ((type_param & 0b00110000) != 0)
+        size++;
+    if ((type_param & 0b00001100) != 0)
+        size++;
+    if ((type_param & 0b00000011) != 0)
+        size++;
     return (size);
 }
 

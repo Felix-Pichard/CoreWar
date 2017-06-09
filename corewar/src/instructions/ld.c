@@ -1,7 +1,7 @@
 /*
 ** my_strlen.c for MYLIB in /home/marzi_n/Piscine/C/Libmy/marzi_n
 ** 
-** Made by MARZI Nicolas
+** Made by MARZI Nicolas    
 ** Login   <marzi_n@etna-alternance.net>
 ** 
 ** Started on  Thu Oct  1 19:16:07 2015 MARZI Nicolas
@@ -9,24 +9,29 @@
 */
 
 #include "game.h"
-
-int check_ld_args(byte args_type)
-{
-    return (0);
-}
+#include "instructions.h"
 
 void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
-    byte first;
-    byte second;
-    byte args_type;
+    int i;
+    byte type_param;
+    byte nb_register;
 
-    args_type = *memory[cursor->position + 1];
-    first = args_type >> 6;
-    second = args_type >> 4;
+    if (!is_type_param_valid(0x02, (*memory)[cursor->position + 1]))
+        return;
+    if (type_param >> 6 == CODED_DIR)
+        nb_register = *memory[cursor->position + 1 + DIR_SIZE];
+    else
+        nb_register = *memory[cursor->position + 1 + IND_SIZE];
 
-    if (!((first == CODED_DIR || first == CODED_IND) && second == CODED_REG))
+    if (nb_register > REG_NUMBER || nb_register < 1)
         return;
-    if (first == CODED_DIR)
-        return;
+    
+    if (type_param >> 6 == CODED_DIR)
+    {
+        for (i = 1; i <= DIR_SIZE; i++)
+        {
+            cursor->registers[nb_register] = *memory[cursor->position + 1 + i] << (DIR_SIZE - i) * 8;
+        }
+    }
 }

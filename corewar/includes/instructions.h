@@ -28,4 +28,6 @@ void ldi(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
 void sti(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 void nop(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 
+int is_type_param_valid(byte opcode, byte type_params);
+
 #endif

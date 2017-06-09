@@ -33,19 +33,15 @@ void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb
     byte opcode;
 
     opcode = *memory[cursor->position];
-
     if (cursor->flag == 1 && cursor->cycles_left == 0)
     {
         if (opcode > 11)
             instructions[11].foo(programs, memory, cursor, nb_programs);
         else
-        {
-            instructions[opcode].foo(programs, memory, cursor, nb_programs);
-            cursor->cycles_left = instructions[opcode].cost;
-            cursor->flag = 0;
-        }
+            instructions[opcode - 1].foo(programs, memory, cursor, nb_programs);
+        cursor->flag = 0;
+        return;
     }
-
     if (cursor->flag == 0 && cursor->cycles_left == 0)
     {
         cursor->flag = 1;

@@ -64,7 +64,7 @@ int main(int argc, char **argv)
         game.cursors[i].position = program->programs[i].address;
         game.cursors[i].cycles_left = 0;
     }
-    dump(game.memory);
+    // dump(game.memory);
 
     init_game(&game);
     launch_game(&game);
