@@ -11,6 +11,8 @@
 #ifndef _INSTRUCTIONS__H_
 #define _INSTRUCTIONS__H_
 
+#include "game.h"
+
 void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 
 void live(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
