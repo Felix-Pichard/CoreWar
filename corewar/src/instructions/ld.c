@@ -31,14 +31,14 @@ void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs
     if (type_param >> 6 == CODED_DIR)
     {
         cursor->registers[nb_register] = read_byte_to_int(memory, cursor->position + 2, DIR_SIZE);
-        cursor->position += DIR_SIZE + 2 + 1;
+        cursor->position = (cursor->position + DIR_SIZE + 2 + 1) % MEM_SIZE;
     }
     else 
     {
         cursor->registers[nb_register] = read_byte_to_int(memory, 
         ((read_byte_to_int(memory, cursor->position + 2, IND_SIZE) % IDX_MOD) + cursor->position) % MEM_SIZE, 
         REG_SIZE);
-        cursor->position += IND_SIZE + 2 + 1;
+        cursor->position = (cursor->position + IND_SIZE + 2 + 1) % MEM_SIZE;
     }
 
     if ( cursor->registers[nb_register] == 0)
