@@ -41,7 +41,7 @@ SRC = src/my_getnbr.c \
 		src/my_strnncpy.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
-CFLAGS = -W -Wextra -Werror -Wall -pedantic
+CFLAGS = -W -Wextra -Werror -Wall -pedantic -I ./includes -I ../includes
 AR = ar
 ARFLAGS = rcs
 

@@ -26,3 +26,19 @@ char *my_strnncpy(char *src, int i, int size)
 
     return (str);
  }
+
+byte *my_bstrnncpy(byte *src[], int i, int size)
+ {
+    byte *str;
+    int count;
+
+    if((str = malloc(sizeof(byte) * size)) == NULL)
+    {
+        my_putstr("Can’t perform malloc\n");
+        exit(5);
+    }
+    for (count = 0; *src[i] != '\0' && count < size; ++i, ++count)
+        str[count] = *src[i];
+
+    return (str);
+ }
