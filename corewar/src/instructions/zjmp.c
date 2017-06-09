@@ -10,7 +10,7 @@
 
 #include "game.h"
 
-void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor)
+void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
 
 }
