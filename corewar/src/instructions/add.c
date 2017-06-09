@@ -30,5 +30,6 @@ void add(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
             cursor->registers[0] = 1;
         else
             cursor->registers[0] = 0;
+        cursor->position += REG_NUMBER * 3 + 1;
     }
 }
