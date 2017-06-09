@@ -85,7 +85,7 @@ byte *get_file_content(char *filename, header_t *header, int opponent_number)
     else
         my_error(12);
     return (file_content);
-}
+}   
 
 header_t *get_header(char *file_content, int opponent_number)
 {
