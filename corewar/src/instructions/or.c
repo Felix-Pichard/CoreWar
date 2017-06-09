@@ -10,7 +10,7 @@
 
 #include "game.h"
 
-void nop(program_t *programs[], byte *memory[], cursor_t *cursor)
+void i_or(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
 
 }

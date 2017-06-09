@@ -23,18 +23,18 @@ SRC = src/main.c \
 	src/instructions.c \
 	src/game.c \
 	src/game_utils.c \
-	instructions/live.c \
-	instructions/ld.c \
-	instructions/st.c \
-	instructions/add.c \
-	instructions/sub.c \
-	instructions/and.c \
-	instructions/or.c \
-	instructions/xor.c \
-	instructions/zjmp.c \
-	instructions/ldi.c \
-	instructions/sti.c \
-	instructions/nop.c
+	src/instructions/live.c \
+	src/instructions/ld.c \
+	src/instructions/st.c \
+	src/instructions/add.c \
+	src/instructions/sub.c \
+	src/instructions/and.c \
+	src/instructions/or.c \
+	src/instructions/xor.c \
+	src/instructions/zjmp.c \
+	src/instructions/ldi.c \
+	src/instructions/sti.c \
+	src/instructions/nop.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 

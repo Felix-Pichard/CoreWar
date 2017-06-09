@@ -10,7 +10,7 @@
 
 #include "game.h"
 
-void sub(program_t *programs[], byte *memory[], cursor_t *cursor)
+void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
 
 }

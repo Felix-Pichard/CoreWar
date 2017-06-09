@@ -20,6 +20,7 @@ typedef struct cursor_s
     int registers[REG_NUMBER + 1];
     int position;
     int cycles_left;
+    int flag;
 } cursor_t;
 
 typedef struct program_s
@@ -45,7 +46,7 @@ typedef struct instruction_s
     byte        opcode;
     byte        nb_args;
     byte        cost;
-    void        (*foo)(program_t *programs[], byte *memory[], cursor_t *cursor);
+    void        (*foo)(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 } instruction_t;
 
 int nb_program_alive(program_t *programs);

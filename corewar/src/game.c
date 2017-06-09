@@ -34,7 +34,7 @@ void launch_game(game_t *game)
         for (i = 0; i < game->nb_player; i++)
         {
             if (game->programs[i].alive != -1)
-                instruction(game->programs, game->memory, game->cursors[i], game->nb_player);
+                instruction(&game->programs, &game->memory, &game->cursors[i], game->nb_player);
         }
         if (game->dump_cycles != -1)
             game->dump_cycles--;

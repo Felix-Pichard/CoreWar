@@ -10,7 +10,7 @@
 
 #include "game.h"
 
-void st(program_t *programs[], byte *memory[], cursor_t *cursor)
+void ldi(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
 
 }

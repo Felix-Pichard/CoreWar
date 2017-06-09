@@ -67,8 +67,8 @@ int main(int argc, char **argv)
     dump(game.memory);
 
     init_game(&game);
-    // launch_game(&game);
-    // free_game(&game);
+    //launch_game(&game);
+    //free_game(&game);
 
     return (0);
 }

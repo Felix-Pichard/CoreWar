@@ -9,12 +9,8 @@
 */
 
 #include "game.h"
-#include "libmy.h"
 
-void live(program_t *programs[], byte *memory[], cursor_t *cursor)
+void i_xor(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
-    int warrior_id;
 
-    warrior_id = (int)my_strnncpy(memory, cursor->position + 1, DIR_SIZE);
-    // if (warrior_id >= )
 }

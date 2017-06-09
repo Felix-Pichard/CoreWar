@@ -11,19 +11,19 @@
 #ifndef _INSTRUCTIONS__H_
 #define _INSTRUCTIONS__H_
 
-void instruction(program_t *programs[], byte *memory[], cursor_t *cursor);
+void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 
-void live(program_t *programs[], byte *memory[], cursor_t *cursor);
-void ld(program_t *programs[], byte *memory[], cursor_t *cursor);
-void st(program_t *programs[], byte *memory[], cursor_t *cursor);
-void add(program_t *programs[], byte *memory[], cursor_t *cursor);
-void sub(program_t *programs[], byte *memory[], cursor_t *cursor);
-void i_and(program_t *programs[], byte *memory[], cursor_t *cursor);
-void i_or(program_t *programs[], byte *memory[], cursor_t *cursor);
-void i_xor(program_t *programs[], byte *memory[], cursor_t *cursor);
-void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor);
-void ldi(program_t *programs[], byte *memory[], cursor_t *cursor);
-void sti(program_t *programs[], byte *memory[], cursor_t *cursor);
-void nop(program_t *programs[], byte *memory[], cursor_t *cursor);
+void live(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void st(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void add(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void i_and(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void i_or(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void i_xor(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void ldi(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void sti(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
+void nop(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs);
 
 #endif
