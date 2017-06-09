@@ -18,7 +18,7 @@ void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
     int res_reg;
     int res;
 
-    if (!is_type_param_valid(5, *memory[cursor->position + 1]))
+    if (!is_type_param_valid(5, (*memory)[cursor->position + 1]))
         return;
     op_1 = (*memory)[cursor->position + 2];
     op_2 = (*memory)[cursor->position + 3];
