@@ -13,6 +13,11 @@
 #include "op.h"
 #include "game.h"
 
+void bypass_programs(program_t *program[], int nb_programs)
+{
+    nb_programs = program[0]->alive;
+}
+
 op_t get_op(byte opcode)
 {
     int i;

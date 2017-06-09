@@ -9,6 +9,7 @@
 */
 
 #include "game.h"
+#include "instructions.h"
 
 void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
@@ -20,4 +21,5 @@ void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progra
         return;
     jmp = (int)my_bstrnncpy(memory, cursor->position, IND_SIZE) % IDX_MOD;
     cursor->position = (cursor->position + jmp) % MEM_SIZE;
+    bypass_programs(programs, nb_programs);
 }
