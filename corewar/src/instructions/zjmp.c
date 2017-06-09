@@ -19,7 +19,7 @@ void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progra
         return;
     if (!is_type_param_valid(9, *memory[cursor->position + 1]))
         return;
-    jmp = (int)my_bstrnncpy(memory, cursor->position, IND_SIZE) % IDX_MOD;
+    jmp = read_byte_to_int(memory, cursor->position, IND_SIZE) % IDX_MOD;
     cursor->position = (cursor->position + jmp) % MEM_SIZE;
     bypass_programs(programs, nb_programs);
 }
