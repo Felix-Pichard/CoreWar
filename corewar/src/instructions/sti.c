@@ -9,8 +9,17 @@
 */
 
 #include "game.h"
+#include "instructions.h"
 
 void sti(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
+    byte type_param;
 
+    type_param = (*memory)[cursor->position + 1];
+    if (!is_type_param_valid(0x0b, type_param))
+    {
+        ++(cursor->position);
+        return;
+    }
+    bypass_programs(programs, nb_programs);
 }
