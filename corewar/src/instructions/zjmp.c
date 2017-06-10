@@ -17,7 +17,11 @@ void zjmp(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progra
 
     if (cursor->registers[0] == 0)
         return;
-    jmp = read_byte_to_int(memory, cursor->position, IND_SIZE) % IDX_MOD;
+    // jmp = read_byte_to_int(memory, cursor->position, IND_SIZE) % IDX_MOD;
+    // cursor->position = (cursor->position + jmp) % MEM_SIZE;
+    jmp = read_byte_to_int(memory, cursor->position + 1, IND_SIZE) % IDX_MOD;
+    if (jmp > IDX_MOD / 2)
+        jmp = jmp - IDX_MOD;
     cursor->position = (cursor->position + jmp) % MEM_SIZE;
     bypass_programs(programs, nb_programs);
 }
