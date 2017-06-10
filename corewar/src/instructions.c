@@ -44,7 +44,8 @@ void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb
     if (cursor->flag == 0 && cursor->cycles_left == 0)
     {
         cursor->flag = 1;
-        cursor->cycles_left = instructions[opcode].cost;
+        cursor->cycles_left = instructions[opcode - 1].cost;
     }
-    --(cursor->cycles_left);
+    if (cursor->cycles_left > 0)
+        cursor->cycles_left--;
 }

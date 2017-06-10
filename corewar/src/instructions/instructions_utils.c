@@ -45,6 +45,18 @@ int get_nb_param(byte type_param)
     return (size);
 }
 
+int get_param_valid_value(byte type_param, int i)
+{
+    byte tmp;
+
+    tmp = (type_param >> (8 - i*2)) & 0x03;
+    if (tmp == 1)
+        return (T_REG);
+    else if (tmp == 2)
+        return (T_IND);
+    return (T_DIR);
+}
+
 int is_type_param_valid(byte opcode, byte type_params)
 {
     op_t op;
@@ -57,9 +69,9 @@ int is_type_param_valid(byte opcode, byte type_params)
     if (get_nb_param(type_params) != op.nbr_args)
         return (0);
     
-    for (i = 0; i < op.nbr_args; i++)
+    for (i = 1; i <= op.nbr_args; i++)
     {
-        if (((byte) op.type[i]) == 0)
+        if (((byte) op.type[i]) & get_param_valid_value(type_params, i) == 0)
             return (0);
     }
     return (1);
