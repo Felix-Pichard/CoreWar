@@ -132,6 +132,7 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
                 buffer[offset + add] = tmp[j];
                 add++;
             }
+            free(tmp);
         }
     }
     else if (instruction->opcode == 1)
@@ -142,7 +143,8 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
         {
             buffer[offset + add] = tmp[j];
             add++;
-        } 
+        }
+        free(tmp);
     }
     else if (instruction->opcode == 9)
     {
@@ -153,6 +155,7 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
             buffer[offset + add] = tmp[j];
             add++;
         } 
+        free(tmp);
     }
     else if (instruction->opcode == 11)
     {
@@ -168,6 +171,7 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
                 buffer[offset + add] = tmp[j];
                 add++;
             }
+            free(tmp);
         }
     }
     return (add);

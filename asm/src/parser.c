@@ -205,6 +205,7 @@ char **split_str(char *line, char delimiter)
             str = get_string(buffer);
             if (my_strlen(str) > 0)
                 push_str(result, str);
+            //free(str);
             init_buffer(buffer, 128);
             cursor = 0;
         }
@@ -214,6 +215,7 @@ char **split_str(char *line, char delimiter)
     str = get_string(buffer);
     if (my_strlen(str) > 0)
         push_str(result, str);
+    //free(str);
     return (result);
 }
 
