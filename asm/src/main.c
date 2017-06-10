@@ -48,8 +48,10 @@ void assemble_file(char *filename)
     int cursor;
     int response;
     int line;
+    char *tmp_str;
 
-    script_t warrior = {NULL, NULL, {COREWAR_EXEC_MAGIC, "", 0, ""}, get_filename(filename)};
+    tmp_str = get_filename(filename);
+    script_t warrior = {NULL, NULL, {COREWAR_EXEC_MAGIC, "", 0, ""}, tmp_str};
     cursor = 0;
     response = 1;
     line = 1;
@@ -61,7 +63,8 @@ void assemble_file(char *filename)
     {
         if (data == '\n')
         {
-            response = push(get_string(buffer), &warrior);
+            tmp_str = get_string(buffer);
+            response = push(tmp_str, &warrior);
             init_buffer(buffer, 512);
             if (response == 0)
                 print_line(line);
@@ -71,14 +74,17 @@ void assemble_file(char *filename)
         else
             buffer[cursor++] = data;
     }
+    free(tmp_str);
     close(file_handle);
-    if (!push(get_string(buffer), &warrior))
+    tmp_str = get_string(buffer);
+    if (!push(tmp_str, &warrior))
         print_line(line);
     else
     {
         warrior.header.prog_size = get_rec_size(warrior.instruction);
         assemble(&warrior);
     }
+    free(tmp_str);
     free_script(warrior);
 }
 
