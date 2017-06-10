@@ -31,5 +31,10 @@ op_t    op_tab[] =
     {"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
      "load index"},
     {"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
-     "store index"}
+     "store index"},
+    {"lld", 2, {T_DIR | T_IND, T_REG}, 12, 15, "long load"},
+    {"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 13, 75,
+     "long load index"},
+    {"mul", 3, {T_REG, T_REG, T_REG}, 14, 30, "multiplication"},
+    {"div", 3, {T_REG, T_REG, T_REG}, 15, 60, "division"}
   };
