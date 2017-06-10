@@ -17,23 +17,27 @@ void i_and(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progr
     int op_2;
     int res_reg;
     int res;
+    int size_param;
 
-    if (!is_type_param_valid(6, (*memory)[cursor->position + 1]))
+    size_param = (*memory)[cursor->position + 1];
+    if (!is_type_param_valid(6, size_param))
     {
-        ++(cursor->position);
+        cursor->position++;
         return;
     }
-    op_1 = (*memory)[cursor->position + 2];
-    op_2 = (*memory)[cursor->position + 3];
-    res_reg = (*memory)[cursor->position + 4];
-    if (op_1 <= REG_NUMBER && op_2 <= REG_NUMBER && res_reg <= REG_NUMBER)
+    op_1 = get_param_value_process(memory, cursor, 1);
+    op_2 = get_param_value_process(memory, cursor, 2);
+    res_reg = get_param_value(memory, cursor, 3);
+    if (res_reg > 0 && res_reg <= REG_NUMBER)
     {
-        res = cursor->registers[op_1] & cursor->registers[op_2];
-        cursor->registers[res_reg] = res;
+        cursor->registers[res_reg] = op_1 & op_2;
         if (res == 0)
             cursor->registers[0] = 1;
         else
             cursor->registers[0] = 0;
+        cursor->position = (cursor->position + 2 + get_size_param(size_param, 1) + get_size_param(size_param, 2) + get_size_param(size_param, 3)) % IDX_MOD;
     }
+    else
+        cursor->position++;
     bypass_programs(programs, nb_programs);
 }

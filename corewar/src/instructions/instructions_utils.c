@@ -123,7 +123,6 @@ int get_param_value_process(byte *memory[], cursor_t *cursor, int i_param)
         position = (position + get_size_param(type_param, i)) % IDX_MOD;
     position = (position + 1) % IDX_MOD;
     value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
-
     if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_DIR)
         return (value);
     if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_REG && value >= 1 && value <= REG_NUMBER)

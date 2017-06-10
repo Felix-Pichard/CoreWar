@@ -26,14 +26,18 @@ void add(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
     op_1 = get_param_value(memory, cursor, 1);
     op_2 = get_param_value(memory, cursor, 2);
     res_reg = get_param_value(memory, cursor, 3);
-    
+    if (!(op_1 <= REG_NUMBER && op_1 >= 1 && op_2 <= REG_NUMBER && op_2 >= 1 
+        && res_reg <= REG_NUMBER && res_reg >= 1))
+    {
+        cursor->position++;
+        return;
+    }
     res = cursor->registers[op_1] + cursor->registers[op_2];
     cursor->registers[res_reg] = res;
     if (res == 0)
         cursor->registers[0] = 1;
     else
         cursor->registers[0] = 0;
-    cursor->position += T_REG * 3 + 2;
-    // else send nop
+    cursor->position = (cursor->position + T_REG * 3 + 2) % IDX_MOD;
     bypass_programs(programs, nb_programs);
 }
