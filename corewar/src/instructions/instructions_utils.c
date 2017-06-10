@@ -76,8 +76,11 @@ int read_byte_to_int(byte *memory[], int position, int size)
     return (result);
 }
 
-int get_size_param(int type)
+int get_size_param(byte type_param, int i)
 {
+    byte type;
+
+    type = (type_param >> ((MAX_ARGS_NUMBER - i) * 2)) & 3;
     if (type == CODED_REG)
         return (T_REG);
     else if (type == CODED_DIR)
