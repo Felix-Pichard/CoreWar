@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Fri Jun  9 10:02:12 2017 MARZI Nicolas
-** Last update Fri Jun  9 16:53:29 2017 MARZI Nicolas
+** Last update Sat Jun 10 15:13:35 2017 MARZI Nicolas
 */
 
 #include "memory.h"
@@ -88,4 +88,47 @@ int get_size_param(byte type_param, int i)
     else if (type == CODED_IND)
         return (IND_SIZE);
     return (0);
+}
+
+int get_param_value(byte *memory[], cursor_t *cursor, int i_param)
+{
+    int i;
+    int type_param;
+    int value;
+    int position;
+
+    value = 0;
+    position = cursor->position;
+    position = (position + 1) % IDX_MOD;
+    type_param = (*memory)[position];
+    for (i = 1; i < i_param; i++)
+        position = (position + get_size_param(type_param, i)) % IDX_MOD;
+    position = (position + 1) % IDX_MOD;
+    value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
+
+    return (value);        
+}
+
+int get_param_value_process(byte *memory[], cursor_t *cursor, int i_param)
+{
+    int i;
+    int type_param;
+    int value;
+    int position;
+
+    position = cursor->position;
+    position = (position + 1) % IDX_MOD;
+    type_param = (*memory)[position];
+    for (i = 1; i < i_param; i++)
+        position = (position + get_size_param(type_param, i)) % IDX_MOD;
+    position = (position + 1) % IDX_MOD;
+    value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
+
+    if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_DIR)
+        return (value);
+    if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_REG && value >= 1 && value <= REG_NUMBER)
+        return (cursor->registers[value]);
+    else if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_IND)
+        return ((*memory)[value % MEM_SIZE]);
+    return (0);        
 }

@@ -31,5 +31,6 @@ int is_type_param_valid(byte opcode, byte type_params);
 void bypass_programs(program_t *program[], int nb_programs);
 int read_byte_to_int(byte *memory[], int position, int size);
 int get_size_param(byte type_param, int i);
-
+int get_param_value(byte *memory[], cursor_t *cursor, int i_param);
+int get_param_value_process(byte *memory[], cursor_t *cursor, int i_param);
 #endif
