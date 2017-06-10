@@ -75,3 +75,14 @@ int read_byte_to_int(byte *memory[], int position, int size)
         result += (*memory)[position + i] << ((size - i - 1) * 8);
     return (result);
 }
+
+int get_size_param(int type)
+{
+    if (type == CODED_REG)
+        return (T_REG);
+    else if (type == CODED_DIR)
+        return (DIR_SIZE);
+    else if (type == CODED_IND)
+        return (IND_SIZE);
+    return (0);
+}
