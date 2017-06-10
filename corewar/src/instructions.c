@@ -35,7 +35,7 @@ void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb
     if (cursor->flag == 1 && cursor->cycles_left == 0)
     {
         if (opcode > 11 || opcode < 1)
-            ++(cursor->position);
+            cursor->position = (cursor->position + 1) % MEM_SIZE;
         else
             instructions[opcode - 1].foo(programs, memory, cursor, nb_programs);
         cursor->flag = 0;
@@ -47,5 +47,5 @@ void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb
         cursor->cycles_left = instructions[opcode - 1].cost;
     }
     if (cursor->cycles_left > 0)
-        cursor->cycles_left--;
+        --cursor->cycles_left;
 }

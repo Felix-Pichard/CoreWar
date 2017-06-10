@@ -30,7 +30,7 @@ void sti(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
     op_1 = get_param_value_process(memory, cursor, 2);
     op_2 = get_param_value_process(memory, cursor, 3);
     for (i = 0; i < 4; i++) 
-        (*memory)[op_2 + op_1] = (byte) value >> ((4 - i - 1) * 8);
+        (*memory)[(op_2 + op_1) % MEM_SIZE] = (byte) value >> ((4 - i - 1) * 8);
     dcl_size = get_size_param(type_param, 1) + get_size_param(type_param, 2) + get_size_param(type_param, 3);
     cursor->position = (cursor->position + dcl_size + 2) % MEM_SIZE;
     bypass_programs(programs, nb_programs);

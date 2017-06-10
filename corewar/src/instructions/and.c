@@ -19,10 +19,10 @@ void i_and(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progr
     int res;
     int size_param;
 
-    size_param = (*memory)[cursor->position + 1];
+    size_param = (*memory)[(cursor->position + 1) % MEM_SIZE];
     if (!is_type_param_valid(6, size_param))
     {
-        cursor->position++;
+        cursor->position = (cursor->position + 1) % MEM_SIZE;
         return;
     }
     op_1 = get_param_value_process(memory, cursor, 1);
@@ -31,13 +31,10 @@ void i_and(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progr
     if (res_reg > 0 && res_reg <= REG_NUMBER)
     {
         cursor->registers[res_reg] = op_1 & op_2;
-        if (res == 0)
-            cursor->registers[0] = 1;
-        else
-            cursor->registers[0] = 0;
-        cursor->position = (cursor->position + 2 + get_size_param(size_param, 1) + get_size_param(size_param, 2) + get_size_param(size_param, 3)) % IDX_MOD;
+        cursor->registers[0] = (res == 0) ? 1 : 0;
+        cursor->position = (cursor->position + 2 + get_size_param(size_param, 1) + get_size_param(size_param, 2) + get_size_param(size_param, 3)) % MEM_SIZE;
     }
     else
-        cursor->position++;
+        cursor->position = (cursor->position + 1) % MEM_SIZE;
     bypass_programs(programs, nb_programs);
 }
