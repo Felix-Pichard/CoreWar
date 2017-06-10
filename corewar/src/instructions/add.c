@@ -19,7 +19,10 @@ void add(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
     int res;
 
     if (!is_type_param_valid(4, (*memory)[cursor->position + 1]))
+    {
+        ++(cursor->position);
         return;
+    }
     op_1 = (*memory)[cursor->position + 2];
     op_2 = (*memory)[cursor->position + 3];
     res_reg = (*memory)[cursor->position + 4];

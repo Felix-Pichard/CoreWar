@@ -19,7 +19,10 @@ void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs
     type_param = (*memory)[cursor->position + 1];
 
     if (!is_type_param_valid(0x02, type_param))
+    {
+        ++(cursor->position);
         return;
+    }
 
     if (type_param >> 6 == CODED_DIR)
         nb_register = (*memory)[cursor->position + 1 + DIR_SIZE + 1];
@@ -27,7 +30,10 @@ void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs
         nb_register = (*memory)[cursor->position + 1 + IND_SIZE + 1];
         
     if (nb_register > REG_NUMBER || nb_register < 1)
+    {
+        ++(cursor->position);
         return;
+    }
     if (type_param >> 6 == CODED_DIR)
     {
         cursor->registers[nb_register] = read_byte_to_int(memory, cursor->position + 2, DIR_SIZE);
