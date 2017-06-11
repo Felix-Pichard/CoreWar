@@ -5,7 +5,7 @@
 ## Login   <marzi_n@etna-alternance.net>
 ##
 ## Started on  Mon Jun  5 13:26:04 2017 MARZI Nicolas
-## Last update Thu Jun  8 08:39:09 2017 MARZI Nicolas
+## Last update Sun Jun 11 13:41:50 2017 MARZI Nicolas
 ##
 
 CC = gcc
@@ -26,7 +26,10 @@ SRC = src/op.c \
 	src/header.c \
 	src/free.c \
 	src/byte.c \
-	src/param.c
+	src/param.c \
+	src/utils.c \
+	src/str_utils.c \
+	src/command.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 TEST_OBJS = $(TEST:%.c=$(BUILD_PATH)/%.o)
