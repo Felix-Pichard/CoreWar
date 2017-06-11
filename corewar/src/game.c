@@ -46,11 +46,13 @@ void put_player(program_t *warrior)
 void launch_game(game_t *game, int interactive_mode)
 {
     int i;
+    int counter;
     
+    counter = 0;
     while (nb_program_alive(game->programs, game->nb_player) > 1 && game->max_cycles > 0 && game->dump_cycles != 0)
     {
         if (interactive_mode)
-            get_command(game);
+            counter = get_command(game, counter);
         for (i = 0; i < game->nb_player; i++)
         {
             if (game->programs[i].alive != -1)
@@ -90,11 +92,10 @@ void free_game(game_t *game)
     free(game->memory);
 }
 
-void get_command(game_t *game)
+int get_command(game_t *game, int counter)
 {
     char *command;
     char *num;
-    static int counter;
     int i;
     int j;
 
@@ -120,7 +121,7 @@ void get_command(game_t *game)
             counter = my_getnbr(command);
         }
     }
-    --i;
+    return (--i);
 }
 
 void free_meta(t_meta* meta)
