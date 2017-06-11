@@ -35,7 +35,10 @@ op_t    op_tab[] =
     {"lld", 2, {T_DIR | T_IND, T_REG}, 12, 10, "long load"},
     {"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 13, 50,
      "long load index"},
-    {"mul", 3, {T_REG, T_REG, T_REG}, 14, 30, "multiplication"},
-    {"div", 3, {T_REG, T_REG, T_REG}, 15, 60, "division"},
+    {"lfork", 1, {T_DIR}, 15, 1000, "long fork"},
+    {"aff", 1, {T_REG}, 16, 2, "aff"},
+    {"mul", 3, {T_REG, T_REG, T_REG}, 17, 30, "multiplication"},
+    {"div", 3, {T_REG, T_REG, T_REG}, 18, 60, "division"},
+    {"mod", 3, {T_REG, T_REG, T_REG}, 19, 150, "modulus"},
     {0, 0, {0}, 0, 0, 0}
   };

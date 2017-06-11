@@ -25,11 +25,14 @@ instruction_t instructions[] =
         {9, 1, 20, &zjmp},
         {10, 3, 25, &ldi},
         {11, 3, 25, &sti},
-        {12, 2, 5, &lld},
-        {13, 3, 5, &lldi},
-        {14, 3, 30, &mul},
-        {15, 3, 60, &i_div},
-        {16, 3, 150, &mod}
+        {12, 1, 800, &fork},
+        {13, 2, 10, &lld},
+        {14, 3, 50, &lldi},
+        {15, 1, 1000, &lfork},
+        {16, 1, 2, &aff},
+        {17, 3, 30, &mul},
+        {18, 3, 60, &i_div},
+        {19, 3, 150, &mod}
     };
 
 void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
