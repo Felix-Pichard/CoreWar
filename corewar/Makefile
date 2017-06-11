@@ -39,6 +39,9 @@ SRC = src/main.c \
 	src/instructions/ldi.c \
 	src/instructions/lldi.c \
 	src/instructions/sti.c \
+	src/instructions/aff.c \
+	src/instructions/fork.c \
+	src/instructions/lfork.c \
 	src/instructions/instructions_utils.c \
 	src/op.c
 

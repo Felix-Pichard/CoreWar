@@ -11,7 +11,7 @@
 #include "game.h"
 #include "instructions.h"
 
-void fork(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
+void i_fork(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     cursor->position = (cursor->position + 1) % MEM_SIZE;
     bypass_programs(programs, nb_programs);
