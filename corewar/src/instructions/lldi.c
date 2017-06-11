@@ -25,8 +25,8 @@ void lldi(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progra
         cursor->position = (cursor->position + 1) % MEM_SIZE;
         return;
     }
-    op_1 = get_param_value_process(memory, cursor, 1);
-    op_2 = get_param_value_process(memory, cursor, 2);
+    op_1 = get_param_long_value_process(memory, cursor, 1);
+    op_2 = get_param_long_value_process(memory, cursor, 2);
     res_register = get_param_value(memory, cursor, 3);
     if (res_register < 1 || res_register > REG_NUMBER)
     {
