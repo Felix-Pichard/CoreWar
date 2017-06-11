@@ -34,7 +34,7 @@ void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb
     opcode = (*memory)[cursor->position];
     if (cursor->flag == 1 && cursor->cycles_left == 0)
     {
-        if (opcode > 11 || opcode < 1)
+        if (opcode > 15 || opcode < 1)
             cursor->position = (cursor->position + 1) % MEM_SIZE;
         else
             instructions[opcode - 1].foo(programs, memory, cursor, nb_programs);

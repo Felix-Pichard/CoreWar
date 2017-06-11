@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 10:35:55 2017 MARZI Nicolas
-** Last update Sun Jun 11 13:26:17 2017 MARZI Nicolas
+** Last update Sun Jun 11 15:29:57 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -19,7 +19,7 @@ int is_instruction(char *line)
 {
     int cursor;
 
-    for (cursor = 0; cursor < 11; cursor++)
+    for (cursor = 0; cursor < 15; cursor++)
     {
         if (my_strncmp(line, op_tab[cursor].mnemonique, my_strlen(op_tab[cursor].mnemonique)) != 0)
             continue;

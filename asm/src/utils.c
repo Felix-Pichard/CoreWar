@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Sun Jun 11 13:28:20 2017 MARZI Nicolas
-** Last update Sun Jun 11 13:30:03 2017 MARZI Nicolas
+** Last update Sun Jun 11 15:30:32 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -66,11 +66,11 @@ op_t get_op(char *name)
 {
     int i;
 
-    for (i = 0; i < 11; i++)
+    for (i = 0; i < 15; i++)
     {
         if (my_strcmp(name, op_tab[i].mnemonique) == 0)
             return (op_tab[i]);
     }
-    return (op_tab[11]);
+    return (op_tab[15]);
 }
 
