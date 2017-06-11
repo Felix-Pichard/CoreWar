@@ -50,6 +50,5 @@ void free_script(script_t *script)
 {
     free_instruction(script->instruction);
     free_label(script->label);
-    free(script->file_name);
 }
 

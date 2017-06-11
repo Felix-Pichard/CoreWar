@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Sun Jun 11 18:36:56 2017 MARZI Nicolas
+** Last update Sun Jun 11 19:29:21 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -25,7 +25,9 @@
 
 int push(char *item, script_t *script)
 {
-    if (is_comment(item))       
+    if (is_null(item))
+        return (1);
+    else if (is_comment(item))       
         return (1);
     else if (is_command(item))
         return (set_command(item, script));
@@ -33,8 +35,6 @@ int push(char *item, script_t *script)
         return (set_label(item, script));
     else if (is_instruction(item))
         return (set_instruction(item, script));
-    else if (is_null(item))
-        return (1);
     else
         my_putstr("Unknow instruction");
     return (0);
@@ -92,11 +92,11 @@ void assemble_file(char *filename)
         print_line(line);
     else
     {
+        free(tmp_str);
         warrior.header.prog_size = get_rec_size(warrior.instruction);
         assemble(&warrior);
         free_script(&warrior);
     }
-    free(tmp_str);
 }
 
 int main(int argv, char **args)
