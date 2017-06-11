@@ -138,7 +138,7 @@ char *get_string(char *buffer)
     int i;
 
     size = my_strlen(buffer);
-    result = malloc(sizeof(char) * size);
+    result = safe_malloc(sizeof(char) * size);
     for (i = 0; i < size; i++)
         result[i] = buffer[i];
     result[size] = '\0';
@@ -169,7 +169,7 @@ char **split_n_str(char *line, char delimiter, int i)
     char *str;
 
     init_buffer(buffer, 128);
-    result = malloc(sizeof(char *) * (find_occurence(line, delimiter) + 2));
+    result = safe_malloc(sizeof(char *) * (find_occurence(line, delimiter) + 2));
     init_container_buffer(result, array_len(result));
     for (cursor = 0; *line != '\0'; line++)
     {
@@ -199,7 +199,7 @@ char **split_str(char *line, char delimiter)
     char *str;
 
     init_buffer(buffer, 128);
-    result = malloc(sizeof(char *) * (find_occurence(line, delimiter) + 2));
+    result = safe_malloc(sizeof(char *) * (find_occurence(line, delimiter) + 2));
     init_container_buffer(result, array_len(result));
     for (cursor = 0; *line != '\0'; line++)
     {
@@ -330,7 +330,7 @@ char *duplicate_str(char *string)
     int i;
     int size;
     size = my_strlen(string);
-    result = malloc(sizeof(char) * (size + 1));
+    result = safe_malloc(sizeof(char) * (size + 1));
     for (i = 0; i < size; i++)
         result[i] = string[i];
     result[i + 1] = '\0';

@@ -29,7 +29,7 @@ byte *int_to_byte(int n, int size)
     byte mask;
     int i;
     
-    result = malloc(sizeof(byte) * size + 1);
+    result = safe_malloc(sizeof(byte) * size + 1);
     mask = 255;
     for (i = size; i > 0; i--)
     {

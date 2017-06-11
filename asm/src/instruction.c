@@ -21,7 +21,7 @@ void add_instruction(script_t *script, instruction_t item)
 
     if (script->instruction == NULL)
     {
-        script->instruction = malloc(sizeof(instruction_t));
+        script->instruction = safe_malloc(sizeof(instruction_t));
         *script->instruction = item;
         script->instruction->next = NULL;
         return;
@@ -31,7 +31,7 @@ void add_instruction(script_t *script, instruction_t item)
     {
         tmp = tmp->next;
     }
-    tmp->next = malloc(sizeof(instruction_t));
+    tmp->next = safe_malloc(sizeof(instruction_t));
     *tmp->next = item;
 }
 

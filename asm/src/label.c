@@ -56,14 +56,14 @@ void add_label(script_t *script, label_t item)
     tmp = script->label;
     if (script->label == NULL)
     {
-        script->label = malloc(sizeof(label_t));
+        script->label = safe_malloc(sizeof(label_t));
         *script->label = item;
         script->label->next = NULL;
         return;
     }
     while (tmp->next != NULL)
         tmp = tmp->next;
-    tmp->next = malloc(sizeof(label_t));
+    tmp->next = safe_malloc(sizeof(label_t));
     *tmp->next = item;
 }
 

@@ -41,7 +41,7 @@ char *get_filename(char *file)
     
     name = split_str(file, '.');
     size = my_strlen(name[0]);
-    result = malloc(sizeof(char) * size);
+    result = safe_malloc(sizeof(char) * size);
     for (i = 0; i < size + 4; i++)
     {
         if (i >= size)
