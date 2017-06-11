@@ -118,9 +118,10 @@ int get_command(game_t *game, int counter)
         {
             for (i = 2; command[i] && command[i] > 47 && command[i] < 58; ++i)
                 num[j++] = command[i];
-            counter = my_getnbr(command);
+            counter = my_getnbr(num);
         }
     }
+    free (num);
     return (--i);
 }
 
