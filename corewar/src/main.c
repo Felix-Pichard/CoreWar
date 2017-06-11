@@ -26,6 +26,7 @@ int main(int argc, char **argv)
     program = parser(argc, argv);
     game.memory = safe_malloc(sizeof(byte) * MEM_SIZE);
     init_mem(&game.memory);
+    game.dump_cycles = program->dump_cycle;
     game.nb_player = program->nbr_prg;
     game.programs = safe_malloc(sizeof(program_t) * game.nb_player);
     game.cursors = safe_malloc(sizeof(cursor_t) * game.nb_player);

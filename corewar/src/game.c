@@ -19,7 +19,6 @@ void init_game(game_t *game)
 {
     game->max_cycles = CYCLE_TO_DIE;
     game->left_cycles = game->max_cycles;
-    game->dump_cycles = -1;
 }
 
 void print_register(int *tab)
@@ -79,6 +78,8 @@ void launch_game(game_t *game, int interactive_mode)
         game->left_cycles--;
         counter--;
     }
+    if (game->dump_cycles == 0)
+        dump(game->memory);
 }
 
 void free_game(game_t *game)
