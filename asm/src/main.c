@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Sun Jun 11 18:06:27 2017 MARZI Nicolas
+** Last update Sun Jun 11 18:36:56 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -94,6 +94,7 @@ void assemble_file(char *filename)
     {
         warrior.header.prog_size = get_rec_size(warrior.instruction);
         assemble(&warrior);
+        free_script(&warrior);
     }
     free(tmp_str);
 }

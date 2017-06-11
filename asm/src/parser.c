@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 20:02:00 2017 MARZI Nicolas
-** Last update Sun Jun 11 18:28:22 2017 MARZI Nicolas
+** Last update Sun Jun 11 18:32:55 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -42,6 +42,7 @@ int set_instruction(char *line, script_t *script)
 {
     char **instructions;
     char **params;
+    
     op_t op;
     instruction_t instruction;
     int i;
@@ -76,6 +77,7 @@ int set_instruction(char *line, script_t *script)
             return (0);
         }
     }
+    free(instructions);
     add_instruction(script, instruction);
     return (1);
 }
