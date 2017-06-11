@@ -54,7 +54,7 @@ int nb_program_alive(program_t *programs, int nb);
 void init_game(game_t *game);
 void launch_game(game_t *game, int interactive_mode);
 void free_game(game_t *game);
-void get_command(byte *memory[]);
+void get_command(game_t *game);
 void free_meta(t_meta* meta);
 
 #endif

@@ -18,7 +18,7 @@
 void init_game(game_t *game)
 {
     game->max_cycles = CYCLE_TO_DIE;
-    game->left_cycles = 100;
+    game->left_cycles = game->max_cycles;
     game->dump_cycles = -1;
 }
 
@@ -34,14 +34,23 @@ void print_register(int *tab)
     }
 }
 
+void put_player(program_t *warrior)
+{
+    my_putstr("le joueur ");
+    my_put_nbr(warrior->id);
+    my_putstr("(");
+    my_putstr(warrior->name);
+    my_putstr(")");
+}
+
 void launch_game(game_t *game, int interactive_mode)
 {
     int i;
     
-    while (nb_program_alive(game->programs, game->nb_player) > 0 /*todo replace to 1 */ && game->max_cycles > 0 && game->dump_cycles != 0)
+    while (nb_program_alive(game->programs, game->nb_player) > 1 && game->max_cycles > 0 && game->dump_cycles != 0)
     {
         if (interactive_mode)
-            get_command(&(game->memory));
+            get_command(game);
         for (i = 0; i < game->nb_player; i++)
         {
             if (game->programs[i].alive != -1)
@@ -54,7 +63,11 @@ void launch_game(game_t *game, int interactive_mode)
             for (i = 0; i < game->nb_player; i++)
             {
                 if (game->programs[i].alive <= 0)
+                {
                     game->programs[i].alive = -1;
+                    put_player(&(game->programs[i]));
+                    my_putstr(" est mort\n");
+                }
                 else
                     game->programs[i].alive = 0;
             }
@@ -77,7 +90,7 @@ void free_game(game_t *game)
     free(game->memory);
 }
 
-void get_command(byte *memory[])
+void get_command(game_t *game)
 {
     char *command;
     char *num;
@@ -90,7 +103,12 @@ void get_command(byte *memory[])
     if (counter == 0)
     {
         my_putstr("\033c");
-        dump(*memory);
+        my_putstr("Max Cycles: ");
+        my_put_nbr(game->max_cycles);
+        my_putstr(" - Left Cycles: ");
+        my_put_nbr(game->left_cycles);
+        my_putstr("\n");
+        dump(game->memory);
         my_putstr("\n$/  ");
         command = readline();
         if (my_strcmp(command, "help") == 0)

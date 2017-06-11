@@ -35,8 +35,8 @@ int main(int argc, char **argv)
         game.programs[i].id = i;
         game.programs[i].alive = 0;
         game.programs[i].name = program->programs[i].header.prog_name;
-        game.cursors[i].registers[0] = i + 1;
-        for (j = 1; j <= REG_NUMBER; j++)
+        game.cursors[i].registers[1] = i;
+        for (j = 2; j <= REG_NUMBER; j++)
             game.cursors[i].registers[i] = 0;
         game.cursors[i].position = program->programs[i].address;
         game.cursors[i].cycles_left = 0;
