@@ -19,7 +19,6 @@ void init_game(game_t *game)
 {
     game->max_cycles = CYCLE_TO_DIE;
     game->left_cycles = game->max_cycles;
-    game->dump_cycles = -1;
 }
 
 void print_register(int *tab)
@@ -51,7 +50,7 @@ void launch_game(game_t *game, int interactive_mode)
     counter = 0;
     while (nb_program_alive(game->programs, game->nb_player) > 1 && game->max_cycles > 0 && game->dump_cycles != 0)
     {
-        if (interactive_mode)
+        if (interactive_mode && counter <= 0)
             counter = get_command(game, counter);
         for (i = 0; i < game->nb_player; i++)
         {
@@ -77,7 +76,10 @@ void launch_game(game_t *game, int interactive_mode)
             game->left_cycles = game->max_cycles;
         }
         game->left_cycles--;
+        counter--;
     }
+    if (game->dump_cycles == 0)
+        dump(game->memory);
 }
 
 void free_game(game_t *game)
@@ -90,34 +92,20 @@ void free_game(game_t *game)
 int get_command(game_t *game, int counter)
 {
     char *command;
-    char *num;
-    int i;
-    int j;
-
-    j = 0;
-    num = safe_malloc(10);
-    if (counter == 0)
-    {
-        my_putstr("\033c");
-        my_putstr("Max Cycles: ");
-        my_put_nbr(game->max_cycles);
-        my_putstr(" - Left Cycles: ");
-        my_put_nbr(game->left_cycles);
-        my_putstr("\n");
-        dump(game->memory);
-        my_putstr("\n$/  ");
-        command = readline();
-        if (my_strcmp(command, "help") == 0)
-            my_putstr("You can type: md x, where x is the number of cycles left before a memory dump.\n");
-        if (command[0] == 'm' && command[1] == 'd')
-        {
-            for (i = 2; command[i] && command[i] > 47 && command[i] < 58; ++i)
-                num[j++] = command[i];
-            counter = my_getnbr(num);
-        }
-    }
-    free (num);
-    return (--counter);
+    
+    my_putstr("\033c");
+    my_putstr("Max Cycles: ");
+    my_put_nbr(game->max_cycles);
+    my_putstr(" - Left Cycles: ");
+    my_put_nbr(game->left_cycles);
+    my_putstr("\n");
+    dump(game->memory);
+    my_putstr("\n$/  ");
+    command = readline();
+    if (my_strcmp(command, "help") == 0)
+        my_putstr("You can type: x, where x is the number of cycles left before a memory dump.\n");
+    counter = my_getnbr(command);
+    return (counter);
 }
 
 void free_meta(t_meta* meta)
