@@ -5,7 +5,7 @@
 ** Login   <viallo_l@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 16:27:50 2017 VIALLON Louis
-** Last update Fri Jun  9 08:23:59 2017 MARZI Nicolas
+** Last update Sun Jun 11 10:26:23 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -32,6 +32,7 @@ int dump(byte memory[])
         if (i != 0 && (i % 32 == 0))
             my_putstr("\n");
         put_hex(memory[i]);
+        my_putstr(" ");
     }
     return (0);
 }

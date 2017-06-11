@@ -5,7 +5,7 @@
 ## Login   <marzi_n@etna-alternance.net>
 ##
 ## Started on  Mon Jun  5 13:26:04 2017 MARZI Nicolas
-## Last update Fri Jun  9 10:21:53 2017 MARZI Nicolas
+## Last update Sun Jun 11 10:40:07 2017 MARZI Nicolas
 ##
 
 CC = gcc
@@ -40,7 +40,7 @@ SRC = src/main.c \
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 
 INCLUDES = -I ./includes -I ../includes 
-CFLAGS = -W -Wextra  -Wall -pedantic $(INCLUDES)
+CFLAGS = -W -Wextra -Werror -Wall -pedantic $(INCLUDES)
 
 LIBMY_PATH = ../libmy/libmy.a
 

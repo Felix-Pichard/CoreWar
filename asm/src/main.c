@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 08:33:28 2017 MARZI Nicolas
+** Last update Sun Jun 11 10:47:16 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -49,9 +49,10 @@ void assemble_file(char *filename)
     int response;
     int line;
     char *tmp_str;
+    script_t warrior;
 
     tmp_str = get_filename(filename);
-    script_t warrior = {NULL, NULL, {COREWAR_EXEC_MAGIC, "", 0, ""}, tmp_str};
+    warrior = {NULL, NULL, {COREWAR_EXEC_MAGIC, "", 0, ""}, tmp_str};
     cursor = 0;
     response = 1;
     line = 1;
@@ -90,12 +91,14 @@ void assemble_file(char *filename)
 
 int main(int argv, char **args)
 {
+    int i;
+    
     if (argv < 1)
     {
         my_putstr("asm file_name[.s] ...");
         return (-1);
     }
-    for (int i = 1; i < argv; i++)
+    for (i = 1; i < argv; i++)
     {
         if (!file_exists(args[i]))
         {

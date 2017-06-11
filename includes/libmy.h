@@ -13,6 +13,7 @@
 
 typedef unsigned char byte;
 
+void	put_hex_core(unsigned char nbr);
 void	put_hex(unsigned char nbr);
 int	    my_getnbr(char *str);
 int     my_is_alphanum(char c);
