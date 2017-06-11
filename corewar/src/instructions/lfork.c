@@ -13,6 +13,7 @@
 
 void lfork(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
+    get_param_value(memory, cursor, 1);
     cursor->position = (cursor->position + 1) % MEM_SIZE;
     bypass_programs(programs, nb_programs);
 }
