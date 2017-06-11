@@ -84,24 +84,15 @@ void launch_game(game_t *game, int interactive_mode)
 
 void free_game(game_t *game)
 {
-    int i;
-
-    for (i = 0; i < game->nb_player; i++)
-    {
-        free(&(game->programs[i]));
-        free(&(game->cursors[i]));
-    }
+    free(game->programs);
+    free(game->cursors);
     free(game->memory);
 }
 
 int get_command(game_t *game, int counter)
 {
     char *command;
-    char *num;
-    int i;
-    int j;
-
-    j = 0;
+    
     my_putstr("\033c");
     my_putstr("Max Cycles: ");
     my_put_nbr(game->max_cycles);
@@ -112,15 +103,8 @@ int get_command(game_t *game, int counter)
     my_putstr("\n$/  ");
     command = readline();
     if (my_strcmp(command, "help") == 0)
-        my_putstr("You can type: md x, where x is the number of cycles left before a memory dump.\n");
-    if (command[0] == 'm' && command[1] == 'd')
-    {
-        num = safe_malloc(10);
-        for (i = 2; command[i] && command[i] > 47 && command[i] < 58; ++i)
-            num[j++] = command[i];
-         counter = my_getnbr(num);
-        free (num);
-    }
+        my_putstr("You can type: x, where x is the number of cycles left before a memory dump.\n");
+    counter = my_getnbr(command);
     return (counter);
 }
 
@@ -128,7 +112,9 @@ void free_meta(t_meta* meta)
 {
     int i;
 
-    for (i = 0; i < meta->nbr_prg; i++)
-        free(&(meta->programs[i]));
+    for(i = 0; i < meta->nbr_prg; ++i)
+        free(meta->programs[i].binaries);
+        
+    free(meta->programs);
     free(meta);
 }
