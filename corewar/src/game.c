@@ -110,6 +110,11 @@ int get_command(game_t *game, int counter)
 
 void free_meta(t_meta* meta)
 {
+    int i;
+
+    for(i = 0; i < meta->nbr_prg; ++i)
+        free(meta->programs[i].binaries);
+        
     free(meta->programs);
     free(meta);
 }
