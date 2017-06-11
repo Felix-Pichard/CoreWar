@@ -111,11 +111,11 @@ int get_param_value(byte *memory[], cursor_t *cursor, int i_param)
 
     value = 0;
     position = cursor->position;
-    position = (position + 1) % IDX_MOD;
+    position = (position + 1) % MEM_SIZE;
     type_param = (*memory)[position];
     for (i = 1; i < i_param; i++)
-        position = (position + get_size_param(type_param, i)) % IDX_MOD;
-    position = (position + 1) % IDX_MOD;
+        position = (position + get_size_param(type_param, i)) % MEM_SIZE;
+    position = (position + 1) % MEM_SIZE;
     value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
 
     return (value);        
@@ -129,11 +129,11 @@ int get_param_value_process(byte *memory[], cursor_t *cursor, int i_param)
     int position;
 
     position = cursor->position;
-    position = (position + 1) % IDX_MOD;
+    position = (position + 1) % MEM_SIZE;
     type_param = (*memory)[position];
     for (i = 1; i < i_param; i++)
-        position = (position + get_size_param(type_param, i)) % IDX_MOD;
-    position = (position + 1) % IDX_MOD;
+        position = (position + get_size_param(type_param, i)) % MEM_SIZE;
+    position = (position + 1) % MEM_SIZE;
     value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
     if (((type_param >> (4 - i) * 2) & 3) == CODED_DIR)
         return (value);
