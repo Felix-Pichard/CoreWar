@@ -102,18 +102,22 @@ int set_label(char *line, script_t *script)
     label_t item;
 
     labels = split_n_str(line, ':', 1);
-    if (array_len(labels) == 2)
+    if (array_len(labels) >= 1)
     {
         item.name = duplicate_str(labels[0]);
         item.position = get_rec_size(script->instruction);
         item.next = NULL;
         add_label(script, item);
-        if (array_len(labels) > 1)
+        if (array_len(labels) >= 2)
         {
             if (is_instruction(labels[1]))
                 return (set_instruction(labels[1], script));
         }
+        else
+            return (1);
     }
-    free_array(labels);
+    else
+        my_putstr("Label is not valid");
+    free(labels);
     return (0);
 }
