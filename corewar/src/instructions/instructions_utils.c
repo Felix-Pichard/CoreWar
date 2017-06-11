@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Fri Jun  9 10:02:12 2017 MARZI Nicolas
-** Last update Sun Jun 11 10:52:19 2017 MARZI Nicolas
+** Last update Sun Jun 11 10:55:49 2017 MARZI Nicolas
 */
 
 #include "memory.h"
@@ -92,7 +92,7 @@ int get_size_param(byte type_param, int i)
 {
     byte type;
 
-    type = (type_param >> ((MAX_ARGS_NUMBER - i) * 2)) & 3;
+    type = (type_param >> ((4 - i) * 2)) & 3;
     if (type == CODED_REG)
         return (T_REG);
     else if (type == CODED_DIR)
@@ -135,11 +135,11 @@ int get_param_value_process(byte *memory[], cursor_t *cursor, int i_param)
         position = (position + get_size_param(type_param, i)) % IDX_MOD;
     position = (position + 1) % IDX_MOD;
     value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
-    if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_DIR)
+    if (((type_param >> (4 - i) * 2) & 3) == CODED_DIR)
         return (value);
-    if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_REG && value >= 1 && value <= REG_NUMBER)
+    if (((type_param >> (4 - i) * 2) & 3) == CODED_REG && value >= 1 && value <= REG_NUMBER)
         return (cursor->registers[value]);
-    else if (((type_param >> (MAX_ARGS_NUMBER - i) * 2) & 3) == CODED_IND)
+    else if (((type_param >> (4 - i) * 2) & 3) == CODED_IND)
         return ((*memory)[value % MEM_SIZE]);
     return (0);        
 }

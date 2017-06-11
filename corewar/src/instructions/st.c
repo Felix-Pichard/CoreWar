@@ -35,7 +35,7 @@ void st(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs
     {
         int value = cursor->registers[nb_register_src];
         for (i = 0; i < 4; i++) 
-            (*memory)[(cursor->position + nb_register_dest + i) % MEM_SIZE] = (byte) value >> ((MAX_ARGS_NUMBER - i - 1) * 8);
+            (*memory)[(cursor->position + nb_register_dest + i) % MEM_SIZE] = (byte) value >> ((4 - i - 1) * 8);
         cursor->position = (cursor->position + IND_SIZE + T_REG + 2) % MEM_SIZE;
     }
     else 

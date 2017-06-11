@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 10:35:55 2017 MARZI Nicolas
-** Last update Sun Jun 11 09:51:03 2017 MARZI Nicolas
+** Last update Sun Jun 11 10:54:45 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -43,7 +43,7 @@ byte get_param_byte(instruction_t instruction)
     for (i = 0; i < instruction.nb_args; i++)
     {
         arg = instruction.args[i];
-        result = result | (arg.type << ((MAX_ARGS_NUMBER - i - 1) * 2));
+        result = result | (arg.type << ((4 - i - 1) * 2));
     }
     return (result);
 }
