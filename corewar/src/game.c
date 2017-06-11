@@ -122,7 +122,7 @@ int get_command(game_t *game, int counter)
         }
     }
     free (num);
-    return (--i);
+    return (--counter);
 }
 
 void free_meta(t_meta* meta)
