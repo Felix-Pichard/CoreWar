@@ -25,14 +25,19 @@ SRC = src/main.c \
 	src/game_utils.c \
 	src/instructions/live.c \
 	src/instructions/ld.c \
+	src/instructions/lld.c \
 	src/instructions/st.c \
 	src/instructions/add.c \
 	src/instructions/sub.c \
+	src/instructions/mul.c \
+	src/instructions/div.c \
+	src/instructions/mod.c \
 	src/instructions/and.c \
 	src/instructions/or.c \
 	src/instructions/xor.c \
 	src/instructions/zjmp.c \
 	src/instructions/ldi.c \
+	src/instructions/lldi.c \
 	src/instructions/sti.c \
 	src/instructions/instructions_utils.c \
 	src/op.c

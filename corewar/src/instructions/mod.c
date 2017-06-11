@@ -11,7 +11,7 @@
 #include "game.h"
 #include "instructions.h"
 
-void div(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
+void mod(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     int op_1;
     int op_2;
@@ -32,7 +32,7 @@ void div(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
         cursor->position = (cursor->position + 1) % MEM_SIZE;
         return;
     }
-    res = cursor->registers[op_1] / cursor->registers[op_2];
+    res = cursor->registers[op_1] % cursor->registers[op_2];
     cursor->registers[res_reg] = res;
     cursor->registers[0] = (res == 0) ? 1 : 0;
     cursor->position = (cursor->position + T_REG * 3 + 2) % MEM_SIZE;

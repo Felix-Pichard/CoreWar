@@ -11,7 +11,7 @@
 #include "game.h"
 #include "instructions.h"
 
-void add(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
+void mul(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     int op_1;
     int op_2;

@@ -16,7 +16,6 @@ void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
     int op_1;
     int op_2;
     int res_reg;
-    int res;
 
     if (!is_type_param_valid(5, (*memory)[cursor->position + 1]))
     {
@@ -29,7 +28,7 @@ void sub(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_program
     if (res_reg > 0 && res_reg <= REG_NUMBER)
     {
         cursor->registers[res_reg] = op_1 - op_2;
-        cursor->registers[0] = (res == 0) ? 1 : 0;
+        cursor->registers[0] = (cursor->registers[res_reg] == 0) ? 1 : 0;
         cursor->position = (cursor->position + T_REG * 3 + 2) % IDX_MOD;
     }
     else

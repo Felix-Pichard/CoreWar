@@ -11,7 +11,7 @@
 #include "game.h"
 #include "instructions.h"
 
-void ldi(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
+void lldi(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     int res_register;
     int op_1;

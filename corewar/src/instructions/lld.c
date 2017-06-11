@@ -11,7 +11,7 @@
 #include "game.h"
 #include "instructions.h"
 
-void ld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
+void lld(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)
 {
     byte type_param;
     byte nb_register;
