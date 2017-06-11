@@ -24,11 +24,11 @@ int main(int argc, char **argv)
     int j;
 
     program = parser(argc, argv);
-    game.memory = malloc(sizeof(byte) * MEM_SIZE);
+    game.memory = safe_malloc(sizeof(byte) * MEM_SIZE);
     init_mem(&game.memory);
     game.nb_player = program->nbr_prg;
-    game.programs = malloc(sizeof(program_t) * game.nb_player);
-    game.cursors = malloc(sizeof(cursor_t) * game.nb_player);
+    game.programs = safe_malloc(sizeof(program_t) * game.nb_player);
+    game.cursors = safe_malloc(sizeof(cursor_t) * game.nb_player);
     for (i = 0; i < program->nbr_prg; i++)
     {
         insert_prog(program->programs[i], &game.memory, (MEM_SIZE / program->nbr_prg) * i);
