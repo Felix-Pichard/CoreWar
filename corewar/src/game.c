@@ -42,6 +42,41 @@ void put_player(program_t *warrior)
     my_putstr(")");
 }
 
+void aff_winner(program_t program)
+{
+    my_putstr("Le joueur ");
+    my_put_nbr(program.id);
+    my_putchar('(');
+    my_putstr(program.name);
+    my_putchar(')');
+    my_putstr(" a gagné\n");
+}
+
+void print_winner(game_t *game)
+{
+    int i;
+    int found;
+
+    found = 0;
+    for (i = 0; i < game->nb_player; ++i)
+    {
+        if (game->programs[i].alive == 1)
+        {
+            aff_winner(game->programs[i]);
+            found = 1;
+        }
+    }
+
+    if (!found)
+    {
+        for (i = 0; i < game->nb_player; ++i)
+        {
+            if (game->programs[i].alive == 0)
+                aff_winner(game->programs[i]);
+        }
+    }
+}
+
 void launch_game(game_t *game, int interactive_mode)
 {
     int i;
@@ -78,6 +113,7 @@ void launch_game(game_t *game, int interactive_mode)
         game->left_cycles--;
         counter--;
     }
+    print_winner(game);
     if (game->dump_cycles == 0)
         dump(game->memory);
 }
@@ -112,7 +148,7 @@ void free_meta(t_meta* meta)
 {
     int i;
 
-    for(i = 0; i < meta->nbr_prg; ++i)
+    for (i = 0; i < meta->nbr_prg; ++i)
         free(meta->programs[i].binaries);
         
     free(meta->programs);

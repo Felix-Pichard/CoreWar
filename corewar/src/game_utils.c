@@ -17,6 +17,7 @@ int nb_program_alive(program_t *programs, int nb)
     int i;
     int size;
 
+    size = 0;
     for (i = 0; i < nb; i++)
     {
         if (programs[i].alive != -1)
