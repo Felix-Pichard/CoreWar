@@ -94,7 +94,7 @@ void escape_str(char *string)
     size = my_strlen(string);
     while (is_invisible_char(string[0]))
     {
-        for (i = 0; i < size - 1 && !is_invisible_char(string[i + 1]); i++)
+        for (i = 0; i < size - 1; i++)
             string[i] = string[i + 1];
         string[size - 1] = '\0';
     }
