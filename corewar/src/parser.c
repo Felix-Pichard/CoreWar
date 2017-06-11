@@ -41,14 +41,14 @@ header_t *new_header()
 void fill_struct(int argc, char** argv, t_meta *meta)
 {
     int count = 0;
-    int cycle = -1;
     int i;
     byte *source_code;
 
+    meta->dump_cycle = -1;
     for (i = 1; i < argc ; ++i)
     {
         if (my_strcmp(argv[i], "-dump") == 0)
-            check_dump(argv, &i, argc, &cycle);
+            check_dump(argv, &i, argc, &meta->dump_cycle);
         else if (my_strcmp(argv[i], "-n") == 0)
             meta->programs[count].number = check_prog_n(argv, &i, argc);
         else if (my_strcmp(argv[i], "-a") == 0)
@@ -94,9 +94,7 @@ t_meta* parser(int argc, char** argv)
     {
         if (my_strcmp(argv[i], "-dump") == 0 || my_strcmp(argv[i], "-n") == 0 || my_strcmp(argv[i], "-a") == 0)
             ++i;
-        else if (my_strcmp(argv[i], "-i"))
-        {}
-        else
+        else if (my_strcmp(argv[i], "-i") == -1 || my_strcmp(argv[i], "-i") == 1)
         {
             if (count >= 4)
                 my_error(4);

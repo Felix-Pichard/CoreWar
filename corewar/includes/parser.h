@@ -21,6 +21,7 @@
 
 typedef struct          s_meta
 {
+    int dump_cycle;
     int nbr_prg;
     int interactive_mode;
     t_program *programs;
