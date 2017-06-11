@@ -42,7 +42,7 @@ int main(int argc, char **argv)
         game.cursors[i].cycles_left = 0;
     }
     init_game(&game);
-    launch_game(&game);
+    launch_game(&game, program->interactive_mode);
     free_game(&game);
     return (0);
 }

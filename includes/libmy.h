@@ -43,5 +43,6 @@ int     my_bstrlen(char *str);
 char    *my_strnncpy(char *src, int i, int size);
 byte    *my_bstrnncpy(byte *src[], int i, int size);
 void*   safe_malloc(size_t size);
+char        *readline();
 
 #endif

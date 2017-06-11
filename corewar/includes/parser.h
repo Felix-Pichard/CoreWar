@@ -22,6 +22,7 @@
 typedef struct          s_meta
 {
     int nbr_prg;
+    int interactive_mode;
     t_program *programs;
 }                       t_meta;
 

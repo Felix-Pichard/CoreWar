@@ -30,7 +30,7 @@ void my_error(int i)
     errors[12] = "File has a too long source code\n";
     my_putstr("Error: ");
     my_putstr(errors[i]);
-    my_putstr("usage: corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address ] prog_name] ...\n");
+    my_putstr("usage: corewar [-dump nbr_cycle] [-i] [[-n prog_number] [-a load_address ] prog_name] ...\n");
     exit(i);
 }
 

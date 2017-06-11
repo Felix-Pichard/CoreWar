@@ -34,12 +34,14 @@ void print_register(int *tab)
     }
 }
 
-void launch_game(game_t *game)
+void launch_game(game_t *game, int interactive_mode)
 {
     int i;
     
     while (nb_program_alive(game->programs, game->nb_player) > 0 /*todo replace to 1 */ && game->max_cycles > 0 && game->dump_cycles != 0)
     {
+        if (interactive_mode)
+            get_command(&(game->memory));
         for (i = 0; i < game->nb_player; i++)
         {
             if (game->programs[i].alive != -1)
@@ -73,4 +75,32 @@ void free_game(game_t *game)
         free(&(game->cursors[i]));
     }
     free(game->memory);
+}
+
+void get_command(byte *memory[])
+{
+    char *command;
+    char *num;
+    static int counter;
+    int i;
+    int j;
+
+    j = 0;
+    num = safe_malloc(10);
+    if (counter == 0)
+    {
+        my_putstr("\033c");
+        dump(*memory);
+        my_putstr("\n$/  ");
+        command = readline();
+        if (my_strcmp(command, "help") == 0)
+            my_putstr("You can type: md x, where x is the number of cycles left before a memory dump.\n");
+        if (command[0] == 'm' && command[1] == 'd')
+        {
+            for (i = 2; command[i] && command[i] > 47 && command[i] < 58; ++i)
+                num[j++] = command[i];
+            counter = my_getnbr(command);
+        }
+    }
+    --i;
 }

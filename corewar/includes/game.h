@@ -51,7 +51,8 @@ typedef struct instruction_s
 
 int nb_program_alive(program_t *programs, int nb);
 void init_game(game_t *game);
-void launch_game(game_t *game);
+void launch_game(game_t *game, int interactive_mode);
 void free_game(game_t *game);
+void get_command(byte *memory[]);
 
 #endif

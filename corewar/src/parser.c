@@ -53,6 +53,8 @@ void fill_struct(int argc, char** argv, t_meta *meta)
             meta->programs[count].number = check_prog_n(argv, &i, argc);
         else if (my_strcmp(argv[i], "-a") == 0)
             meta->programs[count].address = check_prog_addr(argv, &i, argc);
+        else if (my_strcmp(argv[i], "-i") == 0)
+            meta->interactive_mode = 1;
         else
         {
             meta->programs[count].file_name = argv[i];
@@ -94,6 +96,8 @@ t_meta* parser(int argc, char** argv)
     {
         if (my_strcmp(argv[i], "-dump") == 0 || my_strcmp(argv[i], "-n") == 0 || my_strcmp(argv[i], "-a") == 0)
             ++i;
+        else if (my_strcmp(argv[i], "-i"))
+        {}
         else
         {
             if (count >= 4)
