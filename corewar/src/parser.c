@@ -61,9 +61,9 @@ void fill_struct(int argc, char** argv, t_meta *meta)
             source_code = get_file_content(argv[i], &meta->programs[count].header, 1);
             if (count >= 4)
                 my_error(4);
+            meta->programs[count].binaries = source_code;
+            count++;
         }
-        meta->programs[count].binaries = source_code;
-        count++;
     }
 }
 
