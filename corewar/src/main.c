@@ -44,5 +44,6 @@ int main(int argc, char **argv)
     init_game(&game);
     launch_game(&game);
     free_game(&game);
+    free_meta(program);
     return (0);
 }
