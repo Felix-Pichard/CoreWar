@@ -31,5 +31,6 @@ op_t    op_tab[] =
     {"ldi", 3, {CODED_REG | CODED_DIR | CODED_IND, CODED_DIR | CODED_REG, CODED_REG}, 10, 25,
      "load index"},
     {"sti", 3, {CODED_REG, CODED_REG | CODED_DIR | CODED_IND, CODED_DIR | CODED_REG}, 11, 25,
-     "store index"}
+     "store index"},
+     {0, 0, {0}, 0, 0, 0}
   };

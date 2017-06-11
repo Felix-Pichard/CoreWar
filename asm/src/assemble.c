@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 13:50:39 2017 MARZI Nicolas
-** Last update Thu Jun  8 07:35:55 2017 MARZI Nicolas
+** Last update Sun Jun 11 11:08:32 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -41,9 +41,10 @@ int assemble(script_t *script)
     int i;
     int offset;
     int file_handle;
-    byte content[script->header.prog_size];
+    byte *content;
     instruction_t *tmp;
 
+    content = malloc(sizeof(byte) * script->header.prog_size);
     offset = 0;
     init_byte_buffer(content, script->header.prog_size);
     tmp = script->instruction;

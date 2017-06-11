@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Sun Jun 11 10:47:16 2017 MARZI Nicolas
+** Last update Sun Jun 11 11:02:19 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -52,7 +52,6 @@ void assemble_file(char *filename)
     script_t warrior;
 
     tmp_str = get_filename(filename);
-    warrior = {NULL, NULL, {COREWAR_EXEC_MAGIC, "", 0, ""}, tmp_str};
     cursor = 0;
     response = 1;
     line = 1;
@@ -86,7 +85,6 @@ void assemble_file(char *filename)
         assemble(&warrior);
     }
     free(tmp_str);
-    free_script(warrior);
 }
 
 int main(int argv, char **args)

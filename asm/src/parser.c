@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 20:02:00 2017 MARZI Nicolas
-** Last update Thu Jun  8 18:39:41 2017 MARZI Nicolas
+** Last update Sun Jun 11 11:07:39 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -79,11 +79,12 @@ int is_invisible_char(char c)
 void escape_str(char *string)
 {
     int size;
+    int i;
 
     size = my_strlen(string);
     while (is_invisible_char(string[0]))
     {
-        for (int i = 0; i < size - 1; i++)
+        for (i = 0; i < size - 1; i++)
             string[i] = string[i + 1];
         string[size - 1] = '\0';
     }
@@ -122,7 +123,9 @@ int find_occurence(char *line, char find)
 
 void init_buffer(char *buffer, int size)
 {
-    for (int i = 0; i < size; i++)
+    int i;
+
+    for (i = 0; i < size; i++)
     {
         *(buffer + i) = '\0';
     }
@@ -132,10 +135,11 @@ char *get_string(char *buffer)
 {
     int size;
     char *result;
+    int i;
 
     size = my_strlen(buffer);
     result = malloc(sizeof(char) * size);
-    for (int i = 0; i < size; i++)
+    for (i = 0; i < size; i++)
         result[i] = buffer[i];
     result[size] = '\0';
     escape_str(result);
@@ -205,7 +209,6 @@ char **split_str(char *line, char delimiter)
             str = get_string(buffer);
             if (my_strlen(str) > 0)
                 push_str(result, str);
-            //free(str);
             init_buffer(buffer, 128);
             cursor = 0;
         }
@@ -215,7 +218,6 @@ char **split_str(char *line, char delimiter)
     str = get_string(buffer);
     if (my_strlen(str) > 0)
         push_str(result, str);
-    //free(str);
     return (result);
 }
 
@@ -228,7 +230,7 @@ op_t get_op(char *name)
         if (my_strcmp(name, op_tab[i].mnemonique) == 0)
             return (op_tab[i]);
     }
-    return ((op_t) {0, 0, {0}, 0, 0, 0});
+    return (op_tab[11]);
 }
 
 byte get_param_code(char *line)
@@ -253,7 +255,9 @@ int set_params(instruction_t *instruction, char **lines, int size)
         param = &(instruction->args[i]);
         if (!is_param_valid(lines[i]))
             return (0);
-        *param = (param_t) {NULL, 0, get_param_code(lines[i])};
+        (*param).label = NULL;
+        (*param).value = 0;
+        (*param).type = get_param_code(lines[i]);
         if (param->type == CODED_REG)
         {
             param->value = my_getnbr(split_str(lines[i], 'r')[0]);
@@ -285,32 +289,27 @@ int set_instruction(char *line, script_t *script)
     char **params;
     op_t op;
     instruction_t instruction;
+    int i;
 
     instructions = split_str(line, ' ');
-
     if (array_len(instructions) != 2)
         return (0);
-
     op = get_op(instructions[0]);
     if (op.mnemonique == NULL)
         return (0);
     params = split_str(instructions[1], SEPARATOR_CHAR);
-
     if (array_len(params) != op.nbr_args)
     {
         my_put_nbr(array_len(params));my_putstr(" parameters given, ");
         my_put_nbr(op.nbr_args);my_putstr(" expected");
         return (0);
     }
-
     if (!set_params(&instruction, params, op.nbr_args))
         return (0);
-
     instruction.opcode = op.code;
     instruction.nb_args = op.nbr_args;
     instruction.next = NULL;
-
-    for (int i = 0; i < instruction.nb_args; i++)
+    for (i = 0; i < instruction.nb_args; i++)
     {
         if (((byte) op.type[i] & instruction.args[i].type) == 0)
         {
@@ -347,7 +346,9 @@ int set_label(char *line, script_t *script)
     labels = split_n_str(line, ':', 1);
     if (array_len(labels) == 2)
     {
-        item = (label_t) {duplicate_str(labels[0]), get_rec_size(script->instruction), NULL};
+        item.name = duplicate_str(labels[0]);
+        item.position = get_rec_size(script->instruction);
+        item.next = NULL;
         add_label(script, item);
         if (is_instruction(labels[1]))
             return (set_instruction(labels[1], script));
