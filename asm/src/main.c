@@ -95,7 +95,6 @@ void assemble_file(char *filename)
         free(tmp_str);
         warrior.header.prog_size = get_rec_size(warrior.instruction);
         assemble(&warrior);
-        free_script(&warrior);
     }
 }
 
