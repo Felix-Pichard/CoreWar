@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 08:51:04 2017 MARZI Nicolas
-** Last update Thu Jun  8 08:37:57 2017 MARZI Nicolas
+** Last update Sun Jun 11 13:34:07 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -13,6 +13,9 @@
 #include "parser.h"
 #include "label.h"
 #include "libmy.h"
+#include "assemble.h"
+#include "instruction.h"
+#include "free.h"
 
 label_t *get_label(label_t *container, char *name)
 {
@@ -90,5 +93,24 @@ int is_label(char *line)
         else if (is_char_label(line[cursor]) == 0)
             return (0);
     }
+    return (0);
+}
+
+int set_label(char *line, script_t *script)
+{
+    char **labels;
+    label_t item;
+
+    labels = split_n_str(line, ':', 1);
+    if (array_len(labels) == 2)
+    {
+        item.name = duplicate_str(labels[0]);
+        item.position = get_rec_size(script->instruction);
+        item.next = NULL;
+        add_label(script, item);
+        if (is_instruction(labels[1]))
+            return (set_instruction(labels[1], script));
+    }
+    free_array(labels);
     return (0);
 }
