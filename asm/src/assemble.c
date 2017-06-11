@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 13:50:39 2017 MARZI Nicolas
-** Last update Thu Jun  8 07:35:55 2017 MARZI Nicolas
+** Last update Sun Jun 11 18:13:24 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -17,6 +17,7 @@
 #include "libmy.h"
 #include "label.h"
 #include "header.h"
+#include "free.h"
 #include "file.h"
 
 void init_byte_buffer(byte *buffer, int size)
@@ -41,9 +42,10 @@ int assemble(script_t *script)
     int i;
     int offset;
     int file_handle;
-    byte content[script->header.prog_size];
+    byte *content;
     instruction_t *tmp;
 
+    content = safe_malloc(sizeof(byte) * script->header.prog_size);
     offset = 0;
     init_byte_buffer(content, script->header.prog_size);
     tmp = script->instruction;
@@ -58,5 +60,7 @@ int assemble(script_t *script)
     write_header(file_handle, script->header);
     write(file_handle, content, script->header.prog_size);
     close(file_handle);
+    free_script(script);
+    free(content);
     return (1);
 }

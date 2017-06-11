@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 10:35:55 2017 MARZI Nicolas
-** Last update Thu Jun  8 08:30:20 2017 MARZI Nicolas
+** Last update Sun Jun 11 15:29:57 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -15,21 +15,37 @@
 #include "parser.h"
 #include "byte.h"
 
+int is_instruction(char *line)
+{
+    int cursor;
+
+    for (cursor = 0; cursor < 15; cursor++)
+    {
+        if (my_strncmp(line, op_tab[cursor].mnemonique, my_strlen(op_tab[cursor].mnemonique)) != 0)
+            continue;
+        else if (line[my_strlen(op_tab[cursor].mnemonique)] == ' ')
+            return (1);
+    }
+    return (0);
+}
+
 void add_instruction(script_t *script, instruction_t item)
 {
     instruction_t *tmp;
 
-    tmp = script->instruction;
     if (script->instruction == NULL)
     {
-        script->instruction = malloc(sizeof(instruction_t));
+        script->instruction = safe_malloc(sizeof(instruction_t));
         *script->instruction = item;
         script->instruction->next = NULL;
         return;
     }
+    tmp = script->instruction;
     while (tmp->next != NULL)
+    {
         tmp = tmp->next;
-    tmp->next = malloc(sizeof(instruction_t));
+    }
+    tmp->next = safe_malloc(sizeof(instruction_t));
     *tmp->next = item;
 }
 
@@ -43,7 +59,7 @@ byte get_param_byte(instruction_t instruction)
     for (i = 0; i < instruction.nb_args; i++)
     {
         arg = instruction.args[i];
-        result = result | (arg.type << ((MAX_ARGS_NUMBER - i - 1) * 2));
+        result = result | (arg.type << ((4 - i - 1) * 2));
     }
     return (result);
 }
@@ -132,6 +148,7 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
                 buffer[offset + add] = tmp[j];
                 add++;
             }
+            free(tmp);
         }
     }
     else if (instruction->opcode == 1)
@@ -142,7 +159,8 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
         {
             buffer[offset + add] = tmp[j];
             add++;
-        } 
+        }
+        free(tmp);
     }
     else if (instruction->opcode == 9)
     {
@@ -153,6 +171,7 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
             buffer[offset + add] = tmp[j];
             add++;
         } 
+        free(tmp);
     }
     else if (instruction->opcode == 11)
     {
@@ -168,6 +187,7 @@ int write_instruction(byte *buffer, int offset, instruction_t *instruction)
                 buffer[offset + add] = tmp[j];
                 add++;
             }
+            free(tmp);
         }
     }
     return (add);

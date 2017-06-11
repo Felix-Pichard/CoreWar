@@ -19,9 +19,15 @@
 
 void write_header(int file_handle, header_t header)
 {
-    write(file_handle, int_to_byte(header.magic, 4), 4);
+    byte *tmp_byte;
+
+    tmp_byte = int_to_byte(header.magic, 4);
+    write(file_handle, tmp_byte, 4);
+    free(tmp_byte);
     write(file_handle, header.prog_name, PROG_NAME_LENGTH);
-    write(file_handle, int_to_byte(header.prog_size, 4), 4); 
+    tmp_byte = int_to_byte(header.prog_size, 4);
+    write(file_handle, tmp_byte, 4);
+    free(tmp_byte);
     write(file_handle, header.comment, COMMENT_LENGTH);   
 }
 
@@ -35,7 +41,7 @@ char *get_filename(char *file)
     
     name = split_str(file, '.');
     size = my_strlen(name[0]);
-    result = malloc(sizeof(char) * size);
+    result = safe_malloc(sizeof(char) * size);
     for (i = 0; i < size + 4; i++)
     {
         if (i >= size)

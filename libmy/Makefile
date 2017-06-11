@@ -34,10 +34,16 @@ SRC = src/my_getnbr.c \
 		src/my_str_to_wordtab.c \
 		src/my_swap.c \
 		src/my_wordlen.c \
-		src/put_hex.c
+		src/put_hex.c \
+		src/my_putnbr_base.c \
+		src/my_strspn.c \
+		src/my_bstrlen.c \
+		src/my_strnncpy.c \
+		src/safe_malloc.c \
+		src/my_readline.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
-CFLAGS = -W -Wextra -Werror -Wall -pedantic
+CFLAGS = -W -Wextra -Werror -Wall -pedantic -I ./includes -I ../includes
 AR = ar
 ARFLAGS = rcs
 

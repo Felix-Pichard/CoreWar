@@ -8,21 +8,17 @@
 ** Last update Tue Oct  6 13:22:41 2015 MARZI Nicolas
 */
 
-#include <stdlib.h>
+#include "libmy.h"
 
-int	my_is_alphanum(char c);
-int	my_wordlen(char *str);
-int	my_strlen(char *str);
-int 	my_putstr(char *str);
-char    **my_init_tab(char **response, int nb_word, int nb_str);
-char    **my_str_to_wordtab_core(char *str, char **response, int i, int j);
+char  **my_init_tab(char **response, int nb_word, int nb_str);
+char  **my_str_to_wordtab_core(char *str, char **response, int i, int j);
 
 char	**my_str_to_wordtab(char *str)
 {
   char  **response;
   int	i;
   int	j;
-  response = malloc(10);
+  response = safe_malloc(10);
   i = 0;
   j = 0;
 
@@ -63,10 +59,10 @@ char	**my_init_tab(char **response, int nb_word, int nb_str)
 {
   int	i;
   i = 0;
-  response = malloc(nb_word * sizeof(char*));
+  response = safe_malloc(nb_word * sizeof(char*));
   while (i < nb_word)
   {
-    response[i] = malloc(nb_str * sizeof(char));
+    response[i] = safe_malloc(nb_str * sizeof(char));
     i++;
   }
   return (response);

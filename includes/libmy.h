@@ -11,8 +11,13 @@
 #ifndef __LIBMY_H__
 #define __LIBMY_H__
 
-int	my_getnbr(char *str);
+#include "stdlib.h"
+
+typedef unsigned char byte;
+
+void	put_hex_core(unsigned char nbr);
 void	put_hex(unsigned char nbr);
+int	    my_getnbr(char *str);
 int     my_is_alphanum(char c);
 int     my_isneg(int n);
 int     my_nb_len(int n);
@@ -32,5 +37,12 @@ char    *my_strstr(char *str, char *to_find);
 char    **my_str_to_wordtab(char *str);
 void    my_swap(int *a, int *b);
 int     my_wordlen(char *str);
+void    my_putnbr_base(int nbr, char *base);
+int     my_strspn (const char *s, const char *accept);
+int     my_bstrlen(char *str);
+char    *my_strnncpy(char *src, int i, int size);
+byte    *my_bstrnncpy(byte *src[], int i, int size);
+void*   safe_malloc(size_t size);
+char        *readline();
 
 #endif

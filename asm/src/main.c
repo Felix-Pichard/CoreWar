@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Thu Jun  8 08:33:28 2017 MARZI Nicolas
+** Last update Sun Jun 11 18:36:56 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -40,6 +40,16 @@ int push(char *item, script_t *script)
     return (0);
 }
 
+void init_script(script_t *warrior)
+{
+    warrior->label = NULL;
+    warrior->instruction = NULL;
+    warrior->file_name = NULL;
+    warrior->header.magic = COREWAR_EXEC_MAGIC;
+    init_buffer(warrior->header.prog_name, PROG_NAME_LENGTH);
+    init_buffer(warrior->header.comment, COMMENT_LENGTH);
+}
+
 void assemble_file(char *filename)
 {
     int file_handle;
@@ -48,8 +58,11 @@ void assemble_file(char *filename)
     int cursor;
     int response;
     int line;
+    char *tmp_str;
+    script_t warrior;
 
-    script_t warrior = {NULL, NULL, {COREWAR_EXEC_MAGIC, "", 0, ""}, get_filename(filename)};
+    init_script(&warrior);
+    warrior.file_name = get_filename(filename);
     cursor = 0;
     response = 1;
     line = 1;
@@ -61,7 +74,8 @@ void assemble_file(char *filename)
     {
         if (data == '\n')
         {
-            response = push(get_string(buffer), &warrior);
+            tmp_str = get_string(buffer);
+            response = push(tmp_str, &warrior);
             init_buffer(buffer, 512);
             if (response == 0)
                 print_line(line);
@@ -72,24 +86,29 @@ void assemble_file(char *filename)
             buffer[cursor++] = data;
     }
     close(file_handle);
-    if (!push(get_string(buffer), &warrior))
+    free(tmp_str);
+    tmp_str = get_string(buffer);
+    if (!push(tmp_str, &warrior))
         print_line(line);
     else
     {
         warrior.header.prog_size = get_rec_size(warrior.instruction);
         assemble(&warrior);
+        free_script(&warrior);
     }
-    free_script(warrior);
+    free(tmp_str);
 }
 
 int main(int argv, char **args)
 {
+    int i;
+    
     if (argv < 1)
     {
         my_putstr("asm file_name[.s] ...");
         return (-1);
     }
-    for (int i = 1; i < argv; i++)
+    for (i = 1; i < argv; i++)
     {
         if (!file_exists(args[i]))
         {
