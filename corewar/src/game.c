@@ -64,13 +64,13 @@ void launch_game(game_t *game, int interactive_mode)
         {
             for (i = 0; i < game->nb_player; i++)
             {
-                if (game->programs[i].alive <= 0)
+                if (game->programs[i].alive == 0)
                 {
                     game->programs[i].alive = -1;
                     put_player(&(game->programs[i]));
                     my_putstr(" est mort\n");
                 }
-                else
+                else if (game->programs[i].alive == 1)
                     game->programs[i].alive = 0;
             }
             game->max_cycles -= CYCLE_DELTA;
