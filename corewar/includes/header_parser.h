@@ -15,6 +15,5 @@
 #include "memory.h"
 
 byte *get_file_content(char *filename, header_t *header, int opponent_number);
-header_t *get_header(char *file_content, int opponent_number);
 
 #endif

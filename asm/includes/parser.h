@@ -5,15 +5,14 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 08:47:49 2017 MARZI Nicolas
-** Last update Thu Jun  8 08:37:16 2017 MARZI Nicolas
+** Last update Sun Jun 11 10:45:57 2017 MARZI Nicolas
 */
 
 #include "op.h"
+#include "libmy.h"
 
 #ifndef __PARSER_H__
 #define __PARSER_H__
-
-typedef unsigned char byte;
 
 typedef struct param_s
 {

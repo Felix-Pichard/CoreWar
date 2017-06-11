@@ -30,7 +30,8 @@ void i_or(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_progra
     res_reg = get_param_value(memory, cursor, 3);
     if (res_reg > 0 && res_reg <= REG_NUMBER)
     {
-        cursor->registers[res_reg] = op_1 | op_2;
+        res = op_1 | op_2;
+        cursor->registers[res_reg] = res;
         cursor->registers[0] = (res == 0) ? 1 : 0;
         cursor->position = (cursor->position + 2 + get_size_param(type_param, 1) + get_size_param(type_param, 2) + get_size_param(type_param, 3)) % MEM_SIZE;
     }

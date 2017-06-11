@@ -5,15 +5,14 @@
 ** Login   <viallo_l@etna-alternance.net>
 **
 ** Started on  Tue Jun  6 16:27:50 2017 VIALLON Louis
-** Last update Thu Jun  8 19:42:40 2017 MARZI Nicolas
+** Last update Sun Jun 11 10:48:53 2017 MARZI Nicolas
 */
 
 #ifndef _MEMORY__H_
 #define _MEMORY__H_
 
 #include "op.h"
-
-typedef unsigned char byte;
+#include "libmy.h"
  
 typedef struct          s_program
 {

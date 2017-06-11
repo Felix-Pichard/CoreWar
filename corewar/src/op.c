@@ -36,5 +36,6 @@ op_t    op_tab[] =
     {"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 13, 50,
      "long load index"},
     {"mul", 3, {T_REG, T_REG, T_REG}, 14, 30, "multiplication"},
-    {"div", 3, {T_REG, T_REG, T_REG}, 15, 60, "division"}
+    {"div", 3, {T_REG, T_REG, T_REG}, 15, 60, "division"},
+    {0, 0, {0}, 0, 0, 0}
   };

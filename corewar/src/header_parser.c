@@ -16,35 +16,6 @@
 #include "libmy.h"
 #include "op.h"
 
-char *old_gfc(char *filename, int opponent_number)
-{
-    int fd;
-    char *file_content;
-    int i;
-    //int check;
-    int max_size;
-
-    //check = 0;
-    max_size = MEM_SIZE / opponent_number;
-    file_content = malloc(max_size);
-    fd = open(filename, O_RDONLY);
-    if (fd == -1)
-        my_error(7);
-    my_put_nbr(read(fd, file_content, max_size));
-    my_putstr(" octets red");
-//    if (read(fd, file_content, max_size) == -1)
-//        my_error(8);
-    for (i = 0; i < max_size; ++i)
-    {
-//        if (file_content[i] == EOF)
-//            check = 1;
-    }
-    /*if (check == 0)
-        my_error(9);*/
-    close(fd);
-    return (file_content);
-}
-
 byte *get_file_content(char *filename, header_t *header, int opponent_number)
 {
     int fd;
@@ -85,31 +56,4 @@ byte *get_file_content(char *filename, header_t *header, int opponent_number)
     else
         my_error(12);
     return (file_content);
-}   
-
-header_t *get_header(char *file_content, int opponent_number)
-{
-    header_t *header;
-
-
-    if ((header = malloc(sizeof(*header))) == NULL)
-        my_error(5);
-    my_putstr(file_content);
-    my_putstr("\n");
-    my_putstr("DEBUG 1\n");
-    //int header_size = COMMENT_LENGTH + PROG_NAME_LENGTH + sizeof(int) * 2;
-    my_putstr("DEBUG 2\n");
-    /*if (my_bstrlen(file_content) < header_size)
-        my_error(10);*/
-    my_putstr("DEBUG 3\n");
-    header->magic = my_getnbr(my_strnncpy(file_content, 0, sizeof(int)));
-    my_strcpy(header->prog_name,my_strnncpy(file_content, sizeof(int), PROG_NAME_LENGTH));
-    header->prog_size = my_getnbr(my_strnncpy(file_content, sizeof(int) + PROG_NAME_LENGTH + 1, sizeof(int)));
-    my_put_nbr(header->prog_size);
-    my_putstr(" size get \n");
-//    if (header->magic != COREWAR_EXEC_MAGIC)
-//        my_error(11);
-    if (header->prog_size > MEM_SIZE * opponent_number)
-        my_error(12);
-    return (header);
 }

@@ -5,24 +5,12 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 15:24:33 2017 MARZI Nicolas
-** Last update Fri Jun  9 10:23:00 2017 MARZI Nicolas
+** Last update Sun Jun 11 10:50:05 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
 
 #include "game.h"
-
-// int nb_program(program_t *program)
-// {
-//     int size;
-    
-//     for (;program != NULL; program++)
-//     {
-//         if (size > 4)
-//             exit(0);
-//         size++;
-//     }
-// }
 
 int nb_program_alive(program_t *programs, int nb)
 {
