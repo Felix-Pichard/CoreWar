@@ -37,7 +37,6 @@ int dump(byte memory[])
     return (0);
 }
 
-
 int dump_n(byte memory[], int n)
 {
     int i;
