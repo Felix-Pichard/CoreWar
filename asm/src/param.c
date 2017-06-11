@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 08:38:12 2017 MARZI Nicolas
-** Last update Thu Jun  8 08:42:01 2017 MARZI Nicolas
+** Last update Sun Jun 11 13:27:19 2017 MARZI Nicolas
 */
 
 #include "op.h"
@@ -70,4 +70,54 @@ char *get_type_param(byte type)
     if (type >= 1 && type <= 3)
         return (param_name[type - 1]);
     return ("unknow");
+}
+
+byte get_param_code(char *line)
+{
+    if (is_param_register(line))
+        return (CODED_REG);
+    else if (is_param_dir(line))
+        return (CODED_DIR);
+    else if (is_param_indir(line))
+        return (CODED_IND);
+    return (0x00);
+}
+
+int set_params(instruction_t *instruction, char **lines, int size)
+{
+    int i;
+    char *label;
+    param_t *param;
+
+    for (i = 0; i < size; i++)
+    {
+        param = &(instruction->args[i]);
+        if (!is_param_valid(lines[i]))
+            return (0);
+        (*param).label = NULL;
+        (*param).value = 0;
+        (*param).type = get_param_code(lines[i]);
+        if (param->type == CODED_REG)
+        {
+            param->value = my_getnbr(split_str(lines[i], 'r')[0]);
+        }
+        else if (param->type == CODED_IND)
+        {
+            param->value = my_getnbr(lines[i]);
+        }
+        else if (param->type == CODED_DIR)
+        {
+            label = split_str(lines[i], '%')[0];
+            if (label[0] == ':')
+            {
+                label = split_str(label, ':')[0];
+                param->label = label;
+            }
+            else
+                param->value = my_getnbr(label);
+        }
+        else
+            return (0);
+    }
+    return (1);
 }

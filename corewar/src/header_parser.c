@@ -47,7 +47,7 @@ byte *get_file_content(char *filename, header_t *header, int opponent_number)
     }
     if (header->prog_size < max_size)
     {
-        file_content = malloc(header->prog_size*sizeof(byte));
+        file_content = safe_malloc(header->prog_size*sizeof(byte));
         for (i = 0; i < header->prog_size; i++) {
             read(fd, &tmp_char, 1);
             file_content[i] = (byte) tmp_char;

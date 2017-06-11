@@ -104,3 +104,12 @@ void get_command(byte *memory[])
     }
     --i;
 }
+
+void free_meta(t_meta* meta)
+{
+    int i;
+
+    for (i = 0; i < meta->nbr_prg; i++)
+        free(&(meta->programs[i]));
+    free(meta);
+}

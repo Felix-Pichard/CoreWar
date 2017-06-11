@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 10:35:55 2017 MARZI Nicolas
-** Last update Sun Jun 11 12:47:10 2017 MARZI Nicolas
+** Last update Sun Jun 11 15:29:57 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -15,13 +15,27 @@
 #include "parser.h"
 #include "byte.h"
 
+int is_instruction(char *line)
+{
+    int cursor;
+
+    for (cursor = 0; cursor < 15; cursor++)
+    {
+        if (my_strncmp(line, op_tab[cursor].mnemonique, my_strlen(op_tab[cursor].mnemonique)) != 0)
+            continue;
+        else if (line[my_strlen(op_tab[cursor].mnemonique)] == ' ')
+            return (1);
+    }
+    return (0);
+}
+
 void add_instruction(script_t *script, instruction_t item)
 {
     instruction_t *tmp;
 
     if (script->instruction == NULL)
     {
-        script->instruction = malloc(sizeof(instruction_t));
+        script->instruction = safe_malloc(sizeof(instruction_t));
         *script->instruction = item;
         script->instruction->next = NULL;
         return;
@@ -31,7 +45,7 @@ void add_instruction(script_t *script, instruction_t item)
     {
         tmp = tmp->next;
     }
-    tmp->next = malloc(sizeof(instruction_t));
+    tmp->next = safe_malloc(sizeof(instruction_t));
     *tmp->next = item;
 }
 

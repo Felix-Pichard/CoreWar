@@ -8,7 +8,7 @@
 ** Last update Mon Oct  5 17:49:57 2015 MARZI Nicolas
 */
 
-#include <stdlib.h>
+#include "libmy.h"
 
 int 	my_strlen(char *str);
 char 	*my_strcpy(char *dest, char *src);
@@ -16,7 +16,7 @@ char 	*my_strcpy(char *dest, char *src);
 char 	*my_strdup(char *str)
 {
   char 	*dest;
-  dest = malloc(sizeof(char) * my_strlen(str));
+  dest = safe_malloc(sizeof(char) * my_strlen(str));
   dest = my_strcpy(dest, str);
 
   return (dest);

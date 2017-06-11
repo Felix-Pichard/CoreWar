@@ -8,7 +8,6 @@
 ** Last update Thu Jun  8 17:09:32 2017 MARZI Nicolas
 */
 
-#include <stdlib.h>
 #include "libmy.h"
 
 char *my_strnncpy(char *src, int i, int size)
@@ -16,14 +15,9 @@ char *my_strnncpy(char *src, int i, int size)
     char* str;
     int count;
 
-    if((str = malloc(sizeof(char) * size)) == NULL)
-    {
-        my_putstr("Can’t perform malloc\n");
-        exit(5);
-    }
+    str = safe_malloc(sizeof(char) * size);
     for (count = 0; src[i] != '\0' && count < size; ++i, ++count)
         str[count] = src[i];
-
     return (str);
  }
 
@@ -32,13 +26,8 @@ byte *my_bstrnncpy(byte *src[], int i, int size)
     byte *str;
     int count;
 
-    if((str = malloc(sizeof(byte) * size)) == NULL)
-    {
-        my_putstr("Can’t perform malloc\n");
-        exit(5);
-    }
+    str = safe_malloc(sizeof(byte) * size);
     for (count = 0; *src[i] != '\0' && count < size; ++i, ++count)
         str[count] = *src[i];
-
     return (str);
  }

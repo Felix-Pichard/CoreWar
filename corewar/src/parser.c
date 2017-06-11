@@ -32,7 +32,7 @@ header_t *new_header()
 {
     header_t *header;
 
-    header = malloc(sizeof(header_t));
+    header = safe_malloc(sizeof(header_t));
     header->magic = 0;
     header->prog_size = 0;
     return (header);
@@ -71,8 +71,7 @@ void init_meta(t_meta *meta)
 {
 	int i;
 
-    if ((meta->programs = malloc(sizeof(t_program) * meta->nbr_prg)) == NULL)
-		my_error(5);
+    meta->programs = safe_malloc(sizeof(t_program) * meta->nbr_prg);
     for (i = 0; i < meta->nbr_prg; ++i)
     {
         meta->programs[i].file_name = "";
@@ -87,8 +86,7 @@ t_meta* parser(int argc, char** argv)
     int count;
 	int i;
 
-    if ((prog_args = malloc(sizeof(t_meta))) == NULL)
-		my_error(5);
+    prog_args = safe_malloc(sizeof(t_meta));
     if (argc <= 1)
         return (prog_args);
     count = 0;

@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Fri Jun  9 10:02:12 2017 MARZI Nicolas
-** Last update Sun Jun 11 10:55:49 2017 MARZI Nicolas
+** Last update Sun Jun 11 15:30:47 2017 MARZI Nicolas
 */
 
 #include "memory.h"
@@ -23,7 +23,7 @@ op_t get_op(byte opcode)
 {
     int i;
 
-    for (i = 0; i < 11; i++)
+    for (i = 0; i < 15; i++)
     {
         if (op_tab[i].code == opcode)
             return (op_tab[i]);

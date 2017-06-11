@@ -13,6 +13,7 @@
 
 #include "op.h"
 #include "memory.h"
+#include "parser.h"
 #include "libmy.h"
 
 typedef struct cursor_s
@@ -54,5 +55,6 @@ void init_game(game_t *game);
 void launch_game(game_t *game, int interactive_mode);
 void free_game(game_t *game);
 void get_command(byte *memory[]);
+void free_meta(t_meta* meta);
 
 #endif

@@ -44,7 +44,7 @@ int assemble(script_t *script)
     byte *content;
     instruction_t *tmp;
 
-    content = malloc(sizeof(byte) * script->header.prog_size);
+    content = safe_malloc(sizeof(byte) * script->header.prog_size);
     offset = 0;
     init_byte_buffer(content, script->header.prog_size);
     tmp = script->instruction;
