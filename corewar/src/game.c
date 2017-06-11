@@ -52,7 +52,7 @@ void launch_game(game_t *game, int interactive_mode)
     while (nb_program_alive(game->programs, game->nb_player) > 1 && game->max_cycles > 0 && game->dump_cycles != 0)
     {
         if (interactive_mode)
-            counter = get_command(game);
+            counter = get_command(game, counter);
         for (i = 0; i < game->nb_player; i++)
         {
             if (game->programs[i].alive != -1)
@@ -92,7 +92,7 @@ void free_game(game_t *game)
     free(game->memory);
 }
 
-void get_command(game_t *game, int counter)
+int get_command(game_t *game, int counter)
 {
     char *command;
     char *num;
