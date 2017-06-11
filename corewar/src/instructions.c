@@ -24,7 +24,12 @@ instruction_t instructions[] =
         {8, 3, 6, &i_xor},
         {9, 1, 20, &zjmp},
         {10, 3, 25, &ldi},
-        {11, 3, 25, &sti}
+        {11, 3, 25, &sti},
+        {12, 2, 5, &lld},
+        {13, 2, 5, &lldi},
+        {14, 2, 5, &mul},
+        {15, 2, 5, &i_div},
+        {16, 2, 5, &mod}
     };
 
 void instruction(program_t *programs[], byte *memory[], cursor_t *cursor, int nb_programs)

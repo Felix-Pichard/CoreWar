@@ -37,5 +37,6 @@ op_t    op_tab[] =
      "long load index"},
     {"mul", 3, {T_REG, T_REG, T_REG}, 14, 30, "multiplication"},
     {"div", 3, {T_REG, T_REG, T_REG}, 15, 60, "division"},
+    {"mod", 3, {T_REG, T_REG, T_REG}, 16, 150, "modulus"},
     {0, 0, {0}, 0, 0, 0}
   };
