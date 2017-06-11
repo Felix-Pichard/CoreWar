@@ -48,7 +48,7 @@ int set_instruction(char *line, script_t *script)
     int i;
 
     instructions = split_str(line, ' ');
-    if (array_len(instructions) != 2)
+    if (array_len(instructions) < 2)
         return (0);
     op = get_op(instructions[0]);
     if (op.mnemonique == NULL)
