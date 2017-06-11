@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     }
     init_game(&game);
     launch_game(&game, program->interactive_mode);
-    // free_game(&game);
-    // free_meta(program);
+    free_game(&game);
+    free_meta(program);
     return (0);
 }

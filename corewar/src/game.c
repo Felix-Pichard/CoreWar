@@ -82,13 +82,8 @@ void launch_game(game_t *game, int interactive_mode)
 
 void free_game(game_t *game)
 {
-    int i;
-
-    for (i = 0; i < game->nb_player; i++)
-    {
-        free(&(game->programs[i]));
-        free(&(game->cursors[i]));
-    }
+    free(game->programs);
+    free(game->cursors);
     free(game->memory);
 }
 
@@ -127,9 +122,6 @@ int get_command(game_t *game, int counter)
 
 void free_meta(t_meta* meta)
 {
-    int i;
-
-    for (i = 0; i < meta->nbr_prg; i++)
-        free(&(meta->programs[i]));
+    free(meta->programs);
     free(meta);
 }
