@@ -96,11 +96,7 @@ void free_game(game_t *game)
 int get_command(game_t *game, int counter)
 {
     char *command;
-    char *num;
-    int i;
-    int j;
-
-    j = 0;
+    
     my_putstr("\033c");
     my_putstr("Max Cycles: ");
     my_put_nbr(game->max_cycles);
@@ -111,15 +107,8 @@ int get_command(game_t *game, int counter)
     my_putstr("\n$/  ");
     command = readline();
     if (my_strcmp(command, "help") == 0)
-        my_putstr("You can type: md x, where x is the number of cycles left before a memory dump.\n");
-    if (command[0] == 'm' && command[1] == 'd')
-    {
-        num = safe_malloc(10);
-        for (i = 2; command[i] && command[i] > 47 && command[i] < 58; ++i)
-            num[j++] = command[i];
-         counter = my_getnbr(num);
-        free (num);
-    }
+        my_putstr("You can type: x, where x is the number of cycles left before a memory dump.\n");
+    counter = my_getnbr(command);
     return (counter);
 }
 
