@@ -11,6 +11,8 @@
 #ifndef __LIBMY_H__
 #define __LIBMY_H__
 
+#include "stdlib.h"
+
 typedef unsigned char byte;
 
 void	put_hex_core(unsigned char nbr);
@@ -40,5 +42,6 @@ int     my_strspn (const char *s, const char *accept);
 int     my_bstrlen(char *str);
 char    *my_strnncpy(char *src, int i, int size);
 byte    *my_bstrnncpy(byte *src[], int i, int size);
+void*   safe_malloc(size_t size);
 
 #endif
