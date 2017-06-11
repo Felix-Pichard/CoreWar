@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Sun Jun 11 11:02:19 2017 MARZI Nicolas
+** Last update Sun Jun 11 12:49:14 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -40,6 +40,14 @@ int push(char *item, script_t *script)
     return (0);
 }
 
+void init_script(script_t *warrior)
+{
+    warrior->label = NULL;
+    warrior->instruction = NULL;
+    warrior->file_name = NULL;
+    warrior->header.magic = COREWAR_EXEC_MAGIC;
+}
+
 void assemble_file(char *filename)
 {
     int file_handle;
@@ -51,7 +59,8 @@ void assemble_file(char *filename)
     char *tmp_str;
     script_t warrior;
 
-    tmp_str = get_filename(filename);
+    init_script(&warrior);
+    warrior.file_name = get_filename(filename);
     cursor = 0;
     response = 1;
     line = 1;
