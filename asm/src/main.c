@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 13:27:50 2017 MARZI Nicolas
-** Last update Sun Jun 11 12:49:14 2017 MARZI Nicolas
+** Last update Sun Jun 11 13:11:58 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -46,6 +46,8 @@ void init_script(script_t *warrior)
     warrior->instruction = NULL;
     warrior->file_name = NULL;
     warrior->header.magic = COREWAR_EXEC_MAGIC;
+    init_buffer(warrior->header.prog_name, PROG_NAME_LENGTH);
+    init_buffer(warrior->header.comment, COMMENT_LENGTH);
 }
 
 void assemble_file(char *filename)
