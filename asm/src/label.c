@@ -108,8 +108,11 @@ int set_label(char *line, script_t *script)
         item.position = get_rec_size(script->instruction);
         item.next = NULL;
         add_label(script, item);
-        if (is_instruction(labels[1]))
-            return (set_instruction(labels[1], script));
+        if (array_len(labels) > 1)
+        {
+            if (is_instruction(labels[1]))
+                return (set_instruction(labels[1], script));
+        }
     }
     free_array(labels);
     return (0);
