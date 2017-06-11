@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Mon Jun  5 20:02:00 2017 MARZI Nicolas
-** Last update Sun Jun 11 11:07:39 2017 MARZI Nicolas
+** Last update Sun Jun 11 12:37:51 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -148,6 +148,7 @@ char *get_string(char *buffer)
 
 void push_str(char **container, char *item)
 {
+    escape_str(item);
     if (my_strlen(item) > 0)
         container[array_len(container)] = item;
 }
@@ -170,7 +171,6 @@ char **split_n_str(char *line, char delimiter, int i)
     init_buffer(buffer, 128);
     result = malloc(sizeof(char *) * (find_occurence(line, delimiter) + 2));
     init_container_buffer(result, array_len(result));
-
     for (cursor = 0; *line != '\0'; line++)
     {
         if (*line == delimiter && i != 0)
@@ -201,7 +201,6 @@ char **split_str(char *line, char delimiter)
     init_buffer(buffer, 128);
     result = malloc(sizeof(char *) * (find_occurence(line, delimiter) + 2));
     init_container_buffer(result, array_len(result));
-
     for (cursor = 0; *line != '\0'; line++)
     {
         if (*line == delimiter)

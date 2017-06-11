@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Wed Jun  7 10:35:55 2017 MARZI Nicolas
-** Last update Sun Jun 11 10:54:45 2017 MARZI Nicolas
+** Last update Sun Jun 11 12:47:10 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -19,7 +19,6 @@ void add_instruction(script_t *script, instruction_t item)
 {
     instruction_t *tmp;
 
-    tmp = script->instruction;
     if (script->instruction == NULL)
     {
         script->instruction = malloc(sizeof(instruction_t));
@@ -27,8 +26,11 @@ void add_instruction(script_t *script, instruction_t item)
         script->instruction->next = NULL;
         return;
     }
+    tmp = script->instruction;
     while (tmp->next != NULL)
+    {
         tmp = tmp->next;
+    }
     tmp->next = malloc(sizeof(instruction_t));
     *tmp->next = item;
 }
