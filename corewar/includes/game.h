@@ -56,5 +56,6 @@ void launch_game(game_t *game, int interactive_mode);
 void free_game(game_t *game);
 int get_command(game_t *game, int counter);
 void free_meta(t_meta* meta);
+void print_register(int *tab);
 
 #endif
