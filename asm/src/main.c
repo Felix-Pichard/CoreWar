@@ -83,7 +83,12 @@ void assemble_file(char *filename)
             line++;
         }
         else
-            buffer[cursor++] = data;
+        {
+            if (data == '\t')
+                buffer[cursor++] = ' ';
+            else
+                buffer[cursor++] = data;
+        }
     }
     close(file_handle);
     free(tmp_str);
