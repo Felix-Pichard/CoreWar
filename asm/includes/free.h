@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 07:26:11 2017 MARZI Nicolas
-** Last update Thu Jun  8 07:36:47 2017 MARZI Nicolas
+** Last update Sun Jun 11 18:12:39 2017 MARZI Nicolas
 */
 
 #ifndef __FREE_H__
@@ -14,6 +14,6 @@
 #include "parser.h"
 
 void free_array(char **array);
-void free_script(script_t script);
+void free_script(script_t *script);
 
 #endif

@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 07:26:43 2017 MARZI Nicolas
-** Last update Thu Jun  8 07:36:41 2017 MARZI Nicolas
+** Last update Sun Jun 11 18:12:52 2017 MARZI Nicolas
 */
 
 #include <stdlib.h>
@@ -46,10 +46,10 @@ void free_label(label_t *label)
     }
 }
 
-void free_script(script_t script)
+void free_script(script_t *script)
 {
-    free_instruction(script.instruction);
-    free_label(script.label);
-    free(script.file_name);
+    free_instruction(script->instruction);
+    free_label(script->label);
+    free(script->file_name);
 }
 

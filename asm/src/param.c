@@ -5,7 +5,7 @@
 ** Login   <marzi_n@etna-alternance.net>
 **
 ** Started on  Thu Jun  8 08:38:12 2017 MARZI Nicolas
-** Last update Sun Jun 11 13:27:19 2017 MARZI Nicolas
+** Last update Sun Jun 11 18:17:57 2017 MARZI Nicolas
 */
 
 #include "op.h"
@@ -88,6 +88,7 @@ int set_params(instruction_t *instruction, char **lines, int size)
     int i;
     char *label;
     param_t *param;
+    char **tmp;
 
     for (i = 0; i < size; i++)
     {
@@ -99,7 +100,9 @@ int set_params(instruction_t *instruction, char **lines, int size)
         (*param).type = get_param_code(lines[i]);
         if (param->type == CODED_REG)
         {
-            param->value = my_getnbr(split_str(lines[i], 'r')[0]);
+            tmp = split_str(lines[i], 'r');
+            param->value = my_getnbr(tmp[0]);
+            free(tmp);
         }
         else if (param->type == CODED_IND)
         {
@@ -107,14 +110,19 @@ int set_params(instruction_t *instruction, char **lines, int size)
         }
         else if (param->type == CODED_DIR)
         {
-            label = split_str(lines[i], '%')[0];
+
+            tmp = split_str(lines[i], '%');
+            label = tmp[0];
             if (label[0] == ':')
             {
-                label = split_str(label, ':')[0];
+                free(tmp);
+                tmp = split_str(label, ':');
+                label = tmp[0];
                 param->label = label;
             }
             else
                 param->value = my_getnbr(label);
+            free(tmp);
         }
         else
             return (0);
