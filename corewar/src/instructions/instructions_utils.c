@@ -136,6 +136,29 @@ int get_param_value_process(byte *memory[], cursor_t *cursor, int i_param)
     position = (position + 1) % MEM_SIZE;
     value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
     if (((type_param >> (4 - i) * 2) & 3) == CODED_DIR)
+        return (value % IDX_MOD);
+    if (((type_param >> (4 - i) * 2) & 3) == CODED_REG && value >= 1 && value <= REG_NUMBER)
+        return ((cursor->registers[value]) % IDX_MOD);
+    else if (((type_param >> (4 - i) * 2) & 3) == CODED_IND)
+        return (((*memory)[value % MEM_SIZE]) % IDX_MOD);
+    return (0);        
+}
+
+int get_param_long_value_process(byte *memory[], cursor_t *cursor, int i_param)
+{
+    int i;
+    int type_param;
+    int value;
+    int position;
+
+    position = cursor->position;
+    position = (position + 1) % MEM_SIZE;
+    type_param = (*memory)[position];
+    for (i = 1; i < i_param; i++)
+        position = (position + get_size_param(type_param, i)) % MEM_SIZE;
+    position = (position + 1) % MEM_SIZE;
+    value = read_byte_to_int(memory, position, get_size_param(type_param, i_param));
+    if (((type_param >> (4 - i) * 2) & 3) == CODED_DIR)
         return (value);
     if (((type_param >> (4 - i) * 2) & 3) == CODED_REG && value >= 1 && value <= REG_NUMBER)
         return (cursor->registers[value]);

@@ -38,7 +38,8 @@ SRC = src/my_getnbr.c \
 		src/my_putnbr_base.c \
 		src/my_strspn.c \
 		src/my_bstrlen.c \
-		src/my_strnncpy.c
+		src/my_strnncpy.c \
+		src/safe_malloc.c
 
 OBJS = $(SRC:%.c=$(BUILD_PATH)/%.o)
 CFLAGS = -W -Wextra -Werror -Wall -pedantic -I ./includes -I ../includes
