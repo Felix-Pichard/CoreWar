@@ -19,7 +19,7 @@ int is_instruction(char *line)
 {
     int cursor;
 
-    for (cursor = 0; cursor < 17; cursor++)
+    for (cursor = 0; cursor < 16; cursor++)
     {
         if (my_strncmp(line, op_tab[cursor].mnemonique, my_strlen(op_tab[cursor].mnemonique)) != 0)
             continue;

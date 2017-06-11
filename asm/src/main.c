@@ -70,7 +70,7 @@ void assemble_file(char *filename)
     file_handle = xopen_read(filename);
     if (file_handle == -1)
         return;
-    while (read(file_handle, &data, 1) && response == 1)
+    while (read(file_handle, &data, 1) && response == 1 && cursor < 512)
     {
         if (data == '\n')
         {
