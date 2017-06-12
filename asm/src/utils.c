@@ -54,7 +54,8 @@ int find_occurence(char *line, char find)
 {
     int occurence;
 
-    for (occurence = 0; *line != '\0'; line++)
+    occurence = 0;
+    for (; *line != '\0'; line++)
     {
         if (*line == find)
             occurence++;
