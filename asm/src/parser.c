@@ -37,6 +37,16 @@ void init_container_buffer(char **buffer, int size)
         *(buffer + i) = 0;
 }
 
+int get_t_param(byte type)
+{
+    if (type == CODED_REG)
+        return (T_REG);
+    else if (type == CODED_IND)
+        return (T_IND);
+    else if (type == CODED_DIR)
+        return (T_DIR);
+    return (0);
+}
 
 int set_instruction(char *line, script_t *script)
 {
@@ -48,7 +58,7 @@ int set_instruction(char *line, script_t *script)
     int i;
 
     instructions = split_str(line, ' ');
-    if (array_len(instructions) != 2)
+    if (array_len(instructions) < 2)
         return (0);
     op = get_op(instructions[0]);
     if (op.mnemonique == NULL)
@@ -56,20 +66,25 @@ int set_instruction(char *line, script_t *script)
     params = split_str(instructions[1], SEPARATOR_CHAR);
     if (array_len(params) != op.nbr_args)
     {
-        my_put_nbr(array_len(params));my_putstr(" parameters given, ");
+        my_put_nbr(array_len(params));
+        my_putstr(" parameters given, ");
         my_put_nbr(op.nbr_args);my_putstr(" expected");
         return (0);
     }
     if (!set_params(&instruction, params, op.nbr_args))
+    {
+        my_putstr("Error in parameters");
         return (0);
+    }
     instruction.opcode = op.code;
     instruction.nb_args = op.nbr_args;
     instruction.next = NULL;
     for (i = 0; i < instruction.nb_args; i++)
     {
-        if (((byte) op.type[i] & instruction.args[i].type) == 0)
+        if (((byte) op.type[i] & get_t_param(instruction.args[i].type)) == 0)
         {
-            my_putstr("Wrong type for ");my_putstr(op.mnemonique);my_putstr(" instruction for parameter at position ");
+            my_putstr("Wrong type for ");my_putstr(op.mnemonique);
+            my_putstr(" instruction for parameter at position ");
             my_put_nbr(i + 1);my_putstr("\n");
             my_putstr(get_type_param(instruction.args[i].type));
             my_putstr(" given, expected: ");

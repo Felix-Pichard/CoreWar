@@ -70,7 +70,7 @@ void assemble_file(char *filename)
     file_handle = xopen_read(filename);
     if (file_handle == -1)
         return;
-    while (read(file_handle, &data, 1) && response == 1)
+    while (read(file_handle, &data, 1) && response == 1 && cursor < 512)
     {
         if (data == '\n')
         {
@@ -83,19 +83,21 @@ void assemble_file(char *filename)
             line++;
         }
         else
-            buffer[cursor++] = data;
+        {
+            if (data == '\t')
+                buffer[cursor++] = ' ';
+            else
+                buffer[cursor++] = data;
+        }
     }
     close(file_handle);
-    free(tmp_str);
     tmp_str = get_string(buffer);
     if (!push(tmp_str, &warrior))
         print_line(line);
     else
     {
-        free(tmp_str);
         warrior.header.prog_size = get_rec_size(warrior.instruction);
         assemble(&warrior);
-        free_script(&warrior);
     }
 }
 
