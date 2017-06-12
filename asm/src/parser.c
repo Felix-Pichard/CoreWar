@@ -72,7 +72,10 @@ int set_instruction(char *line, script_t *script)
         return (0);
     }
     if (!set_params(&instruction, params, op.nbr_args))
+    {
+        my_putstr("Error in parameters");
         return (0);
+    }
     instruction.opcode = op.code;
     instruction.nb_args = op.nbr_args;
     instruction.next = NULL;

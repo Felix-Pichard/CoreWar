@@ -91,13 +91,11 @@ void assemble_file(char *filename)
         }
     }
     close(file_handle);
-    free(tmp_str);
     tmp_str = get_string(buffer);
     if (!push(tmp_str, &warrior))
         print_line(line);
     else
     {
-        free(tmp_str);
         warrior.header.prog_size = get_rec_size(warrior.instruction);
         assemble(&warrior);
     }
